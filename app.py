@@ -1,10 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 import json
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
+config = json.load(open("config.json", "r"))
 
 app = Flask(__name__)
-app.secret_key = open("secret.txt", "r").read()
+app.secret_key = config["secret"]
+app.config["SQLALCHEMY_DATABASE_URI"] = config["SQLALCHEMY_DATABASE_URI"]
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
@@ -24,20 +32,6 @@ def user_loader(username):
 
     user = User()
     user.id = username
-    return user
-
-
-@login_manager.request_loader
-def request_loader(request):
-    username = request.form.get('username')
-    if username not in users:
-        return
-
-    user = User()
-    user.id = username
-
-    user.is_authenticated = request.form['password'] == users[username]['password']
-
     return user
 
 
