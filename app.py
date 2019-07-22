@@ -4,7 +4,7 @@ import json
 
 
 app = Flask(__name__)
-app.secret_key = 'WWI0n77PiCvpwpI9ca3Y'
+app.secret_key = open("secret.txt", "r").read()
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
