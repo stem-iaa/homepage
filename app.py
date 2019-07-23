@@ -21,21 +21,14 @@ login_manager.init_app(app)
 import models
 
 
-class User(flask_login.UserMixin):
-    pass
-
-
-users = json.load(open("users.json", "r"))
-
-
 @login_manager.user_loader
 def user_loader(username):
-    if username not in users:
-        return None
+    student = models.Student.query.get(username)
+    if student:
+        return student
 
-    user = User()
-    user.id = username
-    return user
+    mentor = models.Mentor.query.get(username)
+    return mentor
 
 
 @app.route("/")
@@ -45,6 +38,9 @@ def hello_world():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if flask_login.current_user.is_authenticated:
+        return redirect("/student/" + flask_login.current_user.username)
+
     if request.method == "GET":
         return render_template("login.html")
     elif request.method == "POST":
@@ -54,11 +50,14 @@ def login():
         if not username or not password:
             return "Bad login"
 
-        if password == users[username]["password"]:
-            user = User()
-            user.id = username
-            flask_login.login_user(user)
-            return redirect(url_for("protected"))
+        student = models.Student.query.filter(username=username).first()
+        mentor = models.Mentor.query.filter(username=username).first()
+        user = student or mentor
+
+        if user is None or not check_password_hash(user.password_hash, password):
+            return redirect(url_for("login"))
+
+        return redirect(url_for("protected"))
 
     return "Bad login"
 

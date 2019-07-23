@@ -1,7 +1,8 @@
 from app import db
+from flask_login import UserMixin
 
 
-class Student(db.Model):
+class Student(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True, primary_key=True)
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(64), index=True)
@@ -12,7 +13,7 @@ class Student(db.Model):
     mentor_username = db.Column(db.String(64), db.ForeignKey('mentor.username'))
 
 
-class Mentor(db.Model):
+class Mentor(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True, primary_key=True)
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(64), index=True)
