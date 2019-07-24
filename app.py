@@ -50,13 +50,14 @@ def login():
         if not username or not password:
             return "Bad login"
 
-        student = models.Student.query.filter(username=username).first()
-        mentor = models.Mentor.query.filter(username=username).first()
+        student = models.Student.query.filter_by(username=username).first()
+        mentor = models.Mentor.query.filter_by(username=username).first()
         user = student or mentor
 
         if user is None or not check_password_hash(user.password_hash, password):
-            return redirect(url_for("login"))
+            return "Bad login"
 
+        flask_login.login_user(user)
         return redirect(url_for("protected"))
 
     return "Bad login"
@@ -67,7 +68,27 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     elif request.method == "POST":
-        pass
+        username = request.form.get("username")
+        password = request.form.get("password")
+        user_type = request.form.get("user_type")
+
+        if not username or not password or not user_type:
+            return "Bad register"
+
+        user = None
+        if user_type == "student":
+            user = models.Student(username=username, password_hash=generate_password_hash(password))
+        elif user_type == "mentor":
+            user = models.Mentor(username=username, password_hash=generate_password_hash(password))
+
+        if not user:
+            return "Bad register"
+
+        db.session.add(user)
+        db.session.commit()
+
+        flask_login.login_user(user)
+        return redirect(url_for("protected"))
 
 
 @app.route("/protected")

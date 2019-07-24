@@ -3,7 +3,8 @@ from flask_login import UserMixin
 
 
 class Student(UserMixin, db.Model):
-    username = db.Column(db.String(64), index=True, unique=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(64), index=True)
     location = db.Column(db.String(128), index=True)
@@ -14,6 +15,7 @@ class Student(UserMixin, db.Model):
 
 
 class Mentor(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True, primary_key=True)
     password_hash = db.Column(db.String(128))
     name = db.Column(db.String(64), index=True)
