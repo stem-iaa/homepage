@@ -97,10 +97,5 @@ def protected():
     return "protected"
 
 
-@app.route("/test")
-def test():
-    return users
-
-
 if __name__ == "__main__":
     app.run()
