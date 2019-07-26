@@ -2,6 +2,10 @@
 
 {% block title %}Register{% endblock %}
 
+{% block head %}
+    <link href="/static/css/signin.css" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
     <div class="text-center" style="width: 100%;">
         <form action="/register" method="post" class="form-signin">
