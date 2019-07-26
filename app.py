@@ -108,7 +108,10 @@ def profile(username):
     user = get_user(username)
 
     if user:
-        return render_template("profile.html", user=get_user(username), is_user=is_user)
+        return render_template("profile.html",
+                               user=get_user(username),
+                               profile_user=user,
+                               is_user=is_user)
     else:
         return "no user found"
 

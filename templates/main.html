@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link href="/static/css/profile.css" rel="stylesheet">
+{% endblock %}
+
+{% block body_params %}{% endblock %}
+
+{% block body %}
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="/"><img style="width: 70%" src="/static/images/STEMatIAA_logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                    </li>
+                </ul>
+                {% if is_user %}
+                    {% block navbar %}{% endblock %}
+
+                    <div style="position: relative">
+                        <a class="nav-link dropdown-toggle text-light" id="user_dropdown"
+                           href=""
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">{{ user.username }}</a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user_dropdown">
+                            <a class="dropdown-item" href="/profile/{{ user.username }}">Profile</a>
+                            <a class="dropdown-item" href="/profile/{{ user.username }}/info">Course Information</a>
+                            <a class="dropdown-item" href="/profile/{{ user.username }}/account">Account</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a class="btn btn-light" href="/login">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {% block content %}{% endblock %}
+
+{% endblock %}

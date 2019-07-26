@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
 {% block head %}
     <link href="/static/css/profile.css" rel="stylesheet">
@@ -6,46 +6,18 @@
 
 {% block body_params %}{% endblock %}
 
-{% block body %}
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="/"><img style="width: 70%" src="/static/images/STEMatIAA_logo.png"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                    </li>
-                </ul>
-                {% if is_user %}
-                    <a class="btn btn-primary" id="edit_button" href="#">Edit</a>
-                {% endif %}
-                <a class="btn btn-light" href="/profile/{{ user.username }}">{{ user.username }}</a>
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <br>
-    <br>
-    <br>
-    <br>
+{% block navbar %}
+    <a class="btn btn-primary" id="edit_button" href="#">Edit</a>
+{% endblock %}
 
+{% block content %}
     <div class="container-fluid" style="padding: 0px; max-width: 1200px;">
         <div class="jumbotron p-4 p-md-5 text-white bg-dark" style="border-radius: 0">
             <div class="row">
                 <div class="col-7 px-10">
-                    <h1 class="display-4 font-italic">{{ user.name or user.username }}</h1>
+                    <h1 class="display-4 font-italic">{{ profile_user.name or profile_user.username }}</h1>
                     <p class="font-italic">
-                        <mark>{{ user.user_type }}</mark>
+                        <mark>{{ profile_user.user_type }}</mark>
                     </p>
 
                     <p class="lead my-3 editable" id="bio">Donec orci felis, posuere vitae sapien ut, porttitor tempus
