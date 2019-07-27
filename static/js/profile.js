@@ -1,8 +1,8 @@
 
-var original_edit_button;
+var original_edit_button_text;
 
 $(document).ready(function() {
-    original_edit_button_text = $("#edit_button")[0]
+    original_edit_button_text = $("#edit_button").text();
 });
 
 var editing = false;
@@ -14,6 +14,7 @@ $("#edit_button").on("click", function() {
             $("#" + id).html($("#" + id + " textarea").val());
         }
         editing = false;
+        $("#edit_button").text(original_edit_button_text);
     } else {
         $(".editable").each(function() {
             editables[this.id] = this;

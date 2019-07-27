@@ -99,26 +99,46 @@ def register():
 
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
+    profile_user = get_user(username)
+    if not profile_user:
+        return "no user found"
+
     current_user = flask_login.current_user
     is_user = False
     if not current_user.is_anonymous:
         if current_user.username == username:
             is_user = True
 
-    user = get_user(username)
+    return render_template("profile.html",
+                           user=current_user,
+                           profile_user=profile_user,
+                           is_user=is_user)
 
-    if user:
-        return render_template("profile.html",
-                               user=get_user(username),
-                               profile_user=user,
-                               is_user=is_user)
-    else:
+
+@app.route("/profile/<username>/info")
+@flask_login.login_required
+def info(username):
+    profile_user = get_user(username)
+    if not profile_user:
         return "no user found"
 
+    if profile_user.username != flask_login.current_user.username:
+        return "no permission for user"
 
-@app.route("/protected")
+    current_user = flask_login.current_user
+    is_user = False
+    if not current_user.is_anonymous:
+        if current_user.username == username:
+            is_user = True
+
+    return render_template("info.html",
+                           user=current_user,
+                           is_user=is_user)
+
+
+@app.route("/profile/<username>/account")
 @flask_login.login_required
-def protected():
+def account(username):
     return "protected"
 
 
