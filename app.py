@@ -21,22 +21,12 @@ login_manager.init_app(app)
 import models
 
 
-def get_user(username):
-    student = models.Student.query.filter_by(username=username).first()
-    mentor = models.Mentor.query.filter_by(username=username).first()
-    user = student or mentor
-
-    return user
-
-
 @login_manager.user_loader
 def user_loader(id):
-    student = models.Student.query.get(id)
-    if student:
-        return student
-
-    mentor = models.Mentor.query.get(id)
-    return mentor
+    user = models.User.query.get(id)
+    if user:
+        return user
+    return None
 
 
 @app.route("/")
@@ -58,7 +48,7 @@ def login():
         if not username or not password:
             return "Bad login"
 
-        user = get_user(username)
+        user = models.User.query.filter_by(username=username).first()
 
         if user is None or not check_password_hash(user.password_hash, password):
             return "Bad login"
@@ -99,7 +89,7 @@ def register():
 
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
-    profile_user = get_user(username)
+    profile_user = models.User.query.filter_by(username=username).first()
     if not profile_user:
         return "no user found"
 
@@ -118,7 +108,7 @@ def profile(username):
 @app.route("/profile/<username>/info")
 @flask_login.login_required
 def info(username):
-    profile_user = get_user(username)
+    profile_user = models.User.query.filter_by(username=username).first()
     if not profile_user:
         return "no user found"
 
