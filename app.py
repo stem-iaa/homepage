@@ -115,21 +115,23 @@ def info(username):
     if profile_user.username != flask_login.current_user.username:
         return "no permission for user"
 
-    current_user = flask_login.current_user
-    is_user = False
-    if not current_user.is_anonymous:
-        if current_user.username == username:
-            is_user = True
-
-    return render_template("info.html",
-                           user=current_user,
-                           is_user=is_user)
+    return render_template("info.html", user=flask_login.current_user, is_user=True)
 
 
-@app.route("/profile/<username>/account")
+@app.route("/profile/<username>/account", methods=["GET, POST"])
 @flask_login.login_required
 def account(username):
-    return "protected"
+    if request.method == "GET":
+        profile_user = models.User.query.filter_by(username=username).first()
+        if not profile_user:
+            return "no user found"
+
+        if profile_user.username != flask_login.current_user.username:
+            return "no permission for user"
+
+        return render_template("account.html", user=flask_login.current_user, is_user=True)
+    elif request.method == "POST":
+        pass
 
 
 @app.route("/test")
