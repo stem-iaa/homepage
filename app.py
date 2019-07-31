@@ -30,7 +30,7 @@ def user_loader(id):
 
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template("index.html")
 
 
@@ -57,35 +57,6 @@ def login():
         return redirect("/profile/" + user.username)
 
     return "Bad login"
-
-'''
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "GET":
-        return render_template("register.html")
-    elif request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        user_type = request.form.get("user_type")
-
-        if not username or not password or not user_type:
-            return "Bad register"
-
-        user = None
-        if user_type == "student":
-            user = models.Student(username=username, password_hash=generate_password_hash(password))
-        elif user_type == "mentor":
-            user = models.Mentor(username=username, password_hash=generate_password_hash(password))
-
-        if not user:
-            return "Bad register"
-
-        db.session.add(user)
-        db.session.commit()
-
-        flask_login.login_user(user)
-        return redirect("/profile/" + user.username)
-'''
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -213,6 +184,12 @@ def account(username):
         return render_template("account.html", user=flask_login.current_user, is_user=True)
     elif request.method == "POST":
         pass
+
+
+@app.route("/logout")
+def logout():
+    flask_login.logout_user()
+    return redirect("/")
 
 
 @app.route("/test")

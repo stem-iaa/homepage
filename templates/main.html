@@ -20,7 +20,7 @@
                         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                     </li>
                 </ul>
-                {% if is_user %}
+                {% if not user.is_anonymous %}
                     {% block navbar %}{% endblock %}
 
                     <div style="position: relative">
@@ -32,6 +32,7 @@
                             <a class="dropdown-item" href="/profile/{{ user.username }}">Profile</a>
                             <a class="dropdown-item" href="/profile/{{ user.username }}/info">Course Information</a>
                             <a class="dropdown-item" href="/profile/{{ user.username }}/account">Account</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
                     </div>
                 {% else %}
