@@ -16,9 +16,7 @@ class User(UserMixin, db.Model):
 
     discriminator = db.Column(db.String(50))
 
-    type = "User"
-
-    mapper_args__ = {
+    __mapper_args__ = {
         "polymorphic_identity": "user",
         "polymorphic_on": discriminator
     }
@@ -27,7 +25,7 @@ class User(UserMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
         if not self.label:
-            self.label = self.type
+            self.label = self.discriminator
 
 
 student_mentor_association_table = db.Table(
@@ -42,20 +40,15 @@ class Student(User):
     id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     portfolio = db.Column(db.String(1024))
 
-    type = "Student"
-
     mentors = db.relationship(
         "Mentor",
         secondary=student_mentor_association_table,
         back_populates="students"
     )
 
-    mapper_args__ = {
+    __mapper_args__ = {
         "polymorphic_identity": "student"
     }
-
-    def __init__(self, **kwargs):
-        super(Student, self).__init__(**kwargs)
 
 
 class Mentor(User):
@@ -70,12 +63,9 @@ class Mentor(User):
         back_populates="mentors"
     )
 
-    mapper_args__ = {
+    __mapper_args__ = {
         "polymorphic_identity": "mentor"
     }
-
-    def __init__(self, **kwargs):
-        super(Mentor, self).__init__(**kwargs)
 
 
 class Instructor(User):
@@ -84,9 +74,6 @@ class Instructor(User):
 
     type = "Instructor"
 
-    mapper_args__ = {
+    __mapper_args__ = {
         "polymorphic_identity": "instructor"
     }
-
-    def __init__(self, **kwargs):
-        super(Instructor, self).__init__(**kwargs)

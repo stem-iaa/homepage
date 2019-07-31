@@ -18,15 +18,10 @@
                 <div class="col-7 px-10">
                     <h1 class="display-4 font-italic">{{ profile_user.name or profile_user.username }}</h1>
                     <p class="font-italic">
-                        <mark>{{ profile_user.user_type }}</mark>
+                        <mark>{{ profile_user.type }}</mark>
                     </p>
 
-                    <p class="lead my-3 editable" id="bio">Donec orci felis, posuere vitae sapien ut, porttitor tempus
-                        odio. Duis volutpat
-                        mauris magna. Sed consequat risus sit amet mollis condimentum. Nunc a congue ligula. Sed sapien
-                        velit, lobortis pretium diam eu, viverra tincidunt nisl. Mauris mollis sapien at pretium
-                        scelerisque. Nulla in augue lacus. Vestibulum faucibus, lectus et convallis cursus, ante lectus
-                        tincidunt nisl, vel bibendum felis ligula egestas eros.</p>
+                    <p class="lead my-3 editable" id="bio">{{ user.bio if user.bio else 'This user did not enter a bio yet.' }}</p>
                 </div>
                 <div class="col">
                     <img class="bd-placeholder-img" src="/static/images/jim.png" width="100%" focusable="false">

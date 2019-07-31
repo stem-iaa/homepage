@@ -4,6 +4,8 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.orm import with_polymorphic
+
 
 config = json.load(open("config.json", "r"))
 
@@ -13,7 +15,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = config["SQLALCHEMY_DATABASE_URI"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
@@ -170,7 +171,7 @@ def info(username):
     return render_template("info.html", user=flask_login.current_user, is_user=True)
 
 
-@app.route("/profile/<username>/account", methods=["GET, POST"])
+@app.route("/profile/<username>/account", methods=["GET", "POST"])
 @flask_login.login_required
 def account(username):
     if request.method == "GET":
