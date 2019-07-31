@@ -58,7 +58,7 @@ def login():
 
     return "Bad login"
 
-
+'''
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
@@ -85,6 +85,35 @@ def register():
 
         flask_login.login_user(user)
         return redirect("/profile/" + user.username)
+'''
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+
+    username = request.form.get("username")
+    if not username:
+        return json.dumps({
+            "error": "Username required"
+        })
+
+    existing_user = models.User.query.filter_by(username=username).first()
+    if existing_user:
+        return json.dumps({
+            "error": "Username already exists"
+        })
+
+    first_name = request.form.get("first_name")
+    last_name = request.form.get("last_name")
+    email = request.form.get("email")
+    location = request.form.get("location")
+    user_type = request.form.get("user_type")
+
+    return json.dumps({
+        "error": None
+    })
 
 
 @app.route("/profile/<username>", methods=["GET"])
@@ -99,7 +128,7 @@ def profile(username):
         if current_user.username == username:
             is_user = True
 
-    return render_template("profile.html",
+    return render_template("student_profile.html",
                            user=current_user,
                            profile_user=profile_user,
                            is_user=is_user)
