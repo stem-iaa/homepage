@@ -29,10 +29,12 @@
                         <span class="input-group-text">@</span>
                     </div>
                     <input type="text" class="form-control" id="username" value="" name="username" required>
-                    <div class="invalid-feedback" style="width: 100%;">
-                        Your username is required.
-                    </div>
                 </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Password</label>
+                <input type="text" class="form-control" id="password" name="password" value="">
             </div>
 
             <div class="mb-3">
@@ -69,15 +71,17 @@
             <div class="collapse user_type_collapse" id="is_mentor_collapse">
                 <div class="mb-3">
                     <label for="mentors">Comma separated list of mentees (must exist already):</label>
-                    <input type="text" class="form-control" id="mentors" name="mentees" value="">
+                    <input type="text" class="form-control" id="students" name="students" value="">
                 </div>
             </div>
 
             <div class="collapse user_type_collapse" id="is_instructor_collapse">
             </div>
 
-            <div class="collapse alert alert-danger" id="submit-alert" role="alert">
-                A simple danger alert—check it out!
+            <div class="alert alert-danger" id="submit-alert" role="alert" style="display: none;">
+            </div>
+
+            <div class="alert alert-success" id="submit-success" role="alert" style="display: none;">
             </div>
 
             <br>

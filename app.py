@@ -105,14 +105,66 @@ def register():
             "error": "Username already exists"
         })
 
-    first_name = request.form.get("first_name")
-    last_name = request.form.get("last_name")
-    email = request.form.get("email")
-    location = request.form.get("location")
+    password = request.form.get("password")
+    if not password:
+        return json.dumps({
+            "error": "Password required"
+        })
+
+    info = {
+        "username": username,
+        "password_hash": generate_password_hash(request.form.get("password")),
+        "first_name": request.form.get("first_name"),
+        "last_name": request.form.get("last_name"),
+        "email": request.form.get("email"),
+        "location": request.form.get("location")
+    }
+
+    for key in info:
+        if not info[key]:
+            info[key] = None
+
     user_type = request.form.get("user_type")
 
+    user = None
+    if user_type == "student":
+        mentor_list = request.form.get("mentors").strip()
+        if mentor_list:
+            info["mentors"] = []
+            mentor_usernames = [username.strip() for username in mentor_list.split(",")]
+            print(mentor_usernames)
+            for mentor_username in mentor_usernames:
+                mentor = models.Mentor.query.filter_by(username=mentor_username).first()
+                if not mentor:
+                    return json.dumps({
+                        "error": "Mentor not found: " + mentor_username
+                    })
+                info["mentors"].append(mentor)
+        user = models.Student(**info)
+    elif user_type == "mentor":
+        student_list = request.form.get("students").strip()
+        if student_list:
+            info["students"] = []
+            student_usernames = [username.strip() for username in request.form.get("students").split(",")]
+            for student_username in student_usernames:
+                student = models.Student.query.filter_by(username=student_username).first()
+                if not student:
+                    return json.dumps({
+                        "error": "Student not found: " + student_username
+                    })
+                info["students"].append(student)
+        user = models.Mentor(**info)
+    else:
+        user = models.Instructor(**info)
+
+    db.session.add(user)
+    db.session.commit()
+
     return json.dumps({
-        "error": None
+        "error": None,
+        "info": {
+            "username": username
+        }
     })
 
 

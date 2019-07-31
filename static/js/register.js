@@ -19,16 +19,23 @@ $("#is_instructor_button").on("click", function () {
 
 $("#register-submit-button").on("click", function () {
     let submit_alert = $("#submit-alert");
-    submit_alert.collapse("hide");
+    let success_alert = $("#submit-success");
+    let register_form = $("#register-form");
+    submit_alert.hide();
+    success_alert.hide();
     $.ajax({
         url: "/register",
         type: "post",
         dataType: "json",
-        data: $("#register-form").serialize(),
+        data: register_form.serialize(),
         success: function (data) {
             if (data.error) {
                 submit_alert.text(data.error);
-                submit_alert.collapse("show");
+                submit_alert.show();
+            } else {
+                register_form.trigger("reset");
+                success_alert.text(data["info"]["username"] + " created!");
+                success_alert.show();
             }
         }
     });
