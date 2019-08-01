@@ -15,7 +15,7 @@
             <div class="portfolio-content">{{ profile_user.portfolio if profile_user.portfolio else 'This user did not create their portfolio yet.' }}</div>
         </div>
 
-        <div class="col col-sm-4">
+        <div class="col col-sm-auto">
             <h3 class="mb-2">Student Info</h3>
             <div class="row">
                 {{ card(profile_user, False) }}
@@ -23,11 +23,11 @@
             <br>
             {% if profile_user.mentors|length > 0 %}
                 <h3 class="mb-2">Mentored By</h3>
-                <div class="row">
-                    {% for mentor in profile_user.mentors %}
+                {% for mentor in profile_user.mentors %}
+                    <div class="row">
                         {{ card(mentor, True) }}
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             {% endif %}
         </div>
     </div>
