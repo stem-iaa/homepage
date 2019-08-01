@@ -27,6 +27,16 @@ class User(UserMixin, db.Model):
         if not self.label:
             self.label = self.discriminator
 
+    @property
+    def full_name(self):
+        if not self.first_name or not self.last_name:
+            return None
+        return self.first_name + " " + self.last_name
+
+    @property
+    def stylized_username(self):
+        return "@" + self.username
+
 
 student_mentor_association_table = db.Table(
     "student_mentor_association", db.Model.metadata,
@@ -43,7 +53,8 @@ class Student(User):
     mentors = db.relationship(
         "Mentor",
         secondary=student_mentor_association_table,
-        back_populates="students"
+        back_populates="students",
+        lazy="joined"
     )
 
     __mapper_args__ = {
@@ -55,12 +66,11 @@ class Mentor(User):
     __tablename__ = "mentor"
     id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
 
-    type = "Mentor"
-
     students = db.relationship(
         "Student",
         secondary=student_mentor_association_table,
-        back_populates="mentors"
+        back_populates="mentors",
+        lazy="joined"
     )
 
     __mapper_args__ = {
@@ -71,8 +81,6 @@ class Mentor(User):
 class Instructor(User):
     __tablename__ = "instructor"
     id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
-
-    type = "Instructor"
 
     __mapper_args__ = {
         "polymorphic_identity": "instructor"

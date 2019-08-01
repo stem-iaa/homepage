@@ -16,9 +16,9 @@
         <div class="jumbotron p-4 p-md-5 text-white bg-dark" style="border-radius: 0">
             <div class="row">
                 <div class="col-7 px-10">
-                    <h1 class="display-4 font-italic">{{ profile_user.name or profile_user.username }}</h1>
+                    <h1 class="display-4 font-italic">{{ profile_user.full_name or profile_user.stylized_username }}</h1>
                     <p class="font-italic">
-                        <mark>{{ profile_user.type }}</mark>
+                        <mark>{{ profile_user.label }}</mark>
                     </p>
 
                     <p class="lead my-3 editable" id="bio">{{ user.bio if user.bio else 'This user did not enter a bio yet.' }}</p>

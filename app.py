@@ -2,9 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 import json
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import with_polymorphic
+from sqlalchemy.orm import joinedload
 
 
 config = json.load(open("config.json", "r"))
@@ -143,6 +142,7 @@ def register():
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
     profile_user = models.User.query.filter_by(username=username).first()
+
     if not profile_user:
         return "no user found"
 
