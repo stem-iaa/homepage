@@ -61,7 +61,14 @@ def login():
 
 
 @app.route("/register", methods=["GET", "POST"])
+@flask_login.login_required
 def register():
+    current_user = flask_login.current_user
+    if current_user.discriminator != "instructor":
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
     if request.method == "GET":
         return render_template("register.html")
 
@@ -344,6 +351,7 @@ def password(username):
     db.session.commit()
 
     return json.dumps({"error": None})
+
 
 @app.route("/logout")
 def logout():
