@@ -8,7 +8,9 @@
 {% block body_params %}{% endblock %}
 
 {% block navbar %}
-    <a class="btn btn-primary" id="edit_button" href="#">Edit</a>
+    {% if is_user %}
+        <a class="btn btn-primary" id="edit_button" href="#">Edit</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +23,8 @@
                         <mark>{{ profile_user.label }}</mark>
                     </p>
 
-                    <p class="lead my-3 editable" id="bio">{{ user.bio if user.bio else 'This user did not enter a bio yet.' }}</p>
+                    <p class="lead my-3 editable"
+                       id="bio">{{ profile_user.bio if profile_user.bio else 'This user did not enter a bio yet.' }}</p>
                 </div>
                 <div class="col">
                     <img class="bd-placeholder-img" src="/static/images/jim.png" width="100%" focusable="false">
@@ -37,5 +40,9 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        let profile_user = "{{ profile_user.username }}";
+    </script>
+    <script src="/static/js/global.js"></script>
     <script src="/static/js/profile.js"></script>
 {% endblock %}

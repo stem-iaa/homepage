@@ -187,10 +187,65 @@ def account(username):
         pass
 
 
+@app.route("/profile/<username>/update", methods=["POST"])
+@flask_login.login_required
+def update(username):
+    profile_user = models.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return json.dumps({
+            "error": "No user found"
+        })
+
+    current_user = flask_login.current_user
+    if profile_user.username != current_user.username:
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
+    whitelisted_parameters = {
+        "first_name", "last_name", "email", "location", "bio", "portfolio"
+    }
+
+    for parameter in request.form.keys():
+        if parameter in whitelisted_parameters:
+            value = request.form.get(parameter)
+            setattr(profile_user, parameter, value)
+
+    if profile_user.discriminator == "mentor":
+        if request.form.get("students"):
+            profile_user.students = []
+            student_usernames = [username.strip() for username in request.form.get("students").split(",")]
+            for student_username in student_usernames:
+                student = models.Student.query.filter_by(username=student_username).first()
+                if not student:
+                    return json.dumps({
+                        "error": "Student not found: " + student_username
+                    })
+                profile_user.students.append(student)
+
+    if profile_user.discriminator == "instructor":
+        if request.form.get("label"):
+            profile_user.label = request.form.get("label")
+
+    db.session.commit()
+
+    return json.dumps({
+        "error": None
+    })
+
+
 @app.route("/logout")
 def logout():
     flask_login.logout_user()
     return redirect("/")
+
+
+@app.route("/current_user", methods=["GET"])
+def current_user():
+    current_user = flask_login.current_user
+    return json.dumps({
+        "current_user": None if current_user.is_anonymous else current_user.username
+    })
 
 
 @app.route("/test")

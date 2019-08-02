@@ -61,6 +61,11 @@ class Student(User):
         "polymorphic_identity": "student"
     }
 
+    @property
+    def mentor_usernames_list(self):
+        names = [mentor.username for mentor in self.mentors]
+        return ", ".join(names)
+
 
 class Mentor(User):
     __tablename__ = "mentor"
@@ -76,6 +81,11 @@ class Mentor(User):
     __mapper_args__ = {
         "polymorphic_identity": "mentor"
     }
+
+    @property
+    def student_usernames_list(self):
+        names = [student.username for student in self.students]
+        return ", ".join(names)
 
 
 class Instructor(User):

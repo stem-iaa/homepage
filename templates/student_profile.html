@@ -12,7 +12,7 @@
             <h1 class="font-italic"><strong>Student Portfolio</strong></h1>
 
             <hr>
-            <div class="portfolio-content">{{ profile_user.portfolio if profile_user.portfolio else 'This user did not create their portfolio yet.' }}</div>
+            <div class="portfolio-content editable" id="portfolio">{{ profile_user.portfolio | safe if profile_user.portfolio else 'This user did not create their portfolio yet.' }}</div>
         </div>
 
         <div class="col col-sm-auto">
