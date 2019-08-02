@@ -14,7 +14,9 @@ $("#profile-search").on("keyup", function () {
                 let user = data[i];
                 html += "<div class='search-result' style='padding: 10px;'>";
                 html += "<a href='/profile/" + user.username + "'>";
-                html += "<h5>" + user.full_name + "</h5>";
+                if (user.full_name) {
+                    html += "<h5>" + user.full_name + "</h5>";
+                }
                 html += "<h6>" + user.stylized_username + "</h6>";
                 html += "</a>";
                 html += "<hr>";
