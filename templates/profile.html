@@ -28,8 +28,8 @@
                        id="bio">{{ profile_user.bio if profile_user.bio else 'This user did not enter a bio yet.' }}</p>
                 </div>
                 <div class="col-sm-4">
-                    <img class="bd-placeholder-img img-thumbnail" src="/static/images/jim.png" width="100%"
-                         focusable="false">
+                    <img class="bd-placeholder-img img-thumbnail" src="/static/images/jim.png"
+                         width="100%" focusable="false">
                 </div>
             </div>
         </div>
@@ -38,7 +38,9 @@
     <div class="container-fluid" style="max-width: 1200px;">
         <div class="row justify-content-between">
             <div class="col">
-                <h1 class="font-italic"><strong>{{ "Student Portfolio" if profile_user.discriminator == "student" else "Content" }}</strong></h1>
+                <h1 class="font-italic"><strong>
+                    {{ "Student Portfolio" if profile_user.discriminator == "student" else "Content" }}
+                </strong></h1>
 
                 <hr>
                 <div class="portfolio-content editable"

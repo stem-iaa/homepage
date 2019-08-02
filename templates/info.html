@@ -6,69 +6,40 @@
 
 {% block content %}
     <div class="container">
-        <h1>Course Links</h1>
-        <ul>
-            <li>
-                <a href="#">Canvas Portal</a>
-            </li>
-            <li>
-                <a href="#">Worm Hosting</a>
-            </li>
-        </ul>
+        {% if user.discriminator == "student" %}
+            <h1>Course Links</h1>
+            <ul>
+                <li>
+                    <a href="#">Canvas Portal</a>
+                </li>
+                <li>
+                    <a href="#">Worm Hosting</a>
+                </li>
+            </ul>
 
-        <h4>Application Downloads</h4>
-        <ul>
-            <li>
-                <a href="#">test</a>
-            </li>
-        </ul>
-        <br>
+            <h4>Application Downloads</h4>
+            <ul>
+                <li>
+                    <a href="#">test</a>
+                </li>
+            </ul>
+            <br>
+        {% endif %}
 
         <h1>Instructor and TA Contact Information</h1>
         <div class="row">
-            <div class="card">
-                <img src="/static/images/sam.png" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Sam Clark</h5>
-                    <p class="mb-1 text-muted">
-                        802-777-1142<br>
-                        samuel.clark@uvm.edu
-                    </p>
-                    <br>
-                    <a class="btn btn-dark" href="#" role="button">Visit Profile</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="/static/images/sam.png" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Sam Clark</h5>
-                    <p class="mb-1 text-muted">
-                        802-777-1142<br>
-                        samuel.clark@uvm.edu
-                    </p>
-                    <br>
-                    <a class="btn btn-dark" href="#" role="button">Visit Profile</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="/static/images/sam.png" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">Sam Clark</h5>
-                    <p class="mb-1 text-muted">
-                        802-777-1142<br>
-                        samuel.clark@uvm.edu
-                    </p>
-                    <br>
-                    <a class="btn btn-dark" href="#" role="button">Visit Profile</a>
-                </div>
-            </div>
+            {% for instructor in instructors %}
+                {{ card(instructor, True) }}
+            {% endfor %}
         </div>
         <br>
 
-        <h1>Connect to VM</h1>
-        <p>Your VM is currently <span class="badge badge-danger">stopped</span>.</p>
+        {% if user.discriminator == "student" %}
+            <h1>Connect to VM</h1>
+            <p>Your VM is currently <span class="badge badge-danger">stopped</span>.</p>
 
-        <a class="btn btn-primary" href="#" role="button">Start VM</a>
+            <a class="btn btn-primary" href="#" role="button">Start VM</a>
+        {% endif %}
 
     </div>
 

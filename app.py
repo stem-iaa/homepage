@@ -174,7 +174,12 @@ def info(username):
     if profile_user.username != flask_login.current_user.username:
         return "no permission for user"
 
-    return render_template("info.html", user=flask_login.current_user, is_user=True)
+    all_instructors = models.Instructor.query.filter_by(discriminator="instructor").all()
+
+    return render_template("info.html",
+                           user=flask_login.current_user,
+                           is_user=True,
+                           instructors=all_instructors)
 
 
 @app.route("/profile/<username>/account", methods=["GET", "POST"])

@@ -15,7 +15,7 @@ class User(UserMixin, db.Model):
     label = db.Column(db.String(128), index=True)
     portfolio = db.Column(db.String(1024))
 
-    discriminator = db.Column(db.String(50))
+    discriminator = db.Column(db.String(50), index=True)
 
     __mapper_args__ = {
         "polymorphic_identity": "user",

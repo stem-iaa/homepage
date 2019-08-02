@@ -59,6 +59,7 @@
             {% if user.full_name %}
                 <h5 class="card-title">{{ user.full_name }}</h5>
             {% endif %}
+            <h6><mark>{{ user.label }}</mark></h6>
             <p class="mb-1 text-muted">
                 <a class="text-info" href="/profile/{{ user.username }}">{{ "@" + user.username }}</a>
                 {% if user.email %}
