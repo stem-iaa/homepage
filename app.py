@@ -32,7 +32,7 @@ def user_loader(id):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", user=flask_login.current_user)
 
 
 @app.route("/login", methods=["GET", "POST"])

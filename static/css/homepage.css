@@ -1,0 +1,41 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.btn-primary {
+    background-color: #e50423;
+    border-color: #e50423;
+}
+
+.btn-primary:hover {
+    background-color: #a8041d;
+    border-color: #a8041d;
+}
+
+.spc {
+    padding-bottom: 1.5rem;
+    text-align: center;
+}
+
+#instructors {
+    text-align: center;
+}
+
+.rtsp {
+    padding-right: .4rem;
+}
+
+.inst-pad {
+
+}
