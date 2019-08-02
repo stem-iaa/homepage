@@ -43,6 +43,12 @@ class User(UserMixin, db.Model):
     def profile_picture_path_or_default(self):
         return self.profile_picture_path if self.profile_picture_path else "/static/images/default_profile.svg"
 
+    @property
+    def relative_profile_picture_path(self):
+        if not self.profile_picture_path:
+            return None
+        return self.profile_picture_path[1:]
+
 
 student_mentor_association_table = db.Table(
     "student_mentor_association", db.Model.metadata,

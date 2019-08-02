@@ -4,6 +4,7 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import joinedload
+import os
 
 
 config = json.load(open("config.json", "r"))
@@ -302,6 +303,9 @@ def picture(username):
             "error": "Picture invalid"
         })
 
+    if profile_user.profile_picture_path:
+        if os.path.isfile(profile_user.relative_profile_picture_path):
+            os.remove(profile_user.relative_profile_picture_path)
     profile_picture_path = "static/images/profile_pictures/" + profile_user.username + "." + extension
     profile_picture.save(profile_picture_path)
 
