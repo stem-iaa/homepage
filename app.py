@@ -152,7 +152,13 @@ def profile(username):
         if current_user.username == username:
             is_user = True
 
-    return render_template("student_profile.html",
+    profiles = {
+        "student": "student_profile.html",
+        "mentor": "mentor_profile.html",
+        "instructor": "instructor.html"
+    }
+
+    return render_template(profiles.get(profile_user.discriminator),
                            user=current_user,
                            profile_user=profile_user,
                            is_user=is_user)

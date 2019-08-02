@@ -6,29 +6,15 @@
     <link href="/static/css/student_profile.css" rel="stylesheet">
 {% endblock %}
 
-{% block profile_content %}
-    <div class="row justify-content-between">
-        <div class="col">
-            <h1 class="font-italic"><strong>Student Portfolio</strong></h1>
+{% block title_section_class %}bg-info text-white{% endblock %}
 
-            <hr>
-            <div class="portfolio-content editable" id="portfolio">{{ profile_user.portfolio | safe if profile_user.portfolio else 'This user did not create their portfolio yet.' }}</div>
-        </div>
-
-        <div class="col col-sm-auto">
-            <h3 class="mb-2">Student Info</h3>
+{% block info_col %}
+    {% if profile_user.mentors|length > 0 %}
+        <h3 class="mb-2">Mentored By</h3>
+        {% for mentor in profile_user.mentors %}
             <div class="row">
-                {{ card(profile_user, False) }}
+                {{ card(mentor, True) }}
             </div>
-            <br>
-            {% if profile_user.mentors|length > 0 %}
-                <h3 class="mb-2">Mentored By</h3>
-                {% for mentor in profile_user.mentors %}
-                    <div class="row">
-                        {{ card(mentor, True) }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

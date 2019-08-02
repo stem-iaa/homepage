@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(128), index=True, unique=True)
     bio = db.Column(db.String(1024))
     label = db.Column(db.String(128), index=True)
+    portfolio = db.Column(db.String(1024))
 
     discriminator = db.Column(db.String(50))
 
@@ -25,7 +26,7 @@ class User(UserMixin, db.Model):
         super(User, self).__init__(**kwargs)
 
         if not self.label:
-            self.label = self.discriminator
+            self.label = self.discriminator.capitalize()
 
     @property
     def full_name(self):
@@ -48,7 +49,6 @@ student_mentor_association_table = db.Table(
 class Student(User):
     __tablename__ = "student"
     id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
-    portfolio = db.Column(db.String(1024))
 
     mentors = db.relationship(
         "Mentor",
