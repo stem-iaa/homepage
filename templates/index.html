@@ -3,6 +3,7 @@
 {% block title %}STEM@IAA - Home{% endblock %}
 
 {% block head %}
+    {{ super() }}
     <link href="/static/css/carousel.css" rel="stylesheet">
     <link href="/static/css/homepage.css" rel="stylesheet">
 {% endblock %}
@@ -245,13 +246,6 @@
             <!-- /END THE FEATURETTES -->
 
         </div><!-- /.container -->
-
-        <!-- FOOTER -->
-        <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
-            <p><img class="" src="/static/images/cc.logo.png" alt="Creative Commons Logo"> | <strong>STEM@IAA -
-                2019</strong></p>
-        </footer>
     </main>
 {% endblock %}
 
