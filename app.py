@@ -3,7 +3,7 @@ import flask_login
 import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from sqlalchemy.orm import joinedload
+from sqlalchemy import or_
 import os
 
 
@@ -351,6 +351,42 @@ def password(username):
     db.session.commit()
 
     return json.dumps({"error": None})
+
+
+@app.route("/search/", methods=["GET"])
+@app.route("/search/<query_string>", methods=["GET"])
+def search(query_string=""):
+    if not query_string:
+        return json.dumps([])
+
+    query = models.User.query.filter(or_(
+        models.User.username.contains(query_string),
+        models.User.first_name.contains(query_string),
+        models.User.last_name.contains(query_string),
+        models.User.label.contains(query_string),
+        models.User.email.contains(query_string)
+    )).all()
+
+    ret = []
+    for result in query:
+        ret.append({
+            "username": result.username,
+            "stylized_username": result.stylized_username,
+            "full_name": result.full_name
+        })
+    return json.dumps(ret)
+
+
+@app.route("/admin")
+@flask_login.login_required
+def admin():
+    current_user = flask_login.current_user
+    if current_user.discriminator != "instructor":
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
+    return render_template("admin.html", user=current_user)
 
 
 @app.route("/logout")

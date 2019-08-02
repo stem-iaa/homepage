@@ -47,3 +47,5 @@ $("#upload-picture-input").on("change", function () {
         $("#upload-picture-form").submit();
     }
 });
+
+
