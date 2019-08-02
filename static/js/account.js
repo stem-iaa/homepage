@@ -1,5 +1,7 @@
 
 $("#update-button").on("click", function () {
+    let submit_alert = $("#settings-submit-alert");
+    let success_alert = $("#settings-submit-success");
     let form = $("#account-settings-form");
     submit_alert.hide();
     success_alert.hide();
