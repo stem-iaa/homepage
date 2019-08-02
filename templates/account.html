@@ -64,6 +64,21 @@
 
             <button class="btn btn-primary" type="button" id="update-button">Update</button>
             <br><br>
+        </form>
+        <br>
+
+
+        <h2>Update Password</h2>
+        <hr>
+        <form id="update-password-form">
+            <div class="mb-3">
+                <label for="new_password">New password</label>
+                <input type="password" class="form-control" id="new_password" name="new_password" value="">
+            </div>
+            <div class="mb-3">
+                <label for="verify_password">Verify password</label>
+                <input type="password" class="form-control" id="verify_password" name="verify_password" value="">
+            </div>
 
             <div class="alert alert-danger" id="submit-alert" role="alert" style="display: none;">
             </div>
@@ -71,6 +86,9 @@
             <div class="alert alert-success" id="submit-success" role="alert" style="display: none;">
                 Updated!
             </div>
+            <br>
+
+            <button class="btn btn-primary" type="button" id="update-password-button">Update Password</button>
         </form>
     </div>
 {% endblock %}

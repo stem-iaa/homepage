@@ -315,6 +315,36 @@ def picture(username):
     return redirect("/profile/" + profile_user.username)
 
 
+@app.route("/profile/<username>/password", methods=["POST"])
+def password(username):
+    profile_user = models.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return json.dumps({
+            "error": "No user found"
+        })
+
+    current_user = flask_login.current_user
+    if profile_user.username != current_user.username:
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
+    new_password = request.form.get("new_password")
+    if not new_password:
+        return json.dumps({"error": "New password required"})
+
+    password_verify = request.form.get("verify_password")
+    if not password_verify:
+        return json.dumps({"error": "Password verification required"})
+
+    if new_password != password_verify:
+        return json.dumps({"error": "Password verification doesn't match password"})
+
+    profile_user.password_hash = generate_password_hash(new_password)
+    db.session.commit()
+
+    return json.dumps({"error": None})
+
 @app.route("/logout")
 def logout():
     flask_login.logout_user()
