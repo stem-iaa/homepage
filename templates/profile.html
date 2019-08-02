@@ -1,4 +1,4 @@
-{% extends "main.html" %}
+{% extends "global_profile.html" %}
 
 {% block head %}
     <link href="/static/css/global.css" rel="stylesheet">
@@ -63,9 +63,6 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        let profile_user = "{{ profile_user.username }}";
-    </script>
-    <script src="/static/js/global.js"></script>
+    {{ super() }}
     <script src="/static/js/profile.js"></script>
 {% endblock %}

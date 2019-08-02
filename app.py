@@ -95,6 +95,13 @@ def register():
         if not info[key]:
             info[key] = None
 
+    if info["email"]:
+        existing_user = models.User.query.filter_by(email=info["email"]).first()
+        if existing_user:
+            return json.dumps({
+                "error": "Email already used"
+            })
+
     user_type = request.form.get("user_type")
 
     user = None
@@ -182,20 +189,20 @@ def info(username):
                            instructors=all_instructors)
 
 
-@app.route("/profile/<username>/account", methods=["GET", "POST"])
+@app.route("/profile/<username>/account", methods=["GET"])
 @flask_login.login_required
 def account(username):
-    if request.method == "GET":
-        profile_user = models.User.query.filter_by(username=username).first()
-        if not profile_user:
-            return "no user found"
+    profile_user = models.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return "no user found"
 
-        if profile_user.username != flask_login.current_user.username:
-            return "no permission for user"
+    if profile_user.username != flask_login.current_user.username:
+        return "no permission for user"
 
-        return render_template("account.html", user=flask_login.current_user, is_user=True)
-    elif request.method == "POST":
-        pass
+    return render_template("account.html",
+                           user=flask_login.current_user,
+                           profile_user=profile_user,
+                           is_user=True)
 
 
 @app.route("/profile/<username>/update", methods=["POST"])
@@ -213,14 +220,28 @@ def update(username):
             "error": "No permission for user"
         })
 
+    existing_user = models.User.query.filter_by(username=username).first()
+    if existing_user and existing_user != profile_user:
+        return json.dumps({
+            "error": "Username already exists"
+        })
+
+    if request.form.get("email"):
+        existing_user = models.User.query.filter_by(email=request.form.get("email")).first()
+        if existing_user and existing_user != profile_user:
+            return json.dumps({
+                "error": "Email already used"
+            })
+
     whitelisted_parameters = {
-        "first_name", "last_name", "email", "location", "bio", "portfolio"
+        "username", "first_name", "last_name", "email", "location", "bio", "portfolio"
     }
 
     for parameter in request.form.keys():
         if parameter in whitelisted_parameters:
             value = request.form.get(parameter)
-            setattr(profile_user, parameter, value)
+            if value:
+                setattr(profile_user, parameter, value)
 
     if profile_user.discriminator == "mentor":
         if request.form.get("students"):
@@ -241,7 +262,10 @@ def update(username):
     db.session.commit()
 
     return json.dumps({
-        "error": None
+        "error": None,
+        "info": {
+            "username": profile_user.username
+        }
     })
 
 
