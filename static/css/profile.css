@@ -2,3 +2,8 @@
 .title-section img {
     min-width: 150px;
 }
+
+.portfolio-content {
+    white-space: pre-wrap;
+    min-width: 400px;
+}

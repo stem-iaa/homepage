@@ -38,7 +38,7 @@
     <div class="container-fluid" style="max-width: 1200px;">
         <div class="row justify-content-between">
             <div class="col">
-                <h1 class="font-italic"><strong>{{ profile_user.label }} {{ "Portfolio" if profile_user.discriminator == "student" else "Content" }}</strong></h1>
+                <h1 class="font-italic"><strong>{{ "Student Portfolio" if profile_user.discriminator == "student" else "Content" }}</strong></h1>
 
                 <hr>
                 <div class="portfolio-content editable"

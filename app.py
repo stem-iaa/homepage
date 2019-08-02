@@ -155,7 +155,7 @@ def profile(username):
     profiles = {
         "student": "student_profile.html",
         "mentor": "mentor_profile.html",
-        "instructor": "instructor.html"
+        "instructor": "instructor_profile.html"
     }
 
     return render_template(profiles.get(profile_user.discriminator),
