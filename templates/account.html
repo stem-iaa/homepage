@@ -54,6 +54,14 @@
                 </div>
             {% endif %}
 
+            {% if profile_user.discriminator == "instructor" %}
+                <label for="label">Label</label>
+                <input type="text" class="form-control" id="label" name="label"
+                       value="{{ profile_user.label }}">
+            {% endif %}
+
+            <br>
+
             <button class="btn btn-primary" type="button" id="update-button">Update</button>
             <br><br>
 
