@@ -36,6 +36,6 @@
     padding-right: .4rem;
 }
 
-.inst-pad {
-
+.bottom {
+    vertical-align: sub;
 }
