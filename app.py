@@ -269,6 +269,48 @@ def update(username):
     })
 
 
+@app.route("/profile/<username>/picture", methods=["POST"])
+@flask_login.login_required
+def picture(username):
+    profile_user = models.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return json.dumps({
+            "error": "No user found"
+        })
+
+    current_user = flask_login.current_user
+    if profile_user.username != current_user.username:
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
+    if "profile_picture" not in request.files:
+        return json.dumps({
+            "error": "No file"
+        })
+
+    profile_picture = request.files["profile_picture"]
+    if not profile_picture.filename:
+        return json.dumps({
+            "error": "No file selected"
+        })
+
+    allowed_extensions = {"png", "jpg", "jpeg", "gif", "svg"}
+    extension = profile_picture.filename.rsplit(".", 1)[1].lower()
+    if extension not in allowed_extensions:
+        return json.dumps({
+            "error": "Picture invalid"
+        })
+
+    profile_picture_path = "static/images/profile_pictures/" + profile_user.username + "." + extension
+    profile_picture.save(profile_picture_path)
+
+    profile_user.profile_picture_path = "/" + profile_picture_path
+    db.session.commit()
+
+    return redirect("/profile/" + profile_user.username)
+
+
 @app.route("/logout")
 def logout():
     flask_login.logout_user()

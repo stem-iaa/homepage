@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     bio = db.Column(db.String(1024))
     label = db.Column(db.String(128), index=True)
     portfolio = db.Column(db.String(1024))
+    profile_picture_path = db.Column(db.String(128))
 
     discriminator = db.Column(db.String(50), index=True)
 
@@ -37,6 +38,10 @@ class User(UserMixin, db.Model):
     @property
     def stylized_username(self):
         return "@" + self.username
+
+    @property
+    def profile_picture_path_or_default(self):
+        return self.profile_picture_path if self.profile_picture_path else "/static/images/default_profile.svg"
 
 
 student_mentor_association_table = db.Table(

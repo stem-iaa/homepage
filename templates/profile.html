@@ -28,8 +28,19 @@
                        id="bio">{{ profile_user.bio if profile_user.bio else 'This user did not enter a bio yet.' }}</p>
                 </div>
                 <div class="col-sm-4">
-                    <img class="bd-placeholder-img img-thumbnail" src="/static/images/jim.png"
-                         width="100%" focusable="false">
+                    <img class="bd-placeholder-img img-thumbnail" id="upload-picture-button"
+                         src="{{ profile_user.profile_picture_path_or_default }}"
+                         width="100%" focusable="false"
+                            {% if is_user %}
+                         style="cursor: pointer"
+                            {% endif %}>
+                    {% if is_user %}
+                        <form class="hidden" id="upload-picture-form"
+                              action="/profile/{{ profile_user.username }}/picture" method="post"
+                              enctype="multipart/form-data">
+                            <input type="file" name="profile_picture" id="upload-picture-input">
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
