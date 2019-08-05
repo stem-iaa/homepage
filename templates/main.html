@@ -81,7 +81,7 @@
 
 {% macro label(user, h) %}
     <{{ h }}>
-        <mark class="pr-0 font-weight-bold text-dark">#</mark><mark class="pl-0 font-italic">{{ user.label }}</mark>
+        <mark class="user-label-hash">#</mark><mark class="user-label">{{ user.label }}</mark>
     </{{ h }}>
 {%- endmacro %}
 
