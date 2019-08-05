@@ -28,6 +28,7 @@ x put on worm
   - mentor sees all students from all their cohorts on their page, other students only see other students from their own
     cohort. instructor sees everyone
   - search restricted to users from a users own cohort(s)
+- homepage = profile if logged in
 
 
 want
@@ -52,3 +53,4 @@ want
     - # for label (instructor, student)
       - make existing labels clickable that search for that label
 - role system rather than binding role to account type
+- edit cancel button

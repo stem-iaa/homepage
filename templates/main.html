@@ -81,6 +81,10 @@
                     <br>
                     {{ user.email }}
                 {% endif %}
+                {% if user.skype_id %}
+                    <br>
+                    <span class="text-secondary">skype:</span> <a href="live:{{ user.skype_id }}" class="text-info">{{ user.skype_id }}</a>
+                {% endif %}
                 {% if user.location %}
                     <br>
                     {{ user.location }}

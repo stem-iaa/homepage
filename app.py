@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_
 import os
+from flask_migrate import Migrate
 
 
 config = json.load(open("config.json", "r"))
@@ -15,6 +16,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = config["SQLALCHEMY_DATABASE_URI"]
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
@@ -96,7 +98,8 @@ def register():
         "first_name": request.form.get("first_name"),
         "last_name": request.form.get("last_name"),
         "email": request.form.get("email"),
-        "location": request.form.get("location")
+        "location": request.form.get("location"),
+        "skype_id": request.form.get("skype_id")
     }
 
     for key in info:
@@ -242,7 +245,7 @@ def update(username):
             })
 
     whitelisted_parameters = {
-        "username", "first_name", "last_name", "email", "location", "bio", "portfolio"
+        "username", "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
     }
 
     for parameter in request.form.keys():

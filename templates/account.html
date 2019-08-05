@@ -40,6 +40,12 @@
             </div>
 
             <div class="mb-3">
+                <label for="skype_id">Skype ID</label>
+                <input type="text" class="form-control" id="skype_id" name="skype_id"
+                       value="{{ '' if not profile_user.skype_id else profile_user.skype_id }}">
+            </div>
+
+            <div class="mb-3">
                 <label for="location">Location</label>
                 <input type="text" class="form-control" id="location" name="location"
                        value="{{ '' if not profile_user.location else profile_user.location }}">
