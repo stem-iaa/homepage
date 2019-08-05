@@ -3,6 +3,7 @@
 {% block title %}STEM@IAA - Home{% endblock %}
 
 {% block head %}
+    {{ super() }}
     <link href="/static/css/carousel.css" rel="stylesheet">
     <link href="/static/css/homepage.css" rel="stylesheet">
 {% endblock %}
@@ -12,7 +13,10 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#about">About</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#sponsors">Sponsors</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#inst-pad">Instructors</a>
@@ -21,15 +25,13 @@
         <a class="nav-link" href="#learn">Learn</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Sponsors</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="mailto:STEM@vthitec.org">Contact</a>
     </li>
 {% endblock %}
 
 {% block content %}
     <main role="main">
+
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -39,19 +41,16 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="dd-block w-100" width="100%" height="100%" preserveAspectRatio="true" focusable="false"
+                    <img class="dd-block w-100" width="100%" focusable="false"
                          role="img" src="/static/images/code.jpg" alt="First slide">
-                    <rect width="100%" height="100%"/>
+                    <rect width="100%"/>
                     <div class="container">
                         <div class="carousel-caption text-left">
                             <h1>Learn Software Development.</h1>
-                            <p>Software drives the systems we use everyday. Design, code, deploy and test new and
-                                innovative
-                                applications. Programming languages are the tools of the trade and you'll learn how to
-                                harness their power to realize your ideas.</p>
+                            <p>Software drives the modern world. Discover how to design, code, deploy and test new and
+                                innovative solutions. Trust us, you'll like it.</p>
                             <p><a class="btn btn-lg btn-primary" href="https://application.vthitec.org/LM/"
-                                  target="_blank"
-                                  role="button">Apply Now</a></p>
+                                  target="_blank" role="button">Apply Now</a></p>
                         </div>
                     </div>
                 </div>
@@ -62,11 +61,10 @@
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Learn Systems Engineering.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p>Hardware meet software. Build a circuit. Write a script. Watch them play together. What
+                                could be more fun than that?</p>
                             <p><a class="btn btn-lg btn-primary" href="https://application.vthitec.org/LM/"
-                                  target="_blank"
-                                  role="button">Apply Now</a></p>
+                                  target="_blank" role="button">Apply Now</a></p>
                         </div>
                     </div>
                 </div>
@@ -77,11 +75,10 @@
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <h1>Solve Complex Problems.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p>What's an algorithm? What's a programming language? Develop your critical thinking skills
+                                as you uncover the mysteries of modern technology.</p>
                             <p><a class="btn btn-lg btn-primary" href="https://application.vthitec.org/LM/"
-                                  target="_blank"
-                                  role="button">Apply Now</a></p>
+                                  target="_blank" role="button">Apply Now</a></p>
                         </div>
                     </div>
                 </div>
@@ -92,8 +89,8 @@
                     <div class="container">
                         <div class="carousel-caption text-right">
                             <h1>A World of 1's and 0's.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
-                                gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p>It all begins with a 0 or a 1. How is everything we do in the digital world built from
+                                these simple and primitive values? Join us to find some answers.</p>
                             <p><a class="btn btn-lg btn-primary btn-color" href="https://application.vthitec.org/LM/"
                                   target="_blank" role="button">Apply Now</a></p>
                         </div>
@@ -108,6 +105,62 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+        </div>
+
+
+        <!-- Marketing messaging and featurettes -->
+
+        <!-- START THE FEATURETTES -->
+        <div id="about" class="container marketing">
+            <h2 class="featurette-heading spc">Lockheed Martin <span class="text-muted">Virtual STEM Education</span>
+            </h2>
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <!--<h2 class="featurette-heading">Learn to code. <span class="text-muted">It will change your life.</span></h2>-->
+                    <p class="lead">The Lockheed Martin Virtual STEM Education and Work-based Mentored Experience
+                        program is for rising high school juniors and seniors 16 years or older. The program, sponsored
+                        by the Lockheed Martin Foundation, provides an opportunity for students to learn about the
+                        exciting field of software development while earning college credits and being mentored by
+                        Lockheed Martin industry experts. No prior programming experience necessary!</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
+                         height="400" src="/static/images/lockheed_martin_logo.jpg" preserveAspectRatio="xMidYMid slice"
+                         focusable="false" role="img"><title>Lockheed Martin Logo</title></img>
+                </div>
+            </div>
+            <p class="lead">This innovative program is offered virtually (100% online) and is designed with flexibility
+                in mind for students to supplement their traditional high school education. The program is comprised of
+                two courses, the first being offered in Fall 2019 and the second in the Spring 2020 semester. A team of
+                dedicated instructors and teaching assistants will guide students through the fundamentals of software
+                development in a virtual hands-on project-based education and learning experience. Students will also by
+                assigned individualized mentors from Lockheed Martin who are subject matter experts in the field!</p>
+
+        </div>
+
+        <div id="sponsors" class="container marketing">
+            <hr class="featurette-divider">
+            <h2 class="featurette-heading spc">Many thanks to these <span class="text-muted">amazing partners.</span>
+            </h2>
+            <div class="row align-items-center">
+                <div class="col-lg-4 bottom">
+                    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="250"
+                         height="150" src="/static/images/iaa_logo.jpg" preserveAspectRatio="xMidYMid slice"
+                         focusable="false"
+                         role="img"><title>IAA</title></img>
+                </div>
+                <div class="col-lg-4 bottom">
+                    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="150"
+                         height="150" src="/static/images/hope_logo.png" preserveAspectRatio="xMidYMid slice"
+                         focusable="false"
+                         role="img"><title>HOPE</title></img>
+                </div>
+                <div class="col-lg-4 bottom">
+                    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="150"
+                         height="150" src="/static/images/columbia_college.png" preserveAspectRatio="xMidYMid slice"
+                         focusable="false" role="img"><title>CC</title></img>
+                </div>
+            </div>
         </div>
 
 
@@ -130,10 +183,9 @@
                     <rect width="100%" height="100%" fill="#777"/>
                     </img>
                     <h2>Meet Jim</h2>
-                    <p>Jim is passionate about technology. He has taught a number of computer science and technology
-                        courses
-                        at several colleges and universities on the east coast.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>
+                    <p>Jim finds great delight in building cool things with technology. He has an affinity for figuring
+                        out how things work, and will guide you through his fascinating process.</p>
+                    <!--<p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>-->
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-3">
                     <img class="bd-placeholder-img rounded-circle" src="/static/images/lisa.png" width="140"
@@ -143,12 +195,9 @@
                     <rect width="100%" height="100%" fill="#777"/>
                     </img>
                     <h2>Meet Lisa</h2>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-                        Cras
-                        mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris
-                        condimentum nibh.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>
+                    <p>Lisa is passionate about teaching computer science to young and inquisitive minds. She heads up
+                        the local chapter of Girls Who Code. She'll show you the way.</p>
+                    <!--<p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>-->
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-3">
                     <img class="bd-placeholder-img rounded-circle" src="/static/images/sam.png" width="140" height="140"
@@ -157,12 +206,9 @@
                     <rect width="100%" height="100%" fill="#777"/>
                     </img>
                     <h2>Meet Sam</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id
-                        ligula
-                        porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                        nibh,
-                        ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>
+                    <p>Sam, our resident code ninja, is beginning graduate school to study computer science. He is a
+                        talented software developer, and loves to share his knowledge.</p>
+                    <!--<p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>-->
                 </div>
                 <div class="col-lg-3">
                     <img class="bd-placeholder-img rounded-circle" src="/static/images/shauna.png" width="140"
@@ -172,12 +218,9 @@
                     <rect width="100%" height="100%" fill="#777"/>
                     </img>
                     <h2>Meet Shauna</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id
-                        ligula
-                        porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum
-                        nibh,
-                        ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>
+                    <p>Shauna is a sophomore majoring in computer science. She took her first programming course in high
+                        school and was hooked! She can't wait to help with your coding labs.</p>
+                    <!--<p><a class="btn btn-secondary" href="#" role="button">Contact &raquo;</a></p>-->
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->
 
@@ -189,11 +232,12 @@
             <div class="row featurette">
                 <div class="col-md-7">
                     <h2 class="featurette-heading">Learn to code. <span
-                            class="text-muted">It will change your life.</span>
-                    </h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                        euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
-                        tellus ac cursus commodo.</p>
+                            class="text-muted">It will change your life.</span></h2>
+                    <p class="lead">Ready to join a Top Secret Club (a.k.a., the Tech Community)? It can be frustrating
+                        learning to code, but after building a website or application – even a simple one – there is
+                        always an overwhelming feeling of accomplishment. Reaching a pivotal point on a project or
+                        overcoming a problem that has been taking several days to solve can bring on that feeling of
+                        achievement. It will change your life. Just give it a chance.</p>
                 </div>
                 <div class="col-md-5">
                     <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
@@ -209,9 +253,10 @@
                 <div class="col-md-7 order-md-2">
                     <h2 class="featurette-heading">Does this look scary? <span class="text-muted">Do not worry.</span>
                     </h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                        euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
-                        tellus ac cursus commodo.</p>
+                    <p class="lead">Our goal is to demystify technology. By taking a look "under the hood," you'll
+                        develop an understanding of how all these pieces come together to make complex devices work.
+                        We'll take you through some pretty intimidating tasks, and you'll walk away saying, "well,
+                        that's wasn't so bad."</p>
                 </div>
                 <div class="col-md-5 order-md-1">
                     <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
@@ -226,11 +271,10 @@
             <div class="row featurette">
                 <div class="col-md-7">
                     <h2 class="featurette-heading">Let's build something. <span
-                            class="text-muted">Insanely great.</span>
-                    </h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis
-                        euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus,
-                        tellus ac cursus commodo.</p>
+                            class="text-muted">Insanely great.</span></h2>
+                    <p class="lead">We have hardware. We have software. Let's put them together to construct something
+                        extraordinarily cool! In the amazing Introduction to Systems Engineering course, you'll learn
+                        how to build circuits and control them with software. Your ideas will really take flight.</p>
                 </div>
                 <div class="col-md-5">
                     <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="400"
@@ -239,27 +283,17 @@
                          role="img" aria-label="Placeholder: 500x500"><title>Update</title></img>
                 </div>
             </div>
-
-            <hr class="featurette-divider">
-
             <!-- /END THE FEATURETTES -->
 
         </div><!-- /.container -->
-
-        <!-- FOOTER -->
-        <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
-            <p><img class="" src="/static/images/cc.logo.png" alt="Creative Commons Logo"> | <strong>STEM@IAA -
-                2019</strong></p>
-        </footer>
     </main>
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $('#topheader .navbar-nav a').on('click', function () {
-        $('#topheader .navbar-nav').find('li.active').removeClass('active');
-        $(this).parent('li').addClass('active');
-    });
-</script>
+    <script>
+        $('#topheader .navbar-nav a').on('click', function () {
+            $('#topheader .navbar-nav').find('li.active').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+    </script>
 {% endblock %}

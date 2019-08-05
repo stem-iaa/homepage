@@ -1,5 +1,6 @@
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
 
 .card {
@@ -11,3 +12,47 @@ h1, h2, h3, h4, h5, h6 {
     display: none;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+.at-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+}
+
+footer {
+    padding: 20px;
+}
+
+footer p {
+    margin: 0px;
+}
+
+/* https://stackoverflow.com/questions/16948266/twitter-bootstrap-carousel-image-appears-distorted */
+.carousel-item {
+  height: 32rem;
+  background-color: #777;
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  height: 32rem;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: 20% 19%;
+}
+
+.many-brs {
+    padding: 50px;
+}

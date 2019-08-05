@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
+    {{ super() }}
     <link href="/static/css/profile.css" rel="stylesheet">
 {% endblock %}
 
@@ -54,12 +55,23 @@
             </div>
         </nav>
     </header>
-    <br>
-    <br>
-    <br>
-    <br>
 
     {% block content %}{% endblock %}
+
+    <div class="many-brs"></div>
+
+    <!-- FOOTER -->
+    <div class="at-bottom">
+        <hr>
+        <footer>
+            <div class="container">
+                <p class="float-right"><a href="#">Back to top</a></p>
+                <p><img class="" src="/static/images/cc.logo.png" alt="Creative Commons Logo"> | <strong>STEM@IAA -
+                    2019</strong></p>
+            </div>
+        </footer>
+    </div>
+
 
 {% endblock %}
 

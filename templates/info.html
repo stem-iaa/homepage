@@ -1,10 +1,12 @@
-{% extends "main.html" %}
+{% extends "global_profile.html" %}
 
 {% block head %}
+    {{ super() }}
     <link href="/static/css/global.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
+    {{ super() }}
     <div class="container">
         {% if user.discriminator == "student" %}
             <h1>Course Links</h1>

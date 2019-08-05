@@ -196,6 +196,7 @@ def info(username):
 
     return render_template("info.html",
                            user=flask_login.current_user,
+                           profile_user=profile_user,
                            is_user=True,
                            instructors=all_instructors)
 
@@ -389,7 +390,9 @@ def admin():
             "error": "No permission for user"
         })
 
-    return render_template("admin.html", user=current_user)
+    return render_template("admin.html",
+                           user=current_user,
+                           profile_user=current_user)
 
 
 @app.route("/logout")
