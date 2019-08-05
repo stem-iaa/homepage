@@ -75,6 +75,16 @@
 
 {% endblock %}
 
+{% macro username(user) %}
+    <a class="text-info" href="/profile/{{ user.username }}">{{ user.stylized_username }}</a>
+{%- endmacro %}
+
+{% macro label(user, h) %}
+    <{{ h }}>
+        <mark class="pr-0 font-weight-bold text-dark">#</mark><mark class="pl-0 font-italic">{{ user.label }}</mark>
+    </{{ h }}>
+{%- endmacro %}
+
 {% macro card(user, full) -%}
     <div class="card">
         {% if full %}
@@ -82,20 +92,19 @@
         {% endif %}
         <div class="card-body">
             {% if user.full_name %}
-                <h4 class="card-title">{{ user.full_name }}</h4>
+                <h4 class="card-title mb-2">{{ user.full_name }}</h4>
             {% endif %}
-            <h6>
-                <mark>{{ user.label }}</mark>
-            </h6>
-            <p class="mb-1 text-muted">
-                <a class="text-info" href="/profile/{{ user.username }}">{{ "@" + user.username }}</a>
+            {{ label(user, "h6") }}
+            <p class="mt-3 mb-0 text-muted">
+                {{ username(user) }}
                 {% if user.email %}
                     <br>
                     {{ user.email }}
                 {% endif %}
                 {% if user.skype_id %}
                     <br>
-                    <span class="text-secondary">skype:</span> <a href="live:{{ user.skype_id }}" class="text-info">{{ user.skype_id }}</a>
+                    <span class="text-secondary">skype:</span>
+                    <a href="live:{{ user.skype_id }}" class="text-info">{{ user.skype_id }}</a>
                 {% endif %}
                 {% if user.location %}
                     <br>
