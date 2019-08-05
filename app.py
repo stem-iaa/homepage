@@ -212,7 +212,8 @@ def account(username):
     if not profile_user:
         return "no user found"
 
-    if profile_user.username != flask_login.current_user.username:
+    current_user = flask_login.current_user
+    if profile_user.username != current_user.username and current_user.discriminator != "instructor":
         return "no permission for user"
 
     return render_template("account.html",
@@ -231,7 +232,7 @@ def update(username):
         })
 
     current_user = flask_login.current_user
-    if profile_user.username != current_user.username:
+    if profile_user.username != current_user.username and current_user.discriminator != "instructor":
         return json.dumps({
             "error": "No permission for user"
         })
@@ -253,10 +254,16 @@ def update(username):
         "username", "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
     }
 
+    admin_parameters = {
+        "label"
+    }
+
     for parameter in request.form.keys():
-        if parameter in whitelisted_parameters:
+        if parameter in whitelisted_parameters.union(admin_parameters):
             value = request.form.get(parameter)
             if value:
+                if parameter in admin_parameters and current_user.discriminator != "instructor":
+                    return json.dumps({"error": "No permission to set " + parameter})
                 setattr(profile_user, parameter, value)
 
     if profile_user.discriminator == "mentor":
@@ -266,9 +273,7 @@ def update(username):
             for student_username in student_usernames:
                 student = models.Student.query.filter_by(username=student_username).first()
                 if not student:
-                    return json.dumps({
-                        "error": "Student not found: " + student_username
-                    })
+                    return json.dumps({"error": "Student not found: " + student_username})
                 profile_user.students.append(student)
 
     if profile_user.discriminator == "instructor":

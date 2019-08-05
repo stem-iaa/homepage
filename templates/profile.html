@@ -12,6 +12,9 @@
     {% if is_user %}
         <a class="btn btn-primary" id="edit_button" href="#">Edit</a>
     {% endif %}
+    {% if user.discriminator == "instructor" and not is_user %}
+        <a class="btn btn-outline-primary" href="/profile/{{ profile_user.username }}/account">Instructor Override</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
