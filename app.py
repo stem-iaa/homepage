@@ -34,7 +34,11 @@ def user_loader(id):
 
 @app.route("/")
 def home():
-    return render_template("index.html", user=flask_login.current_user)
+    current_user = flask_login.current_user
+    if current_user.is_anonymous:
+        return render_template("index.html", user=flask_login.current_user)
+    else:
+        return redirect("/profile/" + current_user.username)
 
 
 @app.route("/login", methods=["GET", "POST"])
