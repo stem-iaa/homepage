@@ -84,18 +84,19 @@ def update(username):
             "error": "No permission for user"
         })
 
-    existing_user = models.User.query.filter_by(username=username).first()
+    username_field = request.form.get("username")
+    existing_user = models.User.query.filter_by(username=username_field).first()
     if existing_user and existing_user != profile_user:
         return json.dumps({
             "error": "Username already exists"
         })
 
     whitelisted_parameters = {
-        "username", "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
+        "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
     }
 
     admin_parameters = {
-        "label"
+        "label", "username"
     }
 
     for parameter in request.form.keys():
@@ -115,10 +116,6 @@ def update(username):
                 if not student:
                     return json.dumps({"error": "Student not found: " + student_username})
                 profile_user.students.append(student)
-
-    if profile_user.discriminator == "instructor":
-        if request.form.get("label"):
-            profile_user.label = request.form.get("label")
 
     db.session.commit()
 
