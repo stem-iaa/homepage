@@ -24,16 +24,18 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="username">Username</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@</span>
+            {% if user.discriminator == "instructor" %}
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="username" name="username"
+                               value="{{ '' if not profile_user.username else profile_user.username }}">
                     </div>
-                    <input type="text" class="form-control" id="username" name="username"
-                           value="{{ '' if not profile_user.username else profile_user.username }}">
                 </div>
-            </div>
+            {% endif %}
 
             <div class="mb-3">
                 <label for="email">Email</label>

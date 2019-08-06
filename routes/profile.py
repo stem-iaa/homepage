@@ -90,13 +90,6 @@ def update(username):
             "error": "Username already exists"
         })
 
-    if request.form.get("email"):
-        existing_user = models.User.query.filter_by(email=request.form.get("email")).first()
-        if existing_user and existing_user != profile_user:
-            return json.dumps({
-                "error": "Email already used"
-            })
-
     whitelisted_parameters = {
         "username", "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
     }
