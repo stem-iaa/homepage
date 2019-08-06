@@ -3,6 +3,7 @@ from app import db
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import or_
 import models
 import json
 
