@@ -2,6 +2,27 @@ from app import db
 from flask_login import UserMixin
 
 
+cohort_association_table = db.Table(
+    "cohort_association", db.Model.metadata,
+    db.Column("cohort", db.Integer, db.ForeignKey("cohort.id")),
+    db.Column("user", db.Integer, db.ForeignKey("user.id"))
+)
+
+
+class Cohort(db.Model):
+    __tablename__ = "cohort"
+    id = db.Column(db.Integer, index=True, primary_key=True)
+    name = db.Column(db.String, index=True)
+    active = db.Column(db.Boolean, index=True)
+
+    users = db.relationship(
+        "User",
+        secondary=cohort_association_table,
+        back_populates="cohorts",
+        lazy="joined"
+    )
+
+
 class User(UserMixin, db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
@@ -16,6 +37,13 @@ class User(UserMixin, db.Model):
     portfolio = db.Column(db.String(1024))
     profile_picture_path = db.Column(db.String(128))
     skype_id = db.Column(db.String(128))
+
+    cohorts = db.relationship(
+        "Cohort",
+        secondary=cohort_association_table,
+        back_populates="users",
+        lazy="joined"
+    )
 
     discriminator = db.Column(db.String(50), index=True)
 
