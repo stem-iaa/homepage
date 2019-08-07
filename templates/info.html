@@ -38,12 +38,34 @@
 
         {% if user.discriminator == "student" %}
             <h1>Connect to VM</h1>
-            <p>Your VM is currently <span class="badge badge-danger">stopped</span>.</p>
+            <div class="vm-info" id="vm-polling">
+                <div class="spinner-border">
+                </div>
+            </div>
+            <div class="hidden vm-info" id="vm-off">
+                <p>Your VM is currently <span class="badge badge-danger">stopped</span>.</p>
+                <a class="btn btn-primary" id="start-vm-button" href="#" role="button">Start VM</a>
+            </div>
+            <div class="hidden vm-info col-4" id="vm-on">
+                <p>Your VM is currently <span class="badge badge-success">running</span>.</p>
+                <div class="form-group">
+                    <label for="vm-ip">VNC IP Address</label>
+                    <input type="text" class="form-control" id="vm-ip" readonly>
+                </div>
+            </div>
+            <div class="hidden vm-info" id="vm-error">
+                <div class="alert alert-primary" role="alert" id="vm-alert">
+                </div>
+            </div>
 
-            <a class="btn btn-primary" href="#" role="button">Start VM</a>
         {% endif %}
 
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/info.js"></script>
 {% endblock %}
 

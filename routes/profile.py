@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import models
 import json
 import os
+from api import Azure
 
 
 def is_user(current_user, compare_to):

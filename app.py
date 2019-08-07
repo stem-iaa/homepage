@@ -21,7 +21,6 @@ login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 import models
-from api.Azure import Azure
 
 
 @login_manager.user_loader

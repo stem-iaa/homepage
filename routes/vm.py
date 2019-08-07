@@ -35,3 +35,19 @@ def start(username):
         return json.dumps({"error": cloud_error.message})
 
     return json.dumps({"error": None})
+
+
+@app.route("/vm/ip/<username>", methods=["GET"])
+def ip(username):
+    if not is_user(flask_login.current_user, username):
+        return json.dumps({"error": "Permission denied for user."})
+
+    try:
+        ip = Azure.get_vm_ip(username)
+    except msrestazure.azure_exceptions.CloudError as cloud_error:
+        return json.dumps({"error": cloud_error.message})
+
+    return json.dumps({
+        "error": None,
+        "ip": ip
+    })
