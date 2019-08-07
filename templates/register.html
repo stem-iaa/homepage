@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "global_profile.html" %}
 
 {% block title %}Register{% endblock %}
 
@@ -7,7 +7,8 @@
     <link href="/static/css/signin.css" rel="stylesheet">
 {% endblock %}
 
-{% block body %}
+{% block content %}
+    {{ super() }}
     <div class="text-center" style="width: 100%;">
         <form class="needs-validation form-signin" id="register-form" novalidate>
             <img class="mb-4" src="/static/images/STEMatIAA_logo.png">
