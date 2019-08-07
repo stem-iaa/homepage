@@ -30,6 +30,7 @@ x instructors able to edit other user's account pages
   - admin editable cohort for each user
 - azure VM startup
 x homepage = profile if logged in
+- solutions
 
 
 want

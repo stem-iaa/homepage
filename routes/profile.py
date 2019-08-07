@@ -8,6 +8,14 @@ import json
 import os
 
 
+def is_user(current_user, compare_to):
+    is_user = False
+    if not current_user.is_anonymous:
+        if current_user.username == compare_to:
+            is_user = True
+    return is_user
+
+
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
     profile_user = models.User.query.filter_by(username=username).first()
@@ -15,22 +23,18 @@ def profile(username):
     if not profile_user:
         return "no user found"
 
-    current_user = flask_login.current_user
-    is_user = False
-    if not current_user.is_anonymous:
-        if current_user.username == username:
-            is_user = True
-
     profiles = {
         "student": "student_profile.html",
         "mentor": "mentor_profile.html",
         "instructor": "instructor_profile.html"
     }
 
+    current_user = flask_login.current_user
+
     return render_template(profiles.get(profile_user.discriminator),
                            user=current_user,
                            profile_user=profile_user,
-                           is_user=is_user)
+                           is_user=is_user(current_user, username))
 
 
 @app.route("/profile/<username>/info")
@@ -66,7 +70,7 @@ def account(username):
     return render_template("account.html",
                            user=flask_login.current_user,
                            profile_user=profile_user,
-                           is_user=True)
+                           is_user=is_user(current_user, username))
 
 
 @app.route("/profile/<username>/update", methods=["POST"])

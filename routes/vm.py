@@ -6,18 +6,32 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import models
 import json
 from api import Azure
+import msrestazure.azure_exceptions
+from .profile import is_user
 
 
 @app.route("/vm/status/<username>", methods=["GET"])
 def status(username):
-    return json.dumps(Azure.get_vm_status(username))
+    try:
+        status = Azure.get_vm_status(username)
+    except msrestazure.azure_exceptions.CloudError as cloud_error:
+        return json.dumps({"error": cloud_error.message})
+
+    return json.dumps({
+        "error": None,
+        "status": status
+    })
 
 
 @app.route("/vm/start/<username>", methods=["POST"])
+@flask_login.login_required
 def start(username):
-    current_user = flask_login.current_user
-    if current_user.is_anonymous():
-        return json.dumps({"error": "No permission for user"})
+    if not is_user(flask_login.current_user, username):
+        return json.dumps({"error": "Permission denied for user."})
 
-    Azure.start_vm(username)
+    try:
+        Azure.start_vm(username)
+    except msrestazure.azure_exceptions.CloudError as cloud_error:
+        return json.dumps({"error": cloud_error.message})
+
     return json.dumps({"error": None})

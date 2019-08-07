@@ -20,10 +20,7 @@ class Azure:
 
     @staticmethod
     def start_vm(name):
-        try:
-            return Azure.compute_client.virtual_machines.start(Azure.RESOURCE_GROUP, name)
-        except Exception:
-            return None
+        return Azure.compute_client.virtual_machines.start(Azure.RESOURCE_GROUP, name)
 
     @staticmethod
     def get_vm_status(name):
