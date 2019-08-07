@@ -1,8 +1,7 @@
 function display_vm_error(error) {
     $(".vm-info").hide();
-    let vm_alert = $("#vm-alert");
-    vm_alert.text(error);
-    vm_alert.show();
+    $("#vm-alert").text(error);
+    $("#vm-error").show();
 }
 
 function show_vm_on(ip) {
