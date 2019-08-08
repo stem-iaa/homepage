@@ -83,5 +83,9 @@ def specific_cohort(id):
 
     db.session.commit()
 
-    return json.dumps({"error": None})
+    return json.dumps({
+        "error": None,
+        "name": cohort.name,
+        "is_active": cohort.active
+    })
 
