@@ -66,12 +66,14 @@ def specific_cohort(id):
 
     if request.method == "DELETE":
         db.session.delete(cohort)
-        db.session.commit();
+        db.session.commit()
         return json.dumps({"error": None})
 
     # update existing
     name = request.form.get("name")
     is_active = request.form.get("is_active")
+    if is_active:
+        is_active = True if request.form.get("is_active") == "true" else False
 
     if name is not None and name != cohort.name:
         existing_cohort = models.Cohort.query.filter_by(name=name).first()

@@ -73,3 +73,21 @@ $(".delete-cohort-button").on("click", function() {
         }
     });
 });
+
+$(".cohort-active-checkbox").on("click", function() {
+     let cohort_id = $(this).data("cohort");
+
+     $.ajax({
+        url: "/cohort/" + cohort_id,
+        type: "post",
+        dataType: "json",
+        data: {
+            "is_active": $(this).prop("checked")
+        },
+        success: function (data) {
+            if (!data.error) {
+                $(this).prop("checked", data.is_active);
+            }
+        }
+    });
+});
