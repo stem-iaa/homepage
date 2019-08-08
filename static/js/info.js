@@ -4,10 +4,13 @@ function display_vm_error(error) {
     $("#vm-error").show();
 }
 
-function show_vm_on(ip) {
+function show_vm_on(ip, port) {
+    if (!port) {
+        port = "6080";
+    }
+
     $(".vm-info").hide();
-    $("#vm-ip").val(ip + ":1");
-    $("#start-vm-button").prop("disabled", false);
+    $("#vm-connect-button").attr("href", "http://" + ip + ":" + port + "/vnc.html?host=" + ip + "&port=" + port);
     $("#vm-on").show();
 }
 
