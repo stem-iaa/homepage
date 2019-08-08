@@ -66,6 +66,7 @@ def specific_cohort(id):
 
     if request.method == "DELETE":
         db.session.delete(cohort)
+        db.session.commit();
         return json.dumps({"error": None})
 
     # update existing

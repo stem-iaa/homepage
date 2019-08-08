@@ -60,3 +60,16 @@ $(".save-cohort-button").on("click", function() {
     $(this).hide();
     $(this).parent().find(".edit-cohort-button").show();
 });
+
+$(".delete-cohort-button").on("click", function() {
+    let cohort_id = $(this).data("cohort");
+
+     $.ajax({
+        url: "/cohort/" + cohort_id,
+        type: "delete",
+        dataType: "json",
+        success: function (data) {
+            location.reload();
+        }
+    });
+});
