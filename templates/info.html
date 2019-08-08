@@ -15,7 +15,10 @@
                     <a href="#">Canvas Portal</a>
                 </li>
                 <li>
-                    <a href="#">Worm Hosting</a>
+                    <a href="http://{{ profile_user.username }}.w3.stem-iaa.org">Worm W3 Hosting</a>
+                </li>
+            <li>
+                    <a href="http://{{ profile_user.username }}.flask.stem-iaa.org">Worm Flask Hosting</a>
                 </li>
             </ul>
 
@@ -26,17 +29,7 @@
                 </li>
             </ul>
             <br>
-        {% endif %}
 
-        <h1>Instructor and TA Contact Information</h1>
-        <div class="row">
-            {% for instructor in instructors %}
-                {{ card(instructor, True) }}
-            {% endfor %}
-        </div>
-        <br>
-
-        {% if user.discriminator == "student" %}
             <h1>Connect to VM</h1>
             <div class="vm-info" id="vm-polling">
                 <div class="spinner-border">
@@ -54,8 +47,16 @@
                 <div class="alert alert-danger" role="alert" id="vm-alert">
                 </div>
             </div>
-
+            <br><br>
         {% endif %}
+
+        <h1>Instructor and TA Contact Information</h1>
+        <div class="row">
+            {% for instructor in instructors %}
+                {{ card(instructor, True) }}
+            {% endfor %}
+        </div>
+
 
     </div>
 
