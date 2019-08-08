@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+
+{% block title %}Cohorts{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="many-brs"></div>
+    <div class="container-fluid">
+        <h1>{{ cohort.name }}</h1>
+    </div>
+{% endblock %}
+

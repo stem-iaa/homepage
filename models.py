@@ -12,7 +12,7 @@ cohort_association_table = db.Table(
 class Cohort(db.Model):
     __tablename__ = "cohort"
     id = db.Column(db.Integer, index=True, primary_key=True)
-    name = db.Column(db.String, index=True)
+    name = db.Column(db.String, index=True, unique=True)
     active = db.Column(db.Boolean, index=True)
 
     users = db.relationship(
