@@ -19,17 +19,16 @@
         {% if user.discriminator == "instructor" %}
             <form class="form-inline">
                 <div class="form-group mr-2">
-                    <label for="new-user-name">Add a user</label>
+                    <label for="new-user-name">Add a new user</label>
                 </div>
-                <div class="form-group mx-2">
-                    <input type="text" class="form-control" id="new-user-name">
+                <div style="position: relative">
+                    <input class="form-control mr-sm-2 dropdown-toggle"
+                           id="cohort-user-search" type="text" placeholder="Search"
+                           aria-label="Search" data-toggle="dropdown">
                     <div class="dropdown-menu" style="visibility: hidden;">
-                        <div class="list-group search-dropdown" id="search-dropdown" style="visibility: visible;">
+                        <div class="list-group search-dropdown" id="cohort-search-dropdown" style="visibility: visible;">
                         </div>
                     </div>
-                </div>
-                <div class="form-group mx-2">
-                    <button class="btn btn-primary" id="add-user-button" type="button">Add</button>
                 </div>
             </form>
             <br>
@@ -70,3 +69,10 @@
     </div>
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/cohort.js"></script>
+    <script>
+        let cohort_id = "{{ cohort.id }}";
+    </script>
+{% endblock %}

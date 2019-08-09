@@ -1,12 +1,12 @@
 
-$("#profile-search").on("keyup", function () {
-    var search_query = $("#profile-search").val();
+$("#cohort-user-search").on("keyup", function () {
+    var search_query = $("#cohort-user-search").val();
     if (!search_query) {
         search_query = "";
     }
 
     $.ajax({
-        url: "/search/" + search_query,
+        url: "/cohort/" + cohort_id + "/add_user_search/" + search_query,
         type: "get",
         dataType: "json",
         success: function (data) {
@@ -26,7 +26,7 @@ $("#profile-search").on("keyup", function () {
                 </a>
                 `;
             }
-            $("#search-dropdown").html(html);
+            $("#cohort-search-dropdown").html(html);
         }
     });
 });

@@ -5,6 +5,7 @@ import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
 import models
 import json
+from sqlalchemy import or_
 
 
 @app.route("/cohorts", methods=["GET"])
@@ -108,3 +109,33 @@ def specific_cohort(id):
         "is_active": cohort.active
     })
 
+
+@app.route("/cohort/<id>/add_user_search/", methods=["GET"])
+@app.route("/cohort/<id>/add_user_search/<query_string>", methods=["GET"])
+def add_user_search(id, query_string=""):
+    if not query_string:
+        return json.dumps([])
+
+    cohort = models.Cohort.query.filter_by(id=id).first()
+    if not cohort:
+        return json.dumps({"error": "no cohort found for id " + id})
+
+    query = models.User.query.filter(or_(
+        models.User.username.contains(query_string),
+        models.User.first_name.contains(query_string),
+        models.User.last_name.contains(query_string),
+        models.User.label.contains(query_string),
+        models.User.email.contains(query_string)
+    )).all()
+
+    new_users = [user for user in query if user not in cohort.users]
+
+    ret = []
+    for result in new_users:
+        ret.append({
+            "username": result.username,
+            "stylized_username": result.stylized_username,
+            "full_name": result.full_name,
+            "label": result.label
+        })
+    return json.dumps(ret)
