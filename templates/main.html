@@ -3,6 +3,7 @@
 {% block head %}
     {{ super() }}
     <link href="/static/css/profile.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
 {% endblock %}
 
 {% block body_params %}{% endblock %}
@@ -23,7 +24,9 @@
                                 <input class="form-control mr-sm-2 dropdown-toggle"
                                        id="profile-search" type="text" placeholder="Search"
                                        aria-label="Search" data-toggle="dropdown">
-                                <div class="dropdown-menu" id="search-dropdown">
+                                <div class="dropdown-menu">
+                                    <div class="list-group search-dropdown" id="search-dropdown">
+                                    </div>
                                 </div>
                             </div>
 
@@ -81,7 +84,7 @@
 
 {% macro label(user, h) %}
     <{{ h }}>
-        <mark class="user-label-hash text-muted">#</mark><mark class="user-label">{{ user.label }}</mark>
+    <mark class="user-label-hash text-muted">#</mark><mark class="user-label">{{ user.label }}</mark>
     </{{ h }}>
 {%- endmacro %}
 

@@ -27,6 +27,7 @@ def search(query_string=""):
         ret.append({
             "username": result.username,
             "stylized_username": result.stylized_username,
-            "full_name": result.full_name
+            "full_name": result.full_name,
+            "label": result.label
         })
     return json.dumps(ret)

@@ -58,11 +58,13 @@ footer p {
 }
 
 .user-label-hash {
-    padding-right: 1px;
+    padding-right: 0px;
+    margin-right: 0px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bolder;
 }
 .user-label {
-    padding-left: 0px;
+    padding-left: 1px;
+    margin-left: 0px;
     font-style: italic;
 }
