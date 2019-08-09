@@ -22,6 +22,13 @@ class Cohort(db.Model):
         lazy="joined"
     )
 
+    def __init__(self, **kwargs):
+        super(Cohort, self).__init__(**kwargs)
+
+        all_instructors = Instructor.query.all()
+        for instructor in all_instructors:
+            self.users.append(instructor)
+
 
 class User(UserMixin, db.Model):
     __tablename__ = "user"

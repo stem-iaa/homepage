@@ -57,9 +57,23 @@ def specific_cohort(id):
 
     current_user = flask_login.current_user
     if request.method == "GET":
+        instructors = []
+        mentors = []
+        students = []
+        for user in cohort.users:
+            if user.discriminator == "instructor":
+                instructors.append(user)
+            elif user.discriminator == "mentor":
+                mentors.append(user)
+            elif user.discriminator == "student":
+                students.append(user)
+
         return render_template("cohort.html",
                                user=current_user,
-                               cohort=cohort)
+                               cohort=cohort,
+                               instructors=instructors,
+                               mentors=mentors,
+                               students=students)
 
     if current_user.discriminator != "instructor":
         return "no permission for user"
