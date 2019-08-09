@@ -31,7 +31,7 @@ $("#cohort-user-search").on("keyup", function () {
                 let clicked_username = $(this).data("username");
                 console.log(clicked_username);
                 $.ajax({
-                    url: "/cohort/" + cohort_id + "/add_user/" + clicked_username,
+                    url: "/cohort/" + cohort_id + "/user/" + clicked_username,
                     type: "post",
                     dataType: "json",
                     success: function (data) {
@@ -39,6 +39,19 @@ $("#cohort-user-search").on("keyup", function () {
                     }
                 });
             });
+        }
+    });
+});
+
+$(".delete-card").on("click", function () {
+    let username = $(this).data("id");
+
+    $.ajax({
+        url: "/cohort/" + cohort_id + "/user/" + username,
+        type: "delete",
+        dataType: "json",
+        success: function (data) {
+            location.reload();
         }
     });
 });

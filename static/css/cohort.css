@@ -2,3 +2,12 @@ ul {
     list-style-type: none;
     padding: 0
 }
+
+.card-image-container image {
+
+}
+.card-image-container button {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+}

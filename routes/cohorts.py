@@ -109,7 +109,7 @@ def specific_cohort(id):
     })
 
 
-@app.route("/cohort/<id>/add_user/<username>", methods=["POST"])
+@app.route("/cohort/<id>/user/<username>", methods=["POST", "DELETE"])
 def add_user(id, username):
     cohort = models.Cohort.query.filter_by(id=id).first()
     if not cohort:
@@ -119,8 +119,12 @@ def add_user(id, username):
     if not user:
         return json.dumps({"error": "no user found for username " + username})
 
-    if cohort not in user.cohorts:
-        user.cohorts.append(cohort)
+    if request.method == "POST":
+        if cohort not in user.cohorts:
+            user.cohorts.append(cohort)
+    elif request.method == "DELETE":
+        if user in cohort.users:
+            cohort.users.remove(user)
 
     db.session.commit()
 

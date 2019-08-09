@@ -26,7 +26,8 @@
                            id="cohort-user-search" type="text" placeholder="Search"
                            aria-label="Search" data-toggle="dropdown">
                     <div class="dropdown-menu" style="visibility: hidden;">
-                        <div class="list-group search-dropdown" id="cohort-search-dropdown" style="visibility: visible;">
+                        <div class="list-group search-dropdown" id="cohort-search-dropdown"
+                             style="visibility: visible;">
                         </div>
                     </div>
                 </div>
@@ -39,7 +40,7 @@
             <h2>Instructors / TAs</h2>
             <ul class="row">
                 {% for instructor in instructors %}
-                    <li>{{ card(instructor, True) }}</li>
+                    <li>{{ deleteable_card(instructor, True, instructor.username) }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -49,7 +50,7 @@
             <h2>Mentors</h2>
             <ul class="row">
                 {% for mentor in mentors %}
-                    <li>{{ card(mentor, True) }}</li>
+                    <li>{{ deleteable_card(mentor, True, mentor.username) }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -59,7 +60,7 @@
             <h2>Students</h2>
             <ul class="row">
                 {% for student in students %}
-                    <li>{{ card(student, True) }}</li>
+                    <li>{{ deleteable_card(student, True, student.username) }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -76,3 +77,44 @@
         let cohort_id = "{{ cohort.id }}";
     </script>
 {% endblock %}
+
+
+{% macro deleteable_card(user, full, id) -%}
+    <div class="card">
+        {% if full %}
+            <div class="card-image-container">
+                <img src="{{ user.profile_picture_path_or_default }}" class="card-img-top">
+                <button type="button" class="close delete-card" data-id="{{ id }}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        {% endif %}
+        <div class="card-body">
+            {% if user.full_name %}
+                <h4 class="card-title mb-2">{{ user.full_name }}</h4>
+            {% endif %}
+            {{ label(user, "h6") }}
+            <p class="mt-3 mb-2 text-muted">
+                {{ username(user) }}
+                {% if user.email %}
+                    <br>
+                    {{ user.email }}
+                {% endif %}
+                {% if user.skype_id %}
+                    <br>
+                    <span class="text-secondary">skype:</span>
+                    <a href="live:{{ user.skype_id }}" class="text-info">{{ user.skype_id }}</a>
+                {% endif %}
+                {% if user.location %}
+                    <br>
+                    {{ user.location }}
+                {% endif %}
+            </p>
+
+            {% for cohort in user.cohorts %}
+                <a href="/cohort/{{ cohort.id }}"><span class="badge badge-info">{{ cohort.name }}</span></a>
+            {% endfor %}
+        </div>
+    </div>
+{%- endmacro %}
