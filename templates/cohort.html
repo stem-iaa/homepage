@@ -40,7 +40,7 @@
             <h2>Instructors / TAs</h2>
             <ul class="row">
                 {% for instructor in instructors %}
-                    <li>{{ deleteable_card(instructor, True, instructor.username) }}</li>
+                    <li>{{ deleteable_card(instructor, True, instructor.username, user.discriminator == "instructor") }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -50,7 +50,7 @@
             <h2>Mentors</h2>
             <ul class="row">
                 {% for mentor in mentors %}
-                    <li>{{ deleteable_card(mentor, True, mentor.username) }}</li>
+                    <li>{{ deleteable_card(mentor, True, mentor.username, user.discriminator == "instructor") }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -60,7 +60,7 @@
             <h2>Students</h2>
             <ul class="row">
                 {% for student in students %}
-                    <li>{{ deleteable_card(student, True, student.username) }}</li>
+                    <li>{{ deleteable_card(student, True, student.username, user.discriminator == "instructor") }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -79,14 +79,16 @@
 {% endblock %}
 
 
-{% macro deleteable_card(user, full, id) -%}
+{% macro deleteable_card(user, full, id, button) -%}
     <div class="card">
         {% if full %}
             <div class="card-image-container">
                 <img src="{{ user.profile_picture_path_or_default }}" class="card-img-top">
-                <button type="button" class="close delete-card" data-id="{{ id }}">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                {% if button %}
+                    <button type="button" class="close delete-card" data-id="{{ id }}">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                {% endif %}
             </div>
 
         {% endif %}
