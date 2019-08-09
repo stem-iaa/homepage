@@ -49,6 +49,7 @@ def info(username):
         return "no permission for user"
 
     all_instructors = models.Instructor.query.filter_by(discriminator="instructor").all()
+    all_instructors = sorted(all_instructors, key=lambda x: x.label)
 
     return render_template("info.html",
                            user=flask_login.current_user,
