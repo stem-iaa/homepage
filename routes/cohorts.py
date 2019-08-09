@@ -68,6 +68,8 @@ def specific_cohort(id):
             elif user.discriminator == "student":
                 students.append(user)
 
+        instructors = sorted(instructors, key=lambda x: x.label)
+
         return render_template("cohort.html",
                                user=current_user,
                                cohort=cohort,
