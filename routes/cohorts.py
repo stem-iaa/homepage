@@ -20,16 +20,12 @@ def cohorts():
                            cohorts=models.Cohort.query.all())
 
 
-@app.route("/cohort", methods=["GET", "POST"])
+@app.route("/cohort", methods=["POST"])
 @flask_login.login_required
 def cohort():
     current_user = flask_login.current_user
-    if request.method == "GET":
-        return render_template("cohort.html",
-                               user=current_user)
-
     if current_user.discriminator != "instructor":
-        return "no permission for user"
+        return json.dumps({"error": "no permission for user"})
 
     name = request.form.get("name")
     is_active = request.form.get("is_active")
@@ -57,6 +53,9 @@ def specific_cohort(id):
         return json.dumps({"error": "no cohort found for id " + id})
 
     current_user = flask_login.current_user
+    if current_user not in cohort.users:
+        return json.dumps({"error": "no permission for user"})
+
     if request.method == "GET":
         instructors = []
         mentors = []
@@ -79,7 +78,7 @@ def specific_cohort(id):
                                students=students)
 
     if current_user.discriminator != "instructor":
-        return "no permission for user"
+        return json.dumps({"error": "no permission for user"})
 
     if request.method == "DELETE":
         db.session.delete(cohort)

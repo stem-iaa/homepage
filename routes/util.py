@@ -10,6 +10,7 @@ import json
 
 @app.route("/search/", methods=["GET"])
 @app.route("/search/<query_string>", methods=["GET"])
+@flask_login.login_required
 def search(query_string=""):
     if not query_string:
         return json.dumps([])
@@ -22,8 +23,18 @@ def search(query_string=""):
         models.User.email.contains(query_string)
     )).all()
 
+    current_user = flask_login.current_user
+
+    # TODO more efficient query join
+    cohort_users = []
+    for cohort in current_user.cohorts:
+        for user in cohort.users:
+            cohort_users.append(user)
+
+    cohort_users = [user for user in query if user in cohort_users]
+
     ret = []
-    for result in query:
+    for result in cohort_users:
         ret.append({
             "username": result.username,
             "stylized_username": result.stylized_username,

@@ -12,7 +12,7 @@
     <div class="many-brs"></div>
 
     <div class="container-fluid px-4">
-        <h1>{{ cohort.name }} Cohort</h1>
+        <h1>{{ cohort.name }}</h1>
         <hr>
         <br>
 
@@ -22,7 +22,7 @@
                     <label for="new-user-name">Add a new user</label>
                 </div>
                 <div style="position: relative">
-                    <input class="form-control mr-sm-2 dropdown-toggle"
+                    <input autocomplete="off" class="form-control mr-sm-2 dropdown-toggle"
                            id="cohort-user-search" type="text" placeholder="Search"
                            aria-label="Search" data-toggle="dropdown">
                     <div class="dropdown-menu" style="visibility: hidden;">
