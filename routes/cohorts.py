@@ -110,6 +110,26 @@ def specific_cohort(id):
     })
 
 
+@app.route("/cohort/<id>/add_user/<username>", methods=["POST"])
+def add_user(id, username):
+    cohort = models.Cohort.query.filter_by(id=id).first()
+    if not cohort:
+        return json.dumps({"error": "no cohort found for id " + id})
+
+    user = models.User.query.filter_by(username=username).first()
+    if not user:
+        return json.dumps({"error": "no user found for username " + username})
+
+    if cohort not in user.cohorts:
+        user.cohorts.append(cohort)
+
+    db.session.commit()
+
+    return json.dumps({
+        "error": None
+    })
+
+
 @app.route("/cohort/<id>/add_user_search/", methods=["GET"])
 @app.route("/cohort/<id>/add_user_search/<query_string>", methods=["GET"])
 def add_user_search(id, query_string=""):
