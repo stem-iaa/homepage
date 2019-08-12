@@ -22,30 +22,28 @@ x skype id in profile
 x instructors able to edit other user's account pages
   - new option for azure VM ID that is only editable by instructor
 - cohorts
-  - mentors and students enroll in shared cohort, instructors are global
+  x mentors and students enroll in shared cohort, instructors are global
   - cohort enroll on user registration page
-  - mentor sees all students from all their cohorts on their page, other students only see other students from their own
+  x mentor sees all students from all their cohorts on their page, other students only see other students from their own
     cohort. instructor sees everyone
-  - search restricted to users from a users own cohort(s)
-  - admin editable cohort for each user
-- azure VM startup
+  x search restricted to users from a users own cohort(s)
+  x admin editable cohort for each user
+x azure VM startup
 x homepage = profile if logged in
-- solutions
+
 
 
 want
+x refactor app.py - move routes to their own files
+x database migration tool
+- only shared cohorts visible
+- jquery smooth scrolling
+- mentor/ta solutions page
+- error messages for login
+x make search in nav look nicer
 - stylized error pages (permission denied, 404, etc)
 - spinner for db commits
-- make Student/Mentor/Instructor tags clickable that enters them into a search filtering all of the same label
 - nicer way to add mentored students (search and autocomplete)
-- refactor app.py - move routes to their own files
-- database migration tool
-- square images in cards
-- vulnerability in image naming?
-- password change verify
-- error messages for login
-- admin password for register instead of instructor?
-- make search in nav look nicer
 - new search page
   - new page for searching rather than just nav autocomplete
   - show entire search results rather than limiting to nav
@@ -54,9 +52,24 @@ want
     - @ for username
     - # for label (instructor, student)
       - make existing labels clickable that search for that label
-- role system rather than binding role to account type
-  - lattice role system with permission groups for various actions (only instructors can set label, etc)
+- vulnerability in image naming?
+- password change verify
 - edit cancel button
 - custom banner images
 - paralax scrolling banner images
 - instructors see all students/mentors in course information
+- role system rather than binding role to account type
+  - lattice role system with permission groups for various actions (only instructors can set label, etc)
+- dynamic copywrite time
+
+
+
+
+
+
+
+
+
+
+
+
