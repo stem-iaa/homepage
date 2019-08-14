@@ -80,8 +80,7 @@
 
 {% macro label(user, h) %}
     <{{ h }}>
-    <mark class="user-label-hash text-muted">#</mark>
-    <mark class="user-label">{{ user.label }}</mark>
+    <mark class="user-label-hash text-muted">#</mark><mark class="user-label">{{ user.label }}</mark>
     </{{ h }}>
 {%- endmacro %}
 
