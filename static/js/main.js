@@ -30,3 +30,46 @@ $("#profile-search").on("keyup", function () {
         }
     });
 });
+
+
+$(document).ready(function () {
+    $(".vm-connect").each(function () {
+        console.log($(this).html());
+        let this_ = $(this);
+        let username = $(this).data("username");
+        $.ajax({
+            url: "/vm/status/" + username,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                if (data.error) {
+                    console.log(data.error);
+                    this_.html('');
+                } else {
+                    if (data.status === "running") {
+                        $.ajax({
+                            url: "/vm/ip/" + username,
+                            type: "get",
+                            dataType: "json",
+                            success: function (ip_data) {
+                                console.log(ip_data);
+                                if (ip_data.error) {
+                                    this_.html('<div class="alert alert-danger" role="alert" id="vm-alert">\n' + ip_data.error + '</div>')
+                                } else {
+                                    if (data.status === "running") {
+                                        this_.html('<a class="btn btn-primary" id="vm-connect-button" href="' +
+                                            'http://' + ip_data.ip + ":6080" + "/vnc.html?host=" + ip_data.ip + "&port=6080" +
+                                            '" role="button" target="_blank">Connect to VM</a>')
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        this_.html('<p>VM is currently <span class="badge badge-danger">stopped</span></p>')
+                    }
+                }
+            }
+        });
+    });
+});

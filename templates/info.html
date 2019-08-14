@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="hidden vm-info" id="vm-off">
-                <p>Your VM is currently <span class="badge badge-danger">stopped</span>.</p>
+                <p>Your VM is currently <span class="badge badge-danger">stopped</span></p>
                 <a class="btn btn-primary" id="start-vm-button" href="#" role="button">Start VM</a>
             </div>
             <div class="hidden vm-info" id="vm-on">
@@ -53,7 +53,7 @@
         <h1>Instructor and TA Contact Information</h1>
         <div class="row">
             {% for instructor in instructors %}
-                {{ card(instructor, True) }}
+                {{ card(instructor, profile_user, True) }}
             {% endfor %}
         </div>
 

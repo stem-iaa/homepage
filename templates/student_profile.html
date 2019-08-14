@@ -7,7 +7,7 @@
         <h3 class="mb-2">Mentored By</h3>
         {% for mentor in profile_user.mentors %}
             <div class="row">
-                {{ card(mentor, True) }}
+                {{ card(mentor, profile_user, True) }}
             </div>
         {% endfor %}
     {% endif %}

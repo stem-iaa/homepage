@@ -44,6 +44,7 @@ x make search in nav look nicer
 - stylized error pages (permission denied, 404, etc)
 - spinner for db commits
 - nicer way to add mentored students (search and autocomplete)
+- nicer connect to vm button - proper statuses displayed
 - new search page
   - new page for searching rather than just nav autocomplete
   - show entire search results rather than limiting to nav

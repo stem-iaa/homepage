@@ -7,7 +7,7 @@
     <div class="row">
         {% if profile_user.students | length > 0 %}
             {% for mentor in profile_user.students %}
-                {{ card(mentor, True) }}
+                {{ card(mentor, user, True) }}
             {% endfor %}
         {% endif %}
     </div>
