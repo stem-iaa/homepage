@@ -112,7 +112,9 @@
             </p>
 
             {% for cohort in profile_user.cohorts %}
-                <a href="/cohort/{{ cohort.id }}"><span class="badge badge-info">{{ cohort.name }}</span></a>
+                {% if cohort in user.cohorts %}
+                    <a href="/cohort/{{ cohort.id }}"><span class="badge badge-info">{{ cohort.name }}</span></a>
+                {% endif %}
             {% endfor %}
 
             {% if profile_user.discriminator == "student" %}

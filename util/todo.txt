@@ -20,10 +20,8 @@ x put on worm
 x db migration
 x skype id in profile
 x instructors able to edit other user's account pages
-  - new option for azure VM ID that is only editable by instructor
-- cohorts
+x cohorts
   x mentors and students enroll in shared cohort, instructors are global
-  - cohort enroll on user registration page
   x mentor sees all students from all their cohorts on their page, other students only see other students from their own
     cohort. instructor sees everyone
   x search restricted to users from a users own cohort(s)
@@ -36,7 +34,8 @@ x homepage = profile if logged in
 want
 x refactor app.py - move routes to their own files
 x database migration tool
-- only shared cohorts visible
+x only shared cohorts visible
+- new option for azure VM ID that is only editable by instructor
 - jquery smooth scrolling
 - mentor/ta solutions page
 - error messages for login
@@ -53,7 +52,7 @@ x make search in nav look nicer
     - @ for username
     - # for label (instructor, student)
       - make existing labels clickable that search for that label
-- vulnerability in image naming?
+- cohort enroll on user registration page
 - password change verify
 - edit cancel button
 - custom banner images
