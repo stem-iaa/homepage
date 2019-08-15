@@ -35,8 +35,8 @@ want
 x refactor app.py - move routes to their own files
 x database migration tool
 x only shared cohorts visible
-- new option for azure VM ID that is only editable by instructor
-- jquery smooth scrolling
+x new option for azure VM ID that is only editable by instructor
+x jquery smooth scrolling
 - mentor/ta solutions page
 - error messages for login
 x make search in nav look nicer
