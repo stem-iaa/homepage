@@ -17,8 +17,9 @@
                 <li>
                     <a href="http://{{ profile_user.username }}.w3.stem-iaa.org" target="_blank">Worm W3 Hosting</a>
                 </li>
-            <li>
-                    <a href="http://{{ profile_user.username }}.flask.stem-iaa.org" target="_blank">Worm Flask Hosting</a>
+                <li>
+                    <a href="http://{{ profile_user.username }}.flask.stem-iaa.org" target="_blank">Worm Flask
+                        Hosting</a>
                 </li>
             </ul>
 
@@ -41,7 +42,8 @@
             </div>
             <div class="hidden vm-info" id="vm-on">
                 <p>Your VM is currently <span class="badge badge-success">running</span></p>
-                <a class="btn btn-primary" id="vm-connect-button" href="" role="button" target="_blank">Connect to VM</a>
+                <a class="btn btn-primary" id="vm-connect-button" href="" role="button" target="_blank">Connect to
+                    VM</a>
             </div>
             <div class="hidden vm-info" id="vm-error">
                 <div class="alert alert-danger" role="alert" id="vm-alert">
@@ -56,6 +58,16 @@
                 {{ card(instructor, profile_user, True) }}
             {% endfor %}
         </div>
+
+        {% if user.mentors | length > 0 %}
+            <br><br>
+            <h1>Your Mentor{{ "s" if user.mentors | length > 1 else "" }}</h1>
+            <div class="row">
+                {% for mentor in user.mentors %}
+                    {{ card(mentor, profile_user, True) }}
+                {% endfor %}
+            </div>
+        {% endif %}
 
 
     </div>
