@@ -3,7 +3,7 @@ from app import db
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
-import models
+import model
 import json
 from api import Azure
 import msrestazure.azure_exceptions
@@ -12,7 +12,7 @@ from .profile import is_user
 
 @app.route("/vm/status/<username>", methods=["GET"])
 def status(username):
-    user = models.User.query.filter_by(username=username).first()
+    user = model.User.query.filter_by(username=username).first()
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
 
@@ -30,7 +30,7 @@ def status(username):
 @app.route("/vm/start/<username>", methods=["POST"])
 @flask_login.login_required
 def start(username):
-    user = models.User.query.filter_by(username=username).first()
+    user = model.User.query.filter_by(username=username).first()
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
 
@@ -47,7 +47,7 @@ def start(username):
 
 @app.route("/vm/ip/<username>", methods=["GET"])
 def ip(username):
-    user = models.User.query.filter_by(username=username).first()
+    user = model.User.query.filter_by(username=username).first()
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
     try:

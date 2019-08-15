@@ -1,7 +1,7 @@
 from app import app
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
-import models
+import model
 
 
 @app.route("/")

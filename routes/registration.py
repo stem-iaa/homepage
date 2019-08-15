@@ -3,7 +3,7 @@ from app import db
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
-import models
+import model
 import json
 
 
@@ -21,7 +21,7 @@ def login():
         if not username or not password:
             return "Bad login"
 
-        user = models.User.query.filter_by(username=username).first()
+        user = model.User.query.filter_by(username=username).first()
 
         if user is None or not check_password_hash(user.password_hash, password):
             return "Bad login"
@@ -51,7 +51,7 @@ def register():
             "error": "Username required"
         })
 
-    existing_user = models.User.query.filter_by(username=username).first()
+    existing_user = model.User.query.filter_by(username=username).first()
     if existing_user:
         return json.dumps({
             "error": "Username already exists"
@@ -78,7 +78,7 @@ def register():
             info[key] = None
 
     if info["email"]:
-        existing_user = models.User.query.filter_by(email=info["email"]).first()
+        existing_user = model.User.query.filter_by(email=info["email"]).first()
         if existing_user:
             return json.dumps({
                 "error": "Email already used"
@@ -94,28 +94,28 @@ def register():
             mentor_usernames = [username.strip() for username in mentor_list.split(",")]
             print(mentor_usernames)
             for mentor_username in mentor_usernames:
-                mentor = models.Mentor.query.filter_by(username=mentor_username).first()
+                mentor = model.Mentor.query.filter_by(username=mentor_username).first()
                 if not mentor:
                     return json.dumps({
                         "error": "Mentor not found: " + mentor_username
                     })
                 info["mentors"].append(mentor)
-        user = models.Student(**info)
+        user = model.Student(**info)
     elif user_type == "mentor":
         student_list = request.form.get("students").strip()
         if student_list:
             info["students"] = []
             student_usernames = [username.strip() for username in request.form.get("students").split(",")]
             for student_username in student_usernames:
-                student = models.Student.query.filter_by(username=student_username).first()
+                student = model.Student.query.filter_by(username=student_username).first()
                 if not student:
                     return json.dumps({
                         "error": "Student not found: " + student_username
                     })
                 info["students"].append(student)
-        user = models.Mentor(**info)
+        user = model.Mentor(**info)
     else:
-        user = models.Instructor(**info)
+        user = model.Instructor(**info)
 
     db.session.add(user)
     db.session.commit()

@@ -3,7 +3,7 @@ from app import db
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
-import models
+import model
 import json
 from sqlalchemy import or_
 
@@ -17,7 +17,7 @@ def cohorts():
 
     return render_template("cohorts.html",
                            user=current_user,
-                           cohorts=models.Cohort.query.all())
+                           cohorts=model.Cohort.query.all())
 
 
 @app.route("/cohort", methods=["POST"])
@@ -34,11 +34,11 @@ def cohort():
     if not name:
         return json.dumps({"error": "no name given"})
 
-    existing_cohort = models.Cohort.query.filter_by(id=name).first()
+    existing_cohort = model.Cohort.query.filter_by(id=name).first()
     if existing_cohort:
         return json.dumps({"error": "cohort already exists with name: " + name})
 
-    new_cohort = models.Cohort(name=name, active=True if is_active else False)
+    new_cohort = model.Cohort(name=name, active=True if is_active else False)
     db.session.add(new_cohort)
 
     db.session.commit()
@@ -48,7 +48,7 @@ def cohort():
 
 @app.route("/cohort/<id>", methods=["GET", "POST", "DELETE"])
 def specific_cohort(id):
-    cohort = models.Cohort.query.filter_by(id=id).first()
+    cohort = model.Cohort.query.filter_by(id=id).first()
     if not cohort:
         return json.dumps({"error": "no cohort found for id " + id})
 
@@ -92,7 +92,7 @@ def specific_cohort(id):
         is_active = True if request.form.get("is_active") == "true" else False
 
     if name is not None and name != cohort.name:
-        existing_cohort = models.Cohort.query.filter_by(name=name).first()
+        existing_cohort = model.Cohort.query.filter_by(name=name).first()
         if existing_cohort:
             return json.dumps({"error": "cohort already exists with name: " + name})
         cohort.name = name
@@ -111,11 +111,11 @@ def specific_cohort(id):
 
 @app.route("/cohort/<id>/user/<username>", methods=["POST", "DELETE"])
 def add_user(id, username):
-    cohort = models.Cohort.query.filter_by(id=id).first()
+    cohort = model.Cohort.query.filter_by(id=id).first()
     if not cohort:
         return json.dumps({"error": "no cohort found for id " + id})
 
-    user = models.User.query.filter_by(username=username).first()
+    user = model.User.query.filter_by(username=username).first()
     if not user:
         return json.dumps({"error": "no user found for username " + username})
 
@@ -139,16 +139,16 @@ def add_user_search(id, query_string=""):
     if not query_string:
         return json.dumps([])
 
-    cohort = models.Cohort.query.filter_by(id=id).first()
+    cohort = model.Cohort.query.filter_by(id=id).first()
     if not cohort:
         return json.dumps({"error": "no cohort found for id " + id})
 
-    query = models.User.query.filter(or_(
-        models.User.username.contains(query_string),
-        models.User.first_name.contains(query_string),
-        models.User.last_name.contains(query_string),
-        models.User.label.contains(query_string),
-        models.User.email.contains(query_string)
+    query = model.User.query.filter(or_(
+        model.User.username.contains(query_string),
+        model.User.first_name.contains(query_string),
+        model.User.last_name.contains(query_string),
+        model.User.label.contains(query_string),
+        model.User.email.contains(query_string)
     )).all()
 
     new_users = [user for user in query if user not in cohort.users]

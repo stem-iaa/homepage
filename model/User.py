@@ -1,34 +1,7 @@
 from app import db
 from flask_login import UserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
-
-
-cohort_association_table = db.Table(
-    "cohort_association", db.Model.metadata,
-    db.Column("cohort", db.Integer, db.ForeignKey("cohort.id")),
-    db.Column("user", db.Integer, db.ForeignKey("user.id"))
-)
-
-
-class Cohort(db.Model):
-    __tablename__ = "cohort"
-    id = db.Column(db.Integer, index=True, primary_key=True)
-    name = db.Column(db.String, index=True, unique=True)
-    active = db.Column(db.Boolean, index=True)
-
-    users = db.relationship(
-        "User",
-        secondary=cohort_association_table,
-        back_populates="cohorts",
-        lazy="joined"
-    )
-
-    def __init__(self, **kwargs):
-        super(Cohort, self).__init__(**kwargs)
-
-        all_instructors = Instructor.query.all()
-        for instructor in all_instructors:
-            self.users.append(instructor)
+from .Maps import cohort_association_table, student_mentor_association_table
 
 
 class User(UserMixin, db.Model):
@@ -96,13 +69,6 @@ class User(UserMixin, db.Model):
     @vm_name.setter
     def vm_name(self, value):
         self._vm_name = value
-
-
-student_mentor_association_table = db.Table(
-    "student_mentor_association", db.Model.metadata,
-    db.Column("student", db.Integer, db.ForeignKey("student.id")),
-    db.Column("mentor", db.Integer, db.ForeignKey("mentor.id"))
-)
 
 
 class Student(User):

@@ -37,12 +37,12 @@ migrate = Migrate(app, db)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
-import models
+import model
 
 
 @login_manager.user_loader
 def user_loader(id):
-    user = models.User.query.get(id)
+    user = model.User.query.get(id)
     if user:
         return user
     return None

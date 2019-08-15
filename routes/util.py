@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_
-import models
+import model
 import json
 
 
@@ -15,12 +15,12 @@ def search(query_string=""):
     if not query_string:
         return json.dumps([])
 
-    query = models.User.query.filter(or_(
-        models.User.username.contains(query_string),
-        models.User.first_name.contains(query_string),
-        models.User.last_name.contains(query_string),
-        models.User.label.contains(query_string),
-        models.User.email.contains(query_string)
+    query = model.User.query.filter(or_(
+        model.User.username.contains(query_string),
+        model.User.first_name.contains(query_string),
+        model.User.last_name.contains(query_string),
+        model.User.label.contains(query_string),
+        model.User.email.contains(query_string)
     )).all()
 
     current_user = flask_login.current_user

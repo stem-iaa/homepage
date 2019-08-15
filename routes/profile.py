@@ -3,7 +3,7 @@ from app import db
 from flask import Flask, render_template, request, redirect, url_for
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
-import models
+import model
 import json
 import os
 from api import Azure
@@ -19,7 +19,7 @@ def is_user(current_user, compare_to):
 
 @app.route("/profile/<username>", methods=["GET"])
 def profile(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
 
     if not profile_user:
         return "no user found"
@@ -41,14 +41,14 @@ def profile(username):
 @app.route("/profile/<username>/info")
 @flask_login.login_required
 def info(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
     if not profile_user:
         return "no user found"
 
     if profile_user.username != flask_login.current_user.username:
         return "no permission for user"
 
-    all_instructors = models.Instructor.query.filter_by(discriminator="instructor").all()
+    all_instructors = model.Instructor.query.filter_by(discriminator="instructor").all()
     all_instructors = sorted(all_instructors, key=lambda x: x.label)
 
     return render_template("info.html",
@@ -61,7 +61,7 @@ def info(username):
 @app.route("/profile/<username>/account", methods=["GET"])
 @flask_login.login_required
 def account(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
     if not profile_user:
         return "no user found"
 
@@ -78,7 +78,7 @@ def account(username):
 @app.route("/profile/<username>/update", methods=["POST"])
 @flask_login.login_required
 def update(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
     if not profile_user:
         return json.dumps({
             "error": "No user found"
@@ -91,7 +91,7 @@ def update(username):
         })
 
     username_field = request.form.get("username")
-    existing_user = models.User.query.filter_by(username=username_field).first()
+    existing_user = model.User.query.filter_by(username=username_field).first()
     if existing_user and existing_user != profile_user:
         return json.dumps({
             "error": "Username already exists"
@@ -118,7 +118,7 @@ def update(username):
             profile_user.students = []
             student_usernames = [username.strip() for username in request.form.get("students").split(",")]
             for student_username in student_usernames:
-                student = models.Student.query.filter_by(username=student_username).first()
+                student = model.Student.query.filter_by(username=student_username).first()
                 if not student:
                     return json.dumps({"error": "Student not found: " + student_username})
                 profile_user.students.append(student)
@@ -136,7 +136,7 @@ def update(username):
 @app.route("/profile/<username>/picture", methods=["POST"])
 @flask_login.login_required
 def picture(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
     if not profile_user:
         return json.dumps({
             "error": "No user found"
@@ -180,7 +180,7 @@ def picture(username):
 
 @app.route("/profile/<username>/password", methods=["POST"])
 def password(username):
-    profile_user = models.User.query.filter_by(username=username).first()
+    profile_user = model.User.query.filter_by(username=username).first()
     if not profile_user:
         return json.dumps({
             "error": "No user found"
