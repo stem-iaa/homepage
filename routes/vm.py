@@ -12,8 +12,12 @@ from .profile import is_user
 
 @app.route("/vm/status/<username>", methods=["GET"])
 def status(username):
+    user = models.User.query.filter_by(username=username).first()
+    if not user:
+        return json.dumps({"error": "no user found for username: " + username})
+
     try:
-        status = Azure.get_vm_status(username)
+        status = Azure.get_vm_status(user.vm_name)
     except msrestazure.azure_exceptions.CloudError as cloud_error:
         return json.dumps({"error": cloud_error.message})
 
@@ -26,11 +30,15 @@ def status(username):
 @app.route("/vm/start/<username>", methods=["POST"])
 @flask_login.login_required
 def start(username):
+    user = models.User.query.filter_by(username=username).first()
+    if not user:
+        return json.dumps({"error": "no user found for username: " + username})
+
     if not is_user(flask_login.current_user, username):
         return json.dumps({"error": "Permission denied for user."})
 
     try:
-        Azure.start_vm(username)
+        Azure.start_vm(user.vm_name)
     except msrestazure.azure_exceptions.CloudError as cloud_error:
         return json.dumps({"error": cloud_error.message})
 
@@ -39,8 +47,11 @@ def start(username):
 
 @app.route("/vm/ip/<username>", methods=["GET"])
 def ip(username):
+    user = models.User.query.filter_by(username=username).first()
+    if not user:
+        return json.dumps({"error": "no user found for username: " + username})
     try:
-        ip = Azure.get_vm_ip(username)
+        ip = Azure.get_vm_ip(user.vm_name)
     except msrestazure.azure_exceptions.CloudError as cloud_error:
         return json.dumps({"error": cloud_error.message})
 

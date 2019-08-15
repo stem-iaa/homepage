@@ -102,7 +102,7 @@ def update(username):
     }
 
     admin_parameters = {
-        "label", "username"
+        "label", "username", "vm_name"
     }
 
     for parameter in request.form.keys():

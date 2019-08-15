@@ -52,6 +52,7 @@ x make search in nav look nicer
     - @ for username
     - # for label (instructor, student)
       - make existing labels clickable that search for that label
+- auto add mentor/student to cohort of their mentors/students
 - cohort enroll on user registration page
 - password change verify
 - edit cancel button

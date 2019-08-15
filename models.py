@@ -1,5 +1,6 @@
 from app import db
 from flask_login import UserMixin
+from sqlalchemy.ext.hybrid import hybrid_property
 
 
 cohort_association_table = db.Table(
@@ -44,6 +45,7 @@ class User(UserMixin, db.Model):
     portfolio = db.Column(db.String(1024))
     profile_picture_path = db.Column(db.String(128))
     skype_id = db.Column(db.String(128))
+    _vm_name = db.Column(db.String(64), index=True)
 
     cohorts = db.relationship(
         "Cohort",
@@ -84,6 +86,16 @@ class User(UserMixin, db.Model):
         if not self.profile_picture_path:
             return None
         return self.profile_picture_path[1:]
+
+    @hybrid_property
+    def vm_name(self):
+        if self._vm_name:
+            return self._vm_name
+        return self.username
+
+    @vm_name.setter
+    def vm_name(self, value):
+        self._vm_name = value
 
 
 student_mentor_association_table = db.Table(
