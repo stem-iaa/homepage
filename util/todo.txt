@@ -58,6 +58,7 @@ x make search in nav look nicer
 - auto add mentor/student to cohort of their mentors/students
 - role system
 - skype links
+- back buttons
 - cohort enroll on user registration page
 - delete users
 - password change verify
