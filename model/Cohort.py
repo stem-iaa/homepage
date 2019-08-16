@@ -8,7 +8,6 @@ class Cohort(db.Model):
     id = db.Column(db.Integer, index=True, primary_key=True)
     name = db.Column(db.String, index=True, unique=True)
     active = db.Column(db.Boolean, index=True)
-    solutions = db.relationship("Solution")
 
     users = db.relationship(
         "User",

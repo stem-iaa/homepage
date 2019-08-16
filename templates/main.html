@@ -45,9 +45,6 @@
                             {% if user.discriminator == "instructor" %}
                                 <a class="dropdown-item" href="/admin">Administration</a>
                             {% endif %}
-                            {% if user.discriminator != "student" %}
-                                <a class="dropdown-item" href="/solutions">Solutions</a>
-                            {% endif %}
                             <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
                     </div>
@@ -88,7 +85,7 @@
 {%- endmacro %}
 
 {% macro card(profile_user, user, full) -%}
-    <div class="card profile-card">
+    <div class="card">
         {% if full %}
             <img src="{{ profile_user.profile_picture_path_or_default }}" class="card-img-top">
         {% endif %}

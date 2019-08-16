@@ -80,7 +80,7 @@
 
 
 {% macro deleteable_card(profile_user, user, full, id, button) -%}
-    <div class="card profile-card">
+    <div class="card">
         {% if full %}
             <div class="card-image-container">
                 <img src="{{ profile_user.profile_picture_path_or_default }}" class="card-img-top">
