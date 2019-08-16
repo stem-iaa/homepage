@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block title %}Cohorts{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="many-brs"></div>
+
+    <div class="container mx-5">
+        {% for cohort in cohorts %}
+            <h2>{{ cohort.name }}</h2>
+        {% endfor %}
+    </div>
+{% endblock %}
