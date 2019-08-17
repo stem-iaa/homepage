@@ -6,6 +6,10 @@
     {{ super() }}
     <div class="many-brs"></div>
     <div class="container">
+        <a class="btn btn-info" href="/solutions" role="button">&#8249; Cohorts</a>
+        <br><br>
+        <h1>Solutions for <span class="text-secondary">{{ cohort.name }}</span></h1><br>
+
         {% if user.discriminator == "instructor" %}
             <form class="form-inline">
                 <div class="form-group mr-2">
@@ -23,7 +27,6 @@
         {% endif %}
 
         {% if cohort.solutions | length > 0 %}
-            <h2>Solutions for <span class="text-secondary">{{ cohort.name }}</span></h2><br>
             <div class="list-group" id="cohort-list">
                 {% for solution in cohort.solutions %}
                     <div class="list-group-item list-group-item-action">
