@@ -12,7 +12,8 @@
     {{ super() }}
     <div class="many-brs"></div>
     <div class="container">
-        <a class="btn btn-info" href="/solutions/{{ solution.cohort_id }}" role="button">&#8249; {{ solution.cohort.name }} Solutions</a>
+        <a class="btn btn-info" href="/solutions/{{ solution.cohort_id }}"
+           role="button">&#8249; {{ solution.cohort.name }} Solutions</a>
         <br><br>
 
         <h1>{{ solution.name }} <small class="text-info">solution</small></h1>
@@ -42,16 +43,20 @@
                     {{ file.name }}
                 </button>
                 <div id="file_{{ file.id }}" class="collapse">
+                    <br>
+                    <a class="btn btn-sm btn-outline-primary"
+                       download="{{ file.name }}"
+                       href="/static/protected/solutions/{{ solution.cohort_id }}/{{ solution.id }}/{{ file.id }}"
+                       role="button">
+                        Download
+                    </a>
+
                     {% if user.discriminator == "instructor" %}
-                        <br>
-                        <div class="row">
-                            <div class="col-2">
-                                <button type="button" class="btn btn-sm btn-outline-danger file-delete-button"
-                                        data-file-id="{{ file.id }}">Delete
-                                </button>
-                            </div>
-                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger file-delete-button"
+                                data-file-id="{{ file.id }}">Delete
+                        </button>
                     {% endif %}
+
                     <div class="card w-100 mx-0">
                         <pre class="m-0"><code>{{ file.content }}</code></pre>
                     </div>
