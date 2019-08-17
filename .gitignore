@@ -5,6 +5,6 @@ worm.db
 static/images/profile_pictures
 util/roster.csv
 util/vm_execute.sh
-static/solutions/*
+static/protected/solutions/*
 
 
