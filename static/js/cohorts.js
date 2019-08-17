@@ -1,10 +1,9 @@
-
 function populate_cohorts() {
     let cohort_list = $("#cohort-list");
 
 }
 
-$("#create-cohort-button").on("click", function() {
+$("#create-cohort-button").on("click", function () {
     let cohort_name = $("#new-cohort-name").val();
     $("#new-cohort-name").val("");
 
@@ -21,7 +20,7 @@ $("#create-cohort-button").on("click", function() {
     });
 });
 
-$(".edit-cohort-button").on("click", function() {
+$(".edit-cohort-button").on("click", function () {
     let cohort_id = $(this).data("cohort");
     let cohort_link = $("#cohort_link_" + cohort_id);
     let cohort_link_text = cohort_link.text();
@@ -35,11 +34,13 @@ $(".edit-cohort-button").on("click", function() {
     $(this).parent().find(".save-cohort-button").show();
 });
 
-$(".save-cohort-button").on("click", function() {
+$(".save-cohort-button").on("click", function () {
     let cohort_id = $(this).data("cohort");
     let cohort_link = $("#cohort_link_" + cohort_id);
     let cohort_name_input = $("#cohort_name_input_" + cohort_id);
     let new_cohort_name = cohort_name_input.val();
+
+    let this_ = $(this);
 
     $.ajax({
         url: "/cohort/" + cohort_id,
@@ -51,20 +52,19 @@ $(".save-cohort-button").on("click", function() {
         success: function (data) {
             if (!data.error) {
                 cohort_link.text(data.name);
+                cohort_name_input.remove();
+                cohort_link.show();
+                this_.hide();
+                this_.parent().find(".edit-cohort-button").show();
             }
         }
     });
-
-    cohort_name_input.remove();
-    cohort_link.show();
-    $(this).hide();
-    $(this).parent().find(".edit-cohort-button").show();
 });
 
-$(".delete-cohort-button").on("click", function() {
+$(".delete-cohort-button").on("click", function () {
     let cohort_id = $(this).data("cohort");
 
-     $.ajax({
+    $.ajax({
         url: "/cohort/" + cohort_id,
         type: "delete",
         dataType: "json",
@@ -74,10 +74,10 @@ $(".delete-cohort-button").on("click", function() {
     });
 });
 
-$(".cohort-active-checkbox").on("click", function() {
-     let cohort_id = $(this).data("cohort");
+$(".cohort-active-checkbox").on("click", function () {
+    let cohort_id = $(this).data("cohort");
 
-     $.ajax({
+    $.ajax({
         url: "/cohort/" + cohort_id,
         type: "post",
         dataType: "json",

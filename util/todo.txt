@@ -65,6 +65,7 @@ x make search in nav look nicer
 - delete users
 - password change verify
 - edit cancel button
+- press enter to save for text inputs
 - custom banner images
 - paralax scrolling banner images
 - instructors see all students/mentors in course information

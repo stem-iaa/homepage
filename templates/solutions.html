@@ -5,8 +5,17 @@
 {% block content %}
     {{ super() }}
     <div class="many-brs"></div>
-
     <div class="container">
-        <h1>solutions!</h1>
+        <h2>Cohorts</h2><br>
+        <div class="list-group" id="cohort-list">
+            {% for cohort in user.cohorts %}
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex justify-content-between">
+                        <a href="/solutions/{{ cohort.id }}"
+                           class="text-secondary align-middle">{{ cohort.name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

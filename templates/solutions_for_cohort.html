@@ -1,0 +1,63 @@
+{% extends "main.html" %}
+
+{% block title %}Solutions{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="many-brs"></div>
+    <div class="container">
+        {% if user.discriminator == "instructor" %}
+            <form class="form-inline">
+                <div class="form-group mr-2">
+                    <label for="new-cohort-name">Create a new solution</label>
+                </div>
+                <div class="form-group mx-2">
+                    <input type="text" class="form-control" id="new-solution-name">
+                </div>
+                <div class="form-group mx-2">
+                    <button class="btn btn-primary" id="create-solution-button" type="button">Create</button>
+                </div>
+            </form>
+            <hr>
+            <br>
+        {% endif %}
+
+        {% if cohort.solutions | length > 0 %}
+            <h2>Solutions for <span class="text-secondary">{{ cohort.name }}</span></h2><br>
+            <div class="list-group" id="cohort-list">
+                {% for solution in cohort.solutions %}
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex justify-content-between">
+                            <a id="solution_link_{{ solution.id }}" href="/solution/{{ solution.id }}"
+                               class="text-secondary align-middle">{{ solution.name }}</a>
+                            {% if user.discriminator == "instructor" %}
+                                <div class="form-inline">
+                                    <button type="button" data-solution="{{ solution.id }}"
+                                            class="btn btn-outline-primary edit-solution-button">Edit
+                                    </button>
+                                    <button type="button" data-solution="{{ solution.id }}"
+                                            class="btn btn-outline-primary save-solution-button hidden">Save
+                                    </button>
+                                    <button type="button" data-solution="{{ solution.id }}"
+                                            class="btn btn-outline-danger delete-solution-button mx-3">Delete
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+    <script>
+        let cohort_id = "{{ cohort.id }}";
+    </script>
+
+    <script src="/static/js/solutions_for_cohort.js"></script>
+{% endblock %}
+
