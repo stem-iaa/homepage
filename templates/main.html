@@ -42,6 +42,9 @@
                             <a class="dropdown-item" href="/profile/{{ user.username }}">Profile</a>
                             <a class="dropdown-item" href="/profile/{{ user.username }}/info">Course Information</a>
                             <a class="dropdown-item" href="/profile/{{ user.username }}/account">Account</a>
+                            {% if user.discriminator != "student" %}
+                                <a class="dropdown-item" href="/solutions">Solutions</a>
+                            {% endif %}
                             {% if user.discriminator == "instructor" %}
                                 <a class="dropdown-item" href="/admin">Administration</a>
                             {% endif %}
