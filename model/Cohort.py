@@ -16,6 +16,8 @@ class Cohort(db.Model):
         lazy="joined"
     )
 
+    solutions = db.relationship("Solution", back_populates="cohort")
+
     def __init__(self, **kwargs):
         super(Cohort, self).__init__(**kwargs)
 
