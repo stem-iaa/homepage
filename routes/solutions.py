@@ -56,6 +56,8 @@ def add_solution():
     db.session.add(new_solution)
     db.session.commit()
 
+    new_solution.create_dir()
+
     return json.dumps({"error": None})
 
 
@@ -66,17 +68,20 @@ def solution(id):
     if current_user.discriminator == "student":
         abort(403)
 
-    if request.method == "GET":
-        return "solution for " + id
-
-    if current_user.discriminator != "instructor":
-        return json.dumps({"error": "no permission for user"})
-
     solution = model.Solution.query.filter_by(id=id).first()
     if not solution:
         return json.dumps({"error": "no solution found for id: " + id})
 
+    if request.method == "GET":
+        return render_template("solution.html",
+                               user=current_user,
+                               solution=solution)
+
+    if current_user.discriminator != "instructor":
+        return json.dumps({"error": "no permission for user"})
+
     if request.method == "DELETE":
+        solution.delete_dir()
         db.session.delete(solution)
         db.session.commit()
         return json.dumps({"error": None})
@@ -85,12 +90,32 @@ def solution(id):
     if name:
         solution.name = name
 
-    for file_obj in request.files:
-        print(file_obj)
-
     db.session.commit()
 
     return json.dumps({
         "error": None,
         "name": solution.name
     })
+
+
+@app.route("/solution/<id>/files", methods=["POST", "DELETE"])
+@flask_login.login_required
+def add_files(id):
+    current_user = flask_login.current_user
+    if current_user.discriminator == "student":
+        abort(403)
+
+    solution = model.Solution.query.filter_by(id=id).first()
+    if not solution:
+        return json.dumps({"error": "no solution found for id: " + id})
+
+    if current_user.discriminator != "instructor":
+        return json.dumps({"error": "no permission for user"})
+
+    upload_files = request.files.getlist("solution_files")
+    for upload_file in upload_files:
+        solution_file = model.SolutionFile(name=upload_file.filename, solution=solution)
+        db.session.commit()
+        solution_file.create_file(upload_file)
+
+    return redirect("/solution/" + id)

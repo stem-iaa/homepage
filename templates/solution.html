@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+
+{% block title %}{{ solution.name }}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="many-brs"></div>
+    <div class="container">
+        <h1>{{ solution.name }} <small class="text-info">solution</small></h1>
+        <hr>
+
+        {% if user.discriminator == "instructor" %}
+            <form class="form-inline">
+                <div class="form-group mr-2">
+                    <label for="new-cohort-name">Add files</label>
+                </div>
+                <div class="form-group mx-2">
+                    <button class="btn btn-info" id="add-files-button" type="button">+</button>
+                </div>
+            </form>
+            <form class="hidden" id="upload-files-form"
+                  action="/solution/{{ solution.id }}/files" method="post"
+                  enctype="multipart/form-data">
+                <input type="file" name="solution_files" id="upload-files-input" multiple>
+            </form>
+        {% endif %}
+        <br><br>
+
+        <div class="list-group">
+            {% for file in solution.files %}
+                <button class="list-group-item list-group-item-action" type="button" data-toggle="collapse"
+                        data-target="#file_{{ file.id }}">
+                    {{ file.name }}
+                </button>
+                    <pre id="file_{{ file.id }}" class="card collapse w-100"><code>{{ file.content }}</code></pre>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script>
+        let solution_id = "{{ solution.id }}";
+    </script>
+    <script src="/static/js/solution.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+{% endblock %}
