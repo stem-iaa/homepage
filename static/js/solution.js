@@ -8,3 +8,16 @@ $("#upload-files-input").on("change", function () {
         $("#upload-files-form").submit();
     }
 });
+
+$(".file-delete-button").on("click", function() {
+    let file_id = $(this).data("file-id");
+
+    $.ajax({
+        url: "/solution/file/" + file_id,
+        type: "delete",
+        dataType: "json",
+        success: function (data) {
+            location.reload();
+        }
+    });
+});

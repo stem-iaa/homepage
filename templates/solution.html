@@ -5,7 +5,7 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
 {% endblock %}
 
 {% block content %}
@@ -38,7 +38,20 @@
                         data-target="#file_{{ file.id }}">
                     {{ file.name }}
                 </button>
-                    <pre id="file_{{ file.id }}" class="card collapse w-100"><code>{{ file.content }}</code></pre>
+                <div id="file_{{ file.id }}" class="collapse">
+                    {% if user.discriminator == "instructor" %}
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger file-delete-button" data-file-id="{{ file.id }}">Delete</button>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="card w-100 mx-0">
+                        <pre class="m-0"><code>{{ file.content }}</code></pre>
+                    </div>
+                </div>
+
             {% endfor %}
         </div>
     </div>

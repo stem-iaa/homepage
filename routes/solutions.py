@@ -98,7 +98,7 @@ def solution(id):
     })
 
 
-@app.route("/solution/<id>/files", methods=["POST", "DELETE"])
+@app.route("/solution/<id>/files", methods=["POST"])
 @flask_login.login_required
 def add_files(id):
     current_user = flask_login.current_user
@@ -119,3 +119,22 @@ def add_files(id):
         solution_file.create_file(upload_file)
 
     return redirect("/solution/" + id)
+
+
+@app.route("/solution/file/<id>", methods=["DELETE"])
+@flask_login.login_required
+def delete_file(id):
+    current_user = flask_login.current_user
+    if current_user.discriminator == "student":
+        abort(403)
+
+    solution_file = model.SolutionFile.query.filter_by(id=id).first()
+    if not solution:
+        return json.dumps({"error": "no solution file found for id: " + id})
+
+    solution_file.delete_file()
+
+    db.session.delete(solution_file)
+    db.session.commit()
+
+    return json.dumps({"error": None})
