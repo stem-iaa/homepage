@@ -41,6 +41,8 @@ x mentor/ta solutions page
   x show solutions ordered by cohort and then name of assignment
   x for each solution, show list of files in that solution. click on one to see it
   x allow instructors to upload solutions
+- nicer ui for course info
+- course info button on navbar rather than in menu
 - error messages for login
 x make search in nav look nicer
 - stylized error pages (permission denied, 404, etc)

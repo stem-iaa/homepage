@@ -3,8 +3,8 @@ config.json
 __pycache__
 worm.db
 static/images/profile_pictures
-util/roster.csv
-util/vm_execute.sh
+util/worm_manage_scripts/vm_execute.sh
 static/protected/solutions/*
+util/worm_manage_scripts
 
 
