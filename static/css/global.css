@@ -55,6 +55,8 @@ footer p {
 
 .many-brs {
     padding: 50px;
+    width: 100%;
+    float: left;
 }
 
 .user-label-hash {
