@@ -55,12 +55,12 @@ footer p {
 
 .many-brs {
     padding: 50px;
+    width: 100%;
 }
 
 .user-label-hash {
     padding-right: 0px;
     margin-right: 0px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: bolder;
 }
 .user-label {

@@ -9,91 +9,93 @@
 
 {% block content %}
     {{ super() }}
-    <div class="text-center" style="width: 100%;">
-        <form class="needs-validation form-signin" id="register-form" novalidate>
-            <img class="mb-4" src="/static/images/STEMatIAA_logo.png">
-            <h1 class="h3 mb-3 font-weight-normal">Create a new account</h1>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="first_name">First name</label>
-                    <input type="text" class="form-control" id="first_name" name="first_name" value="">
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastName">Last name</label>
-                    <input type="text" class="form-control" id="last_name" name="last_name" value="">
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="username">Username</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@</span>
+    <div class="container form-container">
+        <div class="text-center" style="width: 100%;">
+            <form class="needs-validation form-signin" id="register-form" novalidate>
+                <img class="mb-4" src="/static/images/STEMatIAA_logo.png">
+                <h1 class="h3 mb-3 font-weight-normal">Create a new account</h1>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="first_name">First name</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" value="">
                     </div>
-                    <input type="text" class="form-control" id="username" value="" name="username" required>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" value="">
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label for="email">Password</label>
-                <input type="text" class="form-control" id="password" name="password" value="">
-            </div>
-
-            <div class="mb-3">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="">
-            </div>
-
-            <div class="mb-3">
-                <label for="skype_id">Skype ID</label>
-                <input type="text" class="form-control" id="skype_id" name="skype_id" value="">
-            </div>
-
-            <div class="mb-3">
-                <label for="location">Location</label>
-                <input type="text" class="form-control" id="location" name="location" value="">
-            </div>
-
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-info active" id="is_student_button">
-                    <input type="radio" name="user_type" id="is_student" autocomplete="off" value="student" checked>Student
-                </label>
-                <label class="btn btn-info" id="is_mentor_button">
-                    <input type="radio" name="user_type" id="is_mentor" autocomplete="off" value="mentor">Mentor
-                </label>
-                <label class="btn btn-info" id="is_instructor_button">
-                    <input type="radio" name="user_type" id="is_instructor"
-                           autocomplete="off" value="instructor" data-toggle="collapse" data-target="#add_mentors">Instructor
-                </label>
-            </div>
-            <br><br>
-
-            <div class="collapse user_type_collapse" id="is_student_collapse">
                 <div class="mb-3">
-                    <label for="mentors">Comma separated list of mentors (must exist already):</label>
-                    <input type="text" class="form-control" id="mentors" name="mentors" value="">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="username" value="" name="username" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="collapse user_type_collapse" id="is_mentor_collapse">
                 <div class="mb-3">
-                    <label for="mentors">Comma separated list of mentees (must exist already):</label>
-                    <input type="text" class="form-control" id="students" name="students" value="">
+                    <label for="email">Password</label>
+                    <input type="text" class="form-control" id="password" name="password" value="">
                 </div>
-            </div>
 
-            <div class="collapse user_type_collapse" id="is_instructor_collapse">
-            </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="">
+                </div>
 
-            <div class="alert alert-danger" id="submit-alert" role="alert" style="display: none;">
-            </div>
+                <div class="mb-3">
+                    <label for="skype_id">Skype ID</label>
+                    <input type="text" class="form-control" id="skype_id" name="skype_id" value="">
+                </div>
 
-            <div class="alert alert-success" id="submit-success" role="alert" style="display: none;">
-            </div>
+                <div class="mb-3">
+                    <label for="location">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" value="">
+                </div>
 
-            <br>
-            <button class="btn btn-primary btn-lg" type="button" id="register-submit-button">Register User</button>
-        </form>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-info active" id="is_student_button">
+                        <input type="radio" name="user_type" id="is_student" autocomplete="off" value="student" checked>Student
+                    </label>
+                    <label class="btn btn-info" id="is_mentor_button">
+                        <input type="radio" name="user_type" id="is_mentor" autocomplete="off" value="mentor">Mentor
+                    </label>
+                    <label class="btn btn-info" id="is_instructor_button">
+                        <input type="radio" name="user_type" id="is_instructor"
+                               autocomplete="off" value="instructor" data-toggle="collapse" data-target="#add_mentors">Instructor
+                    </label>
+                </div>
+                <br><br>
+
+                <div class="collapse user_type_collapse" id="is_student_collapse">
+                    <div class="mb-3">
+                        <label for="mentors">Comma separated list of mentors (must exist already):</label>
+                        <input type="text" class="form-control" id="mentors" name="mentors" value="">
+                    </div>
+                </div>
+
+                <div class="collapse user_type_collapse" id="is_mentor_collapse">
+                    <div class="mb-3">
+                        <label for="mentors">Comma separated list of mentees (must exist already):</label>
+                        <input type="text" class="form-control" id="students" name="students" value="">
+                    </div>
+                </div>
+
+                <div class="collapse user_type_collapse" id="is_instructor_collapse">
+                </div>
+
+                <div class="alert alert-danger" id="submit-alert" role="alert" style="display: none;">
+                </div>
+
+                <div class="alert alert-success" id="submit-success" role="alert" style="display: none;">
+                </div>
+
+                <br>
+                <button class="btn btn-primary btn-lg" type="button" id="register-submit-button">Register User</button>
+            </form>
+        </div>
     </div>
 {% endblock %}
 
