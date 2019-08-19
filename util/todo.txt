@@ -37,10 +37,10 @@ x database migration tool
 x only shared cohorts visible
 x new option for azure VM ID that is only editable by instructor
 x jquery smooth scrolling
-- mentor/ta solutions page
-  - show solutions ordered by cohort and then name of assignment
-  - for each solution, show list of files in that solution. click on one to see it
-  - allow instructors to upload solutions
+x mentor/ta solutions page
+  x show solutions ordered by cohort and then name of assignment
+  x for each solution, show list of files in that solution. click on one to see it
+  x allow instructors to upload solutions
 - error messages for login
 x make search in nav look nicer
 - stylized error pages (permission denied, 404, etc)
@@ -56,6 +56,7 @@ x make search in nav look nicer
     - # for label (instructor, student)
       - make existing labels clickable that search for that label
 - auto add mentor/student to cohort of their mentors/students
+- correct file permissions
 - role system
 - skype links
 - back buttons
