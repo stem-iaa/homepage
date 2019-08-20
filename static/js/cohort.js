@@ -14,7 +14,7 @@ $("#cohort-user-search").on("keyup", function () {
                 let user = data[i];
                 console.log(user);
                 html += `
-                <a href="#" class="list-group-item list-group-item-action search-item new-user-link" data-username="${user.username}">
+                <a href="" class="list-group-item list-group-item-action search-item new-user-link" data-username="${user.username}">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-0">${user.full_name ? user.full_name : user.stylized_username}</h5>
                         <h6 class="m-1">
