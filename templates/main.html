@@ -108,7 +108,8 @@
                 {% endif %}
                 {% if profile_user.skype_id %}
                     <br>
-                    <a href="skype:{{ profile_user.skype_id }}?chat" class="text-info">Skype Chat</a>
+                    <span class="text-secondary">skype </span>
+                    <a href="skype:{{ profile_user.skype_id }}?chat" class="text-info">{{ profile_user.skype_id }}</a>
                 {% endif %}
                 {% if profile_user.location %}
                     <br>
