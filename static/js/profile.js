@@ -8,6 +8,7 @@ var editing = false;
 var editables = {};
 
 $("#edit_button").on("click", function () {
+    console.log("click");
     if (editing) {
         var editable_content = {};
         for (var id in editables) {
