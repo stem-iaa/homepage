@@ -42,6 +42,7 @@ x mentor/ta solutions page
   x for each solution, show list of files in that solution. click on one to see it
   x allow instructors to upload solutions
 - nicer ui for course info
+? plain text password for vm (copy/paste)
 - course info button on navbar rather than in menu
 - error messages for login
 x make search in nav look nicer
