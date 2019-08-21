@@ -70,7 +70,9 @@ def register():
         "last_name": request.form.get("last_name"),
         "email": request.form.get("email"),
         "location": request.form.get("location"),
-        "skype_id": request.form.get("skype_id")
+        "skype_id": request.form.get("skype_id"),
+        "vm_name": request.form.get("vm_name"),
+        "worm_password": request.form.get("worm_password")
     }
 
     for key in info:

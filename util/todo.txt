@@ -74,6 +74,7 @@ x make search in nav look nicer
 - search section by cohort - put inactive cohorts at the bottom
 - cohort enroll on user registration page
 - delete users
+- better register page
 - password change verify
 - edit cancel button
 - press enter to save for text inputs
