@@ -41,6 +41,10 @@ x mentor/ta solutions page
   x show solutions ordered by cohort and then name of assignment
   x for each solution, show list of files in that solution. click on one to see it
   x allow instructors to upload solutions
+- different vm password
+  - store vm/worm password in plain text in db
+  - let user see this password in course info
+  - show this password when clicking connect to vm (for mentors too)
 - nicer ui for course info
 ? plain text password for vm (copy/paste)
 - course info button on navbar rather than in menu
