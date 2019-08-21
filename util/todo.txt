@@ -46,10 +46,10 @@ x mentor/ta solutions page
   - let user see this password in course info
   - show this password when clicking connect to vm (for mentors too)
 - nicer ui for course info
-- nicer connect to vm button - proper statuses displayed
 - course info button on navbar rather than in menu
 - error messages for login
 x make search in nav look nicer
+- nicer connect to vm button - proper statuses displayed
 - stylized error pages (permission denied, 404, etc)
 - spinner for db commits
 - nicer way to add mentored students (search and autocomplete)
