@@ -102,7 +102,7 @@ def update(username):
     }
 
     admin_parameters = {
-        "label", "username", "vm_name"
+        "label", "username", "vm_name", "worm_password"
     }
 
     for parameter in request.form.keys():
@@ -207,6 +207,32 @@ def password(username):
     db.session.commit()
 
     return json.dumps({"error": None})
+
+
+@app.route("/profile/<username>/worm_password", methods=["GET"])
+@flask_login.login_required
+def get_worm_password(username):
+    profile_user = model.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return json.dumps({
+            "error": "No user found"
+        })
+
+    current_user = flask_login.current_user
+    if current_user.discriminator == "student":
+        return json.dumps({
+            "error": "No permission for user"
+        })
+
+    if profile_user.worm_password:
+        return json.dumps({
+            "error": None,
+            "worm_password": profile_user.worm_password
+        })
+
+    return json.dumps({
+        "error": "User " + profile_user.username + " does not have a worm password"
+    })
 
 
 @app.route("/admin")

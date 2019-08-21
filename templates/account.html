@@ -55,11 +55,17 @@
                        value="{{ '' if not profile_user.location else profile_user.location }}">
             </div>
 
-            {% if profile_user.discriminator == "student" and user.discriminator == "instructor" %}
+            {% if user.discriminator == "instructor" %}
                 <div class="mb-3">
                     <label for="vm_name">VM Name</label>
                     <input type="text" class="form-control" id="vm_name" name="vm_name"
                            value="{{ profile_user.vm_name }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="vm_name">VM/Worm Password</label>
+                    <input type="text" class="form-control" id="worm_password" name="worm_password"
+                           value="{{ profile_user.worm_password if profile_user.worm_password else '' }}">
                 </div>
             {% endif %}
 

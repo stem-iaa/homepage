@@ -1,4 +1,3 @@
-
 $("#profile-search").on("keyup", function () {
     var search_query = $("#profile-search").val();
     if (!search_query) {
@@ -15,14 +14,14 @@ $("#profile-search").on("keyup", function () {
                 let user = data[i];
                 console.log(user);
                 html += `
-                <a href="/profile/${ user.username }" class="list-group-item list-group-item-action search-item">
+                <a href="/profile/${user.username}" class="list-group-item list-group-item-action search-item">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-0">${user.full_name ? user.full_name : user.stylized_username}</h5>
                         <h6 class="m-1">
-                            <mark class="user-label-hash text-muted">#</mark><mark class="user-label">${ user.label }</mark>
+                            <mark class="user-label-hash text-muted">#</mark><mark class="user-label">${user.label}</mark>
                         </h6>
                     </div>
-                    <p class="text-info m-0">${ user.full_name ? user.stylized_username : "" }</p>
+                    <p class="text-info m-0">${user.full_name ? user.stylized_username : ""}</p>
                 </a>
                 `;
             }
@@ -60,7 +59,20 @@ $(document).ready(function () {
                                     if (data.status === "running") {
                                         this_.html('<a class="btn btn-primary" id="vm-connect-button" href="' +
                                             'http://' + ip_data.ip + ":6080" + "/vnc.html?host=" + ip_data.ip + "&port=6080" +
-                                            '" role="button" target="_blank">Connect to VM</a>')
+                                            '" role="button" target="_blank">Connect to VM</a>');
+                                        $.ajax({
+                                            url: "/profile/" + username + "/worm_password",
+                                            type: "get",
+                                            dataType: "json",
+                                            success: function (worm_password_data) {
+                                                if (!worm_password_data.error) {
+                                                    this_.append('<br>');
+                                                    this_.append('<input class="form-control mt-1 form-control-sm" type="text" value="' + worm_password_data.worm_password + '" readonly>');
+                                                } else {
+                                                    console.log(worm_password_data.error);
+                                                }
+                                            }
+                                        });
                                     }
                                 }
                             }

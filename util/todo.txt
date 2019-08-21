@@ -45,9 +45,13 @@ x mentor/ta solutions page
   - store vm/worm password in plain text in db
   - let user see this password in course info
   - show this password when clicking connect to vm (for mentors too)
+  - edit worm password in profile settings
+  - worm password in register user
 - nicer ui for course info
+  - make contact info list like cohort (dont fill whole card)
 - course info button on navbar rather than in menu
 - error messages for login
+- success message for account info update
 x make search in nav look nicer
 - nicer connect to vm button - proper statuses displayed
 - stylized error pages (permission denied, 404, etc)
