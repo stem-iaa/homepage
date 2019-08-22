@@ -1,5 +1,9 @@
 {% extends "global_profile.html" %}
 
+{% block navbar %}
+    <a class="btn btn-outline-info" href="/profile/{{ profile_user.username }}" role="button">Profile</a>
+{% endblock %}
+
 {% block content %}
     {{ super() }}
     <div class="container-fluid">

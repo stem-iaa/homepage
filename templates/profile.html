@@ -10,7 +10,8 @@
 
 {% block navbar %}
     {% if is_user %}
-        <button class="btn btn-primary" id="edit_button">Edit</button>
+        <button class="btn btn-primary mr-4" id="edit_button">Edit</button>
+        <a class="btn btn-outline-info" href="/profile/{{ profile_user.username }}/info" role="button">Course Information</a>
     {% endif %}
     {% if user.discriminator == "instructor" and not is_user %}
         <a class="btn btn-outline-secondary" href="/profile/{{ profile_user.username }}/account">{{profile_user.username}} Settings</a>
