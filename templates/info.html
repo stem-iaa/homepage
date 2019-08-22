@@ -7,7 +7,7 @@
         <hr>
         <div class="row justify-content-lg-between">
             <div class="col-lg">
-                <h2>Your Instructors</h2>
+                <h2>{{ "Your " if profile_user.discriminator == "student" else "" }}Instructors</h2>
                 <ul class="row">
                     {% for instructor in instructors %}
                         <li>{{ card(instructor, user, True) }}</li>
@@ -15,49 +15,54 @@
                 </ul>
                 <br>
 
-                {% if profile_user.mentors | length > 0 %}
-                    <h2>Your Mentor{{ "s" if profile_user.mentors | length > 1 else "" }}</h2>
-                    <ul class="row">
-                        {% for mentor in profile_user.mentors %}
-                            <li>{{ card(mentor, user, True) }}</li>
-                        {% endfor %}
-                    </ul>
-                    <br>
+                {% if profile_user.discriminator == "student" %}
+                    {% if profile_user.mentors | length > 0 %}
+                        <h2>Your Mentor{{ "s" if profile_user.mentors | length > 1 else "" }}</h2>
+                        <ul class="row">
+                            {% for mentor in profile_user.mentors %}
+                                <li>{{ card(mentor, user, True) }}</li>
+                            {% endfor %}
+                        </ul>
+                        <br>
+                    {% endif %}
                 {% endif %}
             </div>
 
             <div class="col-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="mb-3">Connect to VM</h4>
-                        <div class="vm-info" id="vm-polling">
-                            <div class="spinner-border">
+                {% if user.discriminator == "student" %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Connect to VM</h4>
+                            <div class="vm-info" id="vm-polling">
+                                <div class="spinner-border">
+                                </div>
                             </div>
-                        </div>
-                        <div class="hidden vm-info" id="vm-off">
-                            <p>Your VM is currently <span class="badge badge-danger">stopped</span></p>
-                            <a class="btn btn-outline-primary" id="start-vm-button" href="#" role="button">Start VM</a>
-                        </div>
-                        <div class="hidden vm-info" id="vm-on">
-                            <p>Your VM is currently <span class="badge badge-success">running</span></p>
-                            <a class="btn btn-outline-primary mb-2" id="vm-connect-button" href="#" role="button"
-                               target="_blank">Connect
-                                to
-                                VM</a>
-                            {% if profile_user.worm_password %}
-                                <br>
-                                <small>VM Password</small>
-                                <input class="form-control form-control-sm" type="text"
-                                       value="{{ profile_user.worm_password }}"
-                                       readonly>
-                            {% endif %}
-                        </div>
-                        <div class="hidden vm-info" id="vm-error">
-                            <div class="alert alert-danger" role="alert" id="vm-alert">
+                            <div class="hidden vm-info" id="vm-off">
+                                <p>Your VM is currently <span class="badge badge-danger">stopped</span></p>
+                                <a class="btn btn-outline-primary" id="start-vm-button" href="#" role="button">Start
+                                    VM</a>
+                            </div>
+                            <div class="hidden vm-info" id="vm-on">
+                                <p>Your VM is currently <span class="badge badge-success">running</span></p>
+                                <a class="btn btn-outline-primary mb-2" id="vm-connect-button" href="#" role="button"
+                                   target="_blank">Connect
+                                    to
+                                    VM</a>
+                                {% if profile_user.worm_password %}
+                                    <br>
+                                    <small>VM Password</small>
+                                    <input class="form-control form-control-sm" type="text"
+                                           value="{{ profile_user.worm_password }}"
+                                           readonly>
+                                {% endif %}
+                            </div>
+                            <div class="hidden vm-info" id="vm-error">
+                                <div class="alert alert-danger" role="alert" id="vm-alert">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="card">
                     <div class="card-body">
@@ -94,6 +99,21 @@
                         </ul>
                     </div>
                 </div>
+
+                {% if profile_user.cohorts | length > 0 %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-2">Cohort{{ "s" if profile_user.cohorts | length > 1 else "" }}</h4>
+
+                            <div class="row pl-4">
+                                {% for cohort in profile_user.cohorts %}
+                                    <a class="w-100" href="/cohort/{{ cohort.id }}" style="font-size: 20px;"><span
+                                            class="badge badge-info">{{ cohort.name }}</span></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
