@@ -9,16 +9,24 @@
 
 {% block body %}
     <div class="text-center" style="width: 100%;">
-        <form action="/login" method="post" class="form-signin">
+        <form class="form-signin" id="login-form">
             <img class="mb-4" src="/static/images/STEMatIAA_logo.png">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                   autofocus>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
             <br>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" id="login-submit-button" type="button">Sign in</button>
         </form>
+
+        <div class="alert alert-danger hidden" id="submit-alert" role="alert">
+        </div>
     </div>
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    <script src="/static/js/login.js"></script>
+{% endblock %}
