@@ -7,7 +7,7 @@ $("#profile-search").on("keyup", function () {
     }
 
     $.ajax({
-        url: "/search/" + search_query,
+        url: "/api/search/" + search_query,
         type: "get",
         dataType: "json",
         success: function (data) {

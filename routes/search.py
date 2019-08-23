@@ -8,11 +8,26 @@ import model
 import json
 
 
-@app.route("/search/", methods=["GET"])
-@app.route("/search/<query_string>", methods=["GET"])
-@app.route("/search/<query_string>/<limit>")
+def query_users(query_string, limit=None, restrict_to_cohort=None):
+    query = model.User.query.filter(or_(
+        model.User.username.contains(query_string),
+        model.User.first_name.contains(query_string),
+        model.User.last_name.contains(query_string),
+        model.User.label.contains(query_string),
+        model.User.email.contains(query_string)
+    ))
+
+    if limit:
+        query = query.limit(limit).all()
+    else:
+        query = query.all()
+
+
+@app.route("/api/search/", methods=["GET"])
+@app.route("/api/search/<query_string>", methods=["GET"])
+@app.route("/api/search/<query_string>/<limit>")
 @flask_login.login_required
-def search(query_string="", limit=None):
+def search_api(query_string="", limit=None):
     if not query_string:
         return json.dumps([])
 
