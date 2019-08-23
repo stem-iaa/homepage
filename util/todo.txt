@@ -47,9 +47,9 @@ x different vm password
   x show this password when clicking connect to vm (for mentors too)
   x edit worm password in profile settings
   x worm password in register user
-- nicer ui for course info
-  - make contact info list like cohort (dont fill whole card)
-- course info button on navbar rather than in menu
+x nicer ui for course info
+  x make contact info list like cohort (dont fill whole card)
+x course info button on navbar rather than in menu
 - error messages for login
 - success message for account info update
 x make search in nav look nicer

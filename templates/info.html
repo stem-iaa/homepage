@@ -50,16 +50,9 @@
                             <div class="hidden vm-info" id="vm-on">
                                 <p>Your VM is currently <span class="badge badge-success">running</span></p>
                                 <a class="btn btn-outline-primary mb-2" id="vm-connect-button" href="#" role="button"
-                                   target="_blank">Connect
-                                    to
-                                    VM</a>
-                                {% if profile_user.worm_password %}
-                                    <br>
-                                    <small>VM Password</small>
-                                    <input class="form-control form-control-sm" type="text"
-                                           value="{{ profile_user.worm_password }}"
-                                           readonly>
-                                {% endif %}
+                                   target="_blank">
+                                    Connect to VM
+                                </a>
                             </div>
                             <div class="hidden vm-info" id="vm-error">
                                 <div class="alert alert-danger" role="alert" id="vm-alert">

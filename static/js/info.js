@@ -4,13 +4,14 @@ function display_vm_error(error) {
     $("#vm-error").show();
 }
 
-function show_vm_on(ip, port) {
-    if (!port) {
-        port = "6080";
+function show_vm_on(ip, port, password) {
+    var link = "http://" + ip + ":" + port + "/vnc.html?host=" + ip + "&port=" + port;
+    if (password) {
+        link += "&password=" + password
     }
 
     $(".vm-info").hide();
-    $("#vm-connect-button").attr("href", "http://" + ip + ":" + port + "/vnc.html?host=" + ip + "&port=" + port);
+    $("#vm-connect-button").attr("href",  link);
     $("#vm-on").show();
 }
 
@@ -46,7 +47,7 @@ function update_vm_status(timer, until_running) {
                             if (data.error) {
                                 display_vm_error(data.error);
                             } else {
-                                show_vm_on(data.ip);
+                                show_vm_on(data.ip, "6080", data.password);
                             }
                         }
                     });

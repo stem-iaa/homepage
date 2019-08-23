@@ -57,22 +57,13 @@ $(document).ready(function () {
                                     this_.html('<div class="alert alert-danger" role="alert" id="vm-alert">\n' + ip_data.error + '</div>')
                                 } else {
                                     if (data.status === "running") {
+                                        var link = 'http://' + ip_data.ip + ":6080" + "/vnc.html?host=" + ip_data.ip + "&port=6080";
+                                        if (ip_data.password) {
+                                            link += "&password=" + ip_data.password;
+                                        }
                                         this_.html('<a class="btn btn-primary" id="vm-connect-button" href="' +
-                                            'http://' + ip_data.ip + ":6080" + "/vnc.html?host=" + ip_data.ip + "&port=6080" +
+                                            link +
                                             '" role="button" target="_blank">Connect to VM</a>');
-                                        $.ajax({
-                                            url: "/profile/" + username + "/worm_password",
-                                            type: "get",
-                                            dataType: "json",
-                                            success: function (worm_password_data) {
-                                                if (!worm_password_data.error) {
-                                                    this_.append('<br>');
-                                                    this_.append('<input class="form-control mt-1 form-control-sm" type="text" value="' + worm_password_data.worm_password + '" readonly>');
-                                                } else {
-                                                    console.log(worm_password_data.error);
-                                                }
-                                            }
-                                        });
                                     }
                                 }
                             }

@@ -48,6 +48,11 @@ def start(username):
 @app.route("/vm/ip/<username>", methods=["GET"])
 def ip(username):
     user = model.User.query.filter_by(username=username).first()
+
+    current_user = flask_login.current_user
+    if user != current_user and current_user.discriminator == "student":
+        return json.dumps({"error": "no permission for user"})
+
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
     try:
@@ -57,5 +62,6 @@ def ip(username):
 
     return json.dumps({
         "error": None,
-        "ip": ip
+        "ip": ip,
+        "password": user.worm_password
     })

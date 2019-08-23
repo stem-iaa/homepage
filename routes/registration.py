@@ -18,18 +18,23 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if not username or not password:
-            return "Bad login"
+        if not username:
+            return json.dumps({"error": "Username required."})
+        if not password:
+            return json.dumps({"error": "Password required."})
 
         user = model.User.query.filter_by(username=username).first()
 
-        if user is None or not check_password_hash(user.password_hash, password):
-            return "Bad login"
+        if not user:
+            return json.dumps({"error": "No username found."})
+        if not check_password_hash(user.password_hash, password):
+            return json.dumps({"error": "Incorrect password."})
 
         flask_login.login_user(user)
-        return redirect("/profile/" + user.username)
-
-    return "Bad login"
+        return json.dumps({
+            "error": None,
+            "location": "/profile/" + user.username
+        })
 
 
 @app.route("/register", methods=["GET", "POST"])

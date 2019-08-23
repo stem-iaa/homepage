@@ -19,7 +19,7 @@ class User(UserMixin, db.Model):
     profile_picture_path = db.Column(db.String(128))
     skype_id = db.Column(db.String(128))
     _vm_name = db.Column(db.String(64), index=True)
-    worm_password = db.Column(db.String(20))
+    worm_password = db.Column(db.String(20))  # vm password
 
     cohorts = db.relationship(
         "Cohort",
