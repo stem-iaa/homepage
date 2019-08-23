@@ -2,6 +2,8 @@ $("#profile-search").on("keyup", function () {
     var search_query = $("#profile-search").val();
     if (!search_query) {
         search_query = "";
+    } else {
+        search_query += "/8"
     }
 
     $.ajax({

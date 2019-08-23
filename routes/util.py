@@ -10,8 +10,9 @@ import json
 
 @app.route("/search/", methods=["GET"])
 @app.route("/search/<query_string>", methods=["GET"])
+@app.route("/search/<query_string>/<limit>")
 @flask_login.login_required
-def search(query_string=""):
+def search(query_string="", limit=None):
     if not query_string:
         return json.dumps([])
 
@@ -21,7 +22,18 @@ def search(query_string=""):
         model.User.last_name.contains(query_string),
         model.User.label.contains(query_string),
         model.User.email.contains(query_string)
-    )).all()
+    ))
+
+    if limit:
+        try:
+            limit = int(limit)
+        except ValueError:
+            limit = None
+
+    if limit:
+        query = query.limit(limit).all()
+    else:
+        query = query.all()
 
     current_user = flask_login.current_user
 
