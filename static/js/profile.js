@@ -9,6 +9,7 @@ $(document).ready(function () {
         theme: 'snow'
     });
     quill.enable(false);
+    $(".ql-toolbar").hide();
 });
 
 var editing = false;
@@ -21,6 +22,8 @@ $("#edit_button").on("click", function () {
         for (var id in editables) {
             editable_content[id] = $("#" + id + " textarea").val();
         }
+
+        editable_content["portfolio"] = $(".ql-editor").html();
 
         $.ajax({
             url: "/profile/" + profile_user + "/update",
@@ -41,6 +44,10 @@ $("#edit_button").on("click", function () {
             let textarea = $("#" + this.id + " textarea")[0];
             textarea.style.height = textarea.scrollHeight + 5 + "px";
         });
+
+        quill.enable(true);
+        $(".ql-toolbar").show();
+
         editing = true;
         $("#edit_button").text("Save");
     }

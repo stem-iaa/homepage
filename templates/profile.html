@@ -62,9 +62,7 @@
 
                 <hr>
                 <div id="content">
-                    <p>Hello World!</p>
-                    <p>Some initial <strong>bold</strong> text</p>
-                    <p><br></p>
+                    {{ profile_user.portfolio | safe if profile_user.portfolio else "This user did not create their portfolio yet." }}
                 </div>
             </div>
 

@@ -7,3 +7,8 @@
     white-space: pre-wrap;
     min-width: 400px;
 }
+
+.ql-container.ql-snow {
+    border: none;
+    font-size: inherit;
+}
