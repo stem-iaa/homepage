@@ -1,7 +1,14 @@
 var original_edit_button_text;
 
+var quill;
+
 $(document).ready(function () {
     original_edit_button_text = $("#edit_button").text();
+
+    quill = new Quill('#content', {
+        theme: 'snow'
+    });
+    quill.enable(false);
 });
 
 var editing = false;

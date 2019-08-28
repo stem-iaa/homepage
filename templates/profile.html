@@ -2,6 +2,7 @@
 
 {% block head %}
     {{ super() }}
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="/static/css/global.css" rel="stylesheet">
     <link href="/static/css/profile.css" rel="stylesheet">
 {% endblock %}
@@ -11,10 +12,12 @@
 {% block navbar %}
     {% if is_user %}
         <button class="btn btn-primary mr-4" id="edit_button">Edit</button>
-        <a class="btn btn-outline-info" href="/profile/{{ profile_user.username }}/info" role="button">Course Information</a>
+        <a class="btn btn-outline-info" href="/profile/{{ profile_user.username }}/info" role="button">Course
+            Information</a>
     {% endif %}
     {% if user.discriminator == "instructor" and not is_user %}
-        <a class="btn btn-outline-secondary" href="/profile/{{ profile_user.username }}/account">{{profile_user.username}} Settings</a>
+        <a class="btn btn-outline-secondary"
+           href="/profile/{{ profile_user.username }}/account">{{ profile_user.username }} Settings</a>
     {% endif %}
 {% endblock %}
 
@@ -58,8 +61,11 @@
                 </strong></h1>
 
                 <hr>
-                <div class="portfolio-content editable"
-                     id="portfolio">{{ profile_user.portfolio | safe if profile_user.portfolio else 'This user did not create their portfolio yet.' }}</div>
+                <div id="content">
+                    <p>Hello World!</p>
+                    <p>Some initial <strong>bold</strong> text</p>
+                    <p><br></p>
+                </div>
             </div>
 
             <div class="col col-sm-auto info-col">
@@ -79,5 +85,6 @@
 
 {% block scripts %}
     {{ super() }}
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script src="/static/js/profile.js"></script>
 {% endblock %}

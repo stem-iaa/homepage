@@ -235,6 +235,29 @@ def get_worm_password(username):
     })
 
 
+@app.route("/profile/<username>/content", methods=["GET", "POST"])
+@flask_login.login_required
+def content(username):
+    profile_user = model.User.query.filter_by(username=username).first()
+    if not profile_user:
+        return json.dumps({
+            "error": "No user found"
+        })
+
+    if request.method == "GET":
+        return json.dumps(profile_user.portfolio)
+
+    current_user = flask_login.current_user
+    if current_user != profile_user:
+        return json.dumps({"error": "No permission for user"})
+
+    if not request.form.get("content"):
+        return json.dumps({"error": "no content provided"})
+
+    profile_user.portfolio = json.dumps(request.form.get("content"))
+    db.session.commit()
+
+
 @app.route("/admin")
 @flask_login.login_required
 def admin():
