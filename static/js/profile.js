@@ -32,7 +32,11 @@ $("#edit_button").on("click", function () {
             data: editable_content,
             success: function (data) {
                 if (!data.error) {
-                    location.reload();
+                    if ($("#upload-picture-input").get(0).files.length != 0) {
+                        $("#upload-picture-form").submit();
+                    } else {
+                        location.reload();
+                    }
                 }
             }
         });
@@ -50,16 +54,28 @@ $("#edit_button").on("click", function () {
 
         editing = true;
         $("#edit_button").text("Save");
+        $("#upload-picture-button").css("cursor", "pointer");
     }
 });
 
 $("#upload-picture-button").on("click", function () {
-    $("#upload-picture-input").click();
+    if (editing) {
+        $("#upload-picture-input").click();
+    }
 });
 
 $("#upload-picture-input").on("change", function () {
-    if ($("#upload-picture-input").get(0).files.length != 0) {
-        $("#upload-picture-form").submit();
+    var files = $("#upload-picture-input").get(0).files;
+    console.log(files);
+    if (files.length != 0) {
+        console.log("test");
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $("#upload-picture-button").attr("src", e.target.result)
+        };
+
+        reader.readAsDataURL(files[0]);
     }
 });
 
