@@ -37,10 +37,7 @@
                 <div class="col-sm-4">
                     <img class="bd-placeholder-img img-thumbnail rounded-lg shadow" id="upload-picture-button"
                          src="{{ profile_user.profile_picture_path_or_default }}"
-                         width="100%" focusable="false"
-                            {% if is_user %}
-                         style="cursor: pointer"
-                            {% endif %}>
+                         width="100%" focusable="false">
                     {% if is_user %}
                         <form class="hidden" id="upload-picture-form"
                               action="/profile/{{ profile_user.username }}/picture" method="post"
