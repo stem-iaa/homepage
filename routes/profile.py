@@ -48,6 +48,9 @@ def info(username):
     if profile_user.username != flask_login.current_user.username:
         return "no permission for user"
 
+    if profile_user.discriminator == "mentor":
+        return "no permission for user"
+
     all_instructors = model.Instructor.query.filter_by(discriminator="instructor").all()
     all_instructors = sorted(all_instructors, key=lambda x: x.label)
 
