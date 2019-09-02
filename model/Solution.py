@@ -45,6 +45,7 @@ class Solution(db.Model):
     __tablename__ = "solution"
     id = db.Column(db.Integer, index=True, primary_key=True)
     name = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(4096))
 
     cohort_id = db.Column(db.Integer, db.ForeignKey("cohort.id"))
     cohort = db.relationship("Cohort", back_populates="solutions")

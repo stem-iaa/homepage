@@ -121,6 +121,26 @@ def add_files(id):
     return redirect("/solution/" + id)
 
 
+@app.route("/solution/<id>/description", methods=["POST"])
+@flask_login.login_required
+def set_description(id):
+    current_user = flask_login.current_user
+    if current_user.discriminator != "instructor":
+        return json.dumps({"error": "no permission for user"})
+
+    solution = model.Solution.query.filter_by(id=id).first()
+    if not solution:
+        return json.dumps({"error": "no solution found for id: " + id})
+
+    description = request.form.get("description")
+    solution.description = description
+    db.session.commit()
+
+    return json.dumps({
+        "error": None
+    })
+
+
 @app.route("/solution/file/<id>", methods=["DELETE"])
 @flask_login.login_required
 def delete_file(id):

@@ -4,8 +4,10 @@
 
 {% block head %}
     {{ super() }}
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+    <link rel="stylesheet" href="/static/css/solution.css">
 {% endblock %}
 
 {% block content %}
@@ -33,8 +35,15 @@
                   enctype="multipart/form-data">
                 <input type="file" name="solution_files" id="upload-files-input" multiple>
             </form>
+            <br>
+
+            <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">Edit Description</button>
+
+            <div id="description">
+                {{ solution.description | safe if solution.description else "" }}
+            </div>
         {% endif %}
-        <br><br>
+        <br>
 
         <div class="list-group">
             {% for file in solution.files %}
@@ -72,6 +81,7 @@
     <script>
         let solution_id = "{{ solution.id }}";
     </script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script src="/static/js/solution.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
     <script>
