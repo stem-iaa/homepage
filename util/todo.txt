@@ -51,9 +51,9 @@ x nicer ui for course info
   x make contact info list like cohort (dont fill whole card)
 x course info button on navbar rather than in menu
 x error messages for login
-- dont try to display non-ascii solutions
+x dont try to display non-ascii solutions
 - solution description with js editor
-- option to make account invisible to all other accounts
+x option to make account invisible to all other accounts
 - success message for account info update
 x make search in nav look nicer
 - nicer connect to vm button - proper statuses displayed

@@ -35,7 +35,10 @@ class SolutionFile(db.Model):
 
     @property
     def content(self):
-        return open(self.relative_file_path, "r").read()
+        try:
+            return open(self.relative_file_path, "r").read()
+        except UnicodeDecodeError:
+            return "Unable to display content."
 
 
 class Solution(db.Model):
