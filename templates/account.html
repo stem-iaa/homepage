@@ -67,15 +67,15 @@
                     <input type="text" class="form-control" id="worm_password" name="worm_password"
                            value="{{ profile_user.worm_password if profile_user.worm_password else '' }}">
                 </div>
-            {% endif %}
 
-            {% if  profile_user.discriminator == "mentor" %}
-                <div class="mb-3">
-                    <label for="students">Mentored Students</label>
-                    <small>Comma separated list of student usernames.</small>
-                    <input type="text" class="form-control" id="students" name="students"
-                           value="{{ profile_user.student_usernames_list }}">
-                </div>
+                {% if  profile_user.discriminator == "mentor" %}
+                    <div class="mb-3">
+                        <label for="students">Mentored Students</label>
+                        <small>Comma separated list of student usernames.</small>
+                        <input type="text" class="form-control" id="students" name="students"
+                               value="{{ profile_user.student_usernames_list }}">
+                    </div>
+                {% endif %}
             {% endif %}
 
             {% if user.discriminator == "instructor" %}
