@@ -20,6 +20,7 @@ class User(UserMixin, db.Model):
     skype_id = db.Column(db.String(128))
     _vm_name = db.Column(db.String(64), index=True)
     worm_password = db.Column(db.String(20))  # vm password
+    invisible = db.Column(db.Boolean, index=True)
 
     cohorts = db.relationship(
         "Cohort",

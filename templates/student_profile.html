@@ -6,9 +6,11 @@
     {% if profile_user.mentors|length > 0 %}
         <h3 class="mb-2">Mentored By</h3>
         {% for mentor in profile_user.mentors %}
-            <div class="row">
-                {{ card(mentor, profile_user, True) }}
-            </div>
+            {% if not mentor.invisible or user.discriminator == "instructor" %}
+                <div class="row">
+                    {{ card(mentor, profile_user, True) }}
+                </div>
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}

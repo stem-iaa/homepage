@@ -105,7 +105,7 @@ def update(username):
     }
 
     admin_parameters = {
-        "label", "username", "vm_name", "worm_password"
+        "label", "username", "vm_name", "worm_password", "invisible"
     }
 
     for parameter in request.form.keys():
@@ -114,6 +114,10 @@ def update(username):
             if value:
                 if parameter in admin_parameters and current_user.discriminator != "instructor":
                     return json.dumps({"error": "No permission to set " + parameter})
+
+                if parameter == "invisible":
+                    value = value == "on"
+
                 setattr(profile_user, parameter, value)
 
     if profile_user.discriminator == "mentor":

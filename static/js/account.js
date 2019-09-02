@@ -5,6 +5,7 @@ $("#update-button").on("click", function () {
     let form = $("#account-settings-form");
     submit_alert.hide();
     success_alert.hide();
+
     $.ajax({
         url: "/profile/" + profile_user + "/update",
         type: "post",

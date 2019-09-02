@@ -40,7 +40,9 @@
             <h2>Instructors / TAs</h2>
             <ul class="row">
                 {% for instructor in instructors %}
-                    <li>{{ deleteable_card(instructor, user, True, instructor.username, user.discriminator == "instructor") }}</li>
+                    {% if not instructor.invisible or user.discriminator == "instructor" %}
+                        <li>{{ deleteable_card(instructor, user, True, instructor.username, user.discriminator == "instructor") }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
             <br>
@@ -50,7 +52,9 @@
             <h2>Mentors</h2>
             <ul class="row">
                 {% for mentor in mentors %}
-                    <li>{{ deleteable_card(mentor, user, True, mentor.username, user.discriminator == "instructor") }}</li>
+                    {% if not mentor.invisible or user.discriminator == "instructor" %}
+                        <li>{{ deleteable_card(mentor, user, True, mentor.username, user.discriminator == "instructor") }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
             <br>
@@ -60,7 +64,9 @@
             <h2>Students</h2>
             <ul class="row">
                 {% for student in students %}
-                    <li>{{ deleteable_card(student, user, True, student.username, user.discriminator == "instructor") }}</li>
+                    {% if not student.invisible or user.discriminator == "instructor" %}
+                        <li>{{ deleteable_card(student, user, True, student.username, user.discriminator == "instructor") }}</li>
+                    {% endif %}
                 {% endfor %}
             </ul>
             <br>

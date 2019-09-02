@@ -22,7 +22,9 @@
                 <h2>{{ "Your " if profile_user.discriminator == "student" else "" }}Instructors</h2>
                 <ul class="row">
                     {% for instructor in instructors %}
-                        <li>{{ card(instructor, user, True) }}</li>
+                        {% if not instructor.invisible or user.discriminator == "instructor" %}
+                            <li>{{ card(instructor, user, True) }}</li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 <br>
@@ -32,7 +34,9 @@
                         <h2>Your Mentor{{ "s" if profile_user.mentors | length > 1 else "" }}</h2>
                         <ul class="row">
                             {% for mentor in profile_user.mentors %}
-                                <li>{{ card(mentor, user, True) }}</li>
+                                {% if not mentor.invisible or user.discriminator == "instructor" %}
+                                    <li>{{ card(mentor, user, True) }}</li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
                         <br>

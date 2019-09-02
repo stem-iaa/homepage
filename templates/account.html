@@ -68,6 +68,16 @@
                            value="{{ profile_user.worm_password if profile_user.worm_password else '' }}">
                 </div>
 
+                <div class="form-inline">
+                    <input type="checkbox" class="form-control" id="invisible" name="invisible"
+                            {{ "checked" if profile_user.invisible }}>
+                    <label class="form-check-label ml-1">
+                        Invisible
+                    </label>
+                </div>
+
+
+
                 {% if  profile_user.discriminator == "mentor" %}
                     <div class="mb-3">
                         <label for="students">Mentored Students</label>
