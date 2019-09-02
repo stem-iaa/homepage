@@ -37,12 +37,12 @@
             </form>
             <br>
 
-            <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">Edit Description</button>
-
-            <div id="description">
-                {{ solution.description | safe if solution.description else "" }}
-            </div>
+            <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">Edit Description
+            </button>
         {% endif %}
+        <div id="description">
+            {{ solution.description | safe if solution.description else "" }}
+        </div>
         <br>
 
         <div class="list-group">
