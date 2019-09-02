@@ -93,6 +93,17 @@
     </{{ h }}>
 {%- endmacro %}
 
+{% macro email(user) %}
+    <a class="text-info" href="mailto:{{ user.email }}">{{ user.email }}</a>
+{%- endmacro %}
+
+{% macro skype(user) %}
+    <a class="btn btn-sm btn-info" href="skype:{{ profile_user.skype_id }}?chat" role="button">
+        <img src="/static/images/icons8-skype-24.png" style="width: 20px;">
+        Skype Chat
+    </a>
+{%- endmacro %}
+
 {% macro card(profile_user, user, full) -%}
     <div class="card">
         {% if full %}
@@ -107,12 +118,11 @@
                 {{ username(profile_user) }}
                 {% if profile_user.email %}
                     <br>
-                    {{ profile_user.email }}
+                    {{ email(profile_user) }}
                 {% endif %}
                 {% if profile_user.skype_id %}
                     <br>
-                    <span class="text-secondary">skype </span>
-                    <a href="skype:{{ profile_user.skype_id }}?chat" class="text-info">{{ profile_user.skype_id }}</a>
+                    {{ skype(profile_user) }}
                 {% endif %}
                 {% if profile_user.location %}
                     <br>
