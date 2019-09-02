@@ -101,12 +101,11 @@
                 {{ username(profile_user) }}
                 {% if profile_user.email %}
                     <br>
-                    {{ profile_user.email }}
+                    {{ email(profile_user) }}
                 {% endif %}
                 {% if profile_user.skype_id %}
                     <br>
-                    <span class="text-secondary">skype:</span>
-                    <a href="live:{{ profile_user.skype_id }}" class="text-info">{{ profile_user.skype_id }}</a>
+                    {{ skype(profile_user) }}
                 {% endif %}
                 {% if profile_user.location %}
                     <br>

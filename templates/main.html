@@ -98,7 +98,7 @@
 {%- endmacro %}
 
 {% macro skype(user) %}
-    <a class="btn btn-sm btn-info" href="skype:{{ profile_user.skype_id }}?chat" role="button">
+    <a class="btn btn-sm btn-info" href="skype:{{ user.skype_id }}?chat" role="button">
         <img src="/static/images/icons8-skype-24.png" style="width: 20px;">
         Skype Chat
     </a>
