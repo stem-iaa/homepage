@@ -52,7 +52,7 @@ x nicer ui for course info
 x course info button on navbar rather than in menu
 x error messages for login
 x dont try to display non-ascii solutions
-- solution description with js editor
+x solution description with js editor
 - start vm button in card
   - restrict mentors by mentee
   - instructors start all

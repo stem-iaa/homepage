@@ -12,12 +12,13 @@
         <div class="row justify-content-lg-between">
             <div class="col-lg">
                 <h2>Learning Management System</h2>
-                <a class="btn btn-info mt-2 ml-4 mb-4"
+                <a class="btn btn-info mt-2 ml-4 mb-5"
                    href="https://canvas.instructure.com/login/canvas"
                    role="button" target="_blank">
                     <img src="/static/images/instructure_lg.svg" style="width: 25px;">
                     Canvas Login
                 </a>
+                <br><br>
 
                 <h2>{{ "Your " if profile_user.discriminator == "student" else "" }}Instructors</h2>
                 <ul class="row">
