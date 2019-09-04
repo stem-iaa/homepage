@@ -21,14 +21,20 @@
         <h1>{{ solution.name }} <small class="text-info">solution</small></h1>
         <hr>
 
-        <h2>
-            Description
+        <div class="align-middle">
+            <div class="d-inline-block">
+                <h2>Description</h2>
+            </div>
+
             {% if user.discriminator == "instructor" %}
-                <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">
-                    Edit
-                </button>
+                <div class="d-inline-block ml-2">
+                    <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">
+                        Edit
+                    </button>
+                </div>
             {% endif %}
-        </h2>
+        </div>
+
 
         <div class="ml-3" id="description">
             {{ solution.description | safe if solution.description else "" }}
