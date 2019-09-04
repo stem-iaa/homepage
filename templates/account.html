@@ -49,7 +49,7 @@
                        value="{{ '' if not profile_user.skype_id else profile_user.skype_id }}">
             </div>
 
-            {% if profile_user.discriminator == "mentor" %}
+            {% if profile_user.discriminator != "student" %}
                 <div class="mb-3">
                     <label for="lync_link">Lync Link</label>
                     <input type="text" class="form-control" id="lync_link" name="lync_link"
