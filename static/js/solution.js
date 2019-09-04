@@ -35,7 +35,7 @@ $("#edit-description-button").on("click", function () {
     } else {
         quill.enable(true);
         $(".ql-toolbar").show();
-        $("#edit-description-button").text("Save Description");
+        $("#edit-description-button").text("Save");
 
         editing = true;
     }

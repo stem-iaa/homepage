@@ -21,6 +21,22 @@
         <h1>{{ solution.name }} <small class="text-info">solution</small></h1>
         <hr>
 
+        <h2>
+            Description
+            {% if user.discriminator == "instructor" %}
+                <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">
+                    Edit
+                </button>
+            {% endif %}
+        </h2>
+
+        <div class="ml-3" id="description">
+            {{ solution.description | safe if solution.description else "" }}
+        </div>
+        <br><br>
+
+        <h2>Files</h2>
+
         {% if user.discriminator == "instructor" %}
             <form class="form-inline">
                 <div class="form-group mr-2">
@@ -36,14 +52,7 @@
                 <input type="file" name="solution_files" id="upload-files-input" multiple>
             </form>
             <br>
-
-            <button class="btn btn-sm btn-info mb-3" id="edit-description-button" type="button">Edit Description
-            </button>
         {% endif %}
-        <div id="description">
-            {{ solution.description | safe if solution.description else "" }}
-        </div>
-        <br>
 
         <div class="list-group">
             {% for file in solution.files %}
