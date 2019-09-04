@@ -3,12 +3,13 @@
 {% block title_section_class %}text-white bg-dark{% endblock %}
 
 {% block profile_content %}
-    <h2 class="font-italic">Students Mentored</h2>
-    <div class="row">
-        {% if profile_user.students | length > 0 %}
+    {% if profile_users.students | length > 0 %}
+        <h2 class="font-italic">Students Mentored</h2>
+        <div class="row">
             {% for mentor in profile_user.students %}
                 {{ card(mentor, user, True) }}
             {% endfor %}
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
