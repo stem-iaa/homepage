@@ -102,7 +102,13 @@
 {% macro skype(user) %}
     <a class="btn btn-sm btn-info" href="skype:{{ user.skype_id }}?chat" role="button">
         <img src="/static/images/icons8-skype-24.png" style="width: 20px;">
-        Skype Chat
+        Skype
+    </a>
+{%- endmacro %}
+
+{% macro lync(user) %}
+    <a class="btn btn-sm btn-info" href="{{ user.lync_link }}" role="button">
+        Lync Connect
     </a>
 {%- endmacro %}
 
@@ -125,6 +131,9 @@
                 {% if profile_user.skype_id %}
                     <br>
                     {{ skype(profile_user) }}
+                {% endif %}
+                {% if profile_user.lync_link %}
+                    {{ lync(profile_user) }}
                 {% endif %}
                 {% if profile_user.location %}
                     <br>

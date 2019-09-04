@@ -101,7 +101,7 @@ def update(username):
         })
 
     whitelisted_parameters = {
-        "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
+        "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio", "lync_link"
     }
 
     admin_parameters = {

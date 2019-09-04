@@ -21,6 +21,7 @@ class User(UserMixin, db.Model):
     _vm_name = db.Column(db.String(64), index=True)
     worm_password = db.Column(db.String(20))  # vm password
     invisible = db.Column(db.Boolean, index=True)
+    lync_link = db.Column(db.String(64))
 
     cohorts = db.relationship(
         "Cohort",
