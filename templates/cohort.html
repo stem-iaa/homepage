@@ -113,6 +113,9 @@
                     <br>
                     {{ skype(profile_user) }}
                 {% endif %}
+                {% if profile_user.lync_link %}
+                    {{ lync(profile_user) }}
+                {% endif %}
                 {% if profile_user.location %}
                     <br>
                     <div class="mb-3"></div>
