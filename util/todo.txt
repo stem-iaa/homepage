@@ -52,6 +52,8 @@ x nicer ui for course info
 x course info button on navbar rather than in menu
 - error messages for login
 - success message for account info update
+- have to click mentor button each time to actually be mentor register
+- dont show solution description to mentors if there is none
 x make search in nav look nicer
 - nicer connect to vm button - proper statuses displayed
 - stylized error pages (permission denied, 404, etc)
