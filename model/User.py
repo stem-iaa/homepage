@@ -55,7 +55,7 @@ class User(UserMixin, db.Model):
 
     @property
     def profile_picture_path_or_default(self):
-        return self.profile_picture_path if self.profile_picture_path else "/static/images/default_profile.svg"
+        return self.profile_picture_path if self.profile_picture_path else "/static/images/stem-iaa-big-faded.png"
 
     @property
     def relative_profile_picture_path(self):
