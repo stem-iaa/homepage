@@ -51,6 +51,8 @@ def search_api(query_string="", limit=None):
         query = query.all()
 
     current_user = flask_login.current_user
+    if current_user.discriminator != "instructor":
+        query = [item for item in query if item.invisible is False]
 
     # TODO more efficient query join
     cohort_users = []

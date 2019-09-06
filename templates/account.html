@@ -49,6 +49,14 @@
                        value="{{ '' if not profile_user.skype_id else profile_user.skype_id }}">
             </div>
 
+            {% if profile_user.discriminator != "student" %}
+                <div class="mb-3">
+                    <label for="lync_link">Lync Link</label>
+                    <input type="text" class="form-control" id="lync_link" name="lync_link"
+                           value="{{ '' if not profile_user.lync_link else profile_user.lync_link }}">
+                </div>
+            {% endif %}
+
             <div class="mb-3">
                 <label for="location">Location</label>
                 <input type="text" class="form-control" id="location" name="location"
@@ -66,6 +74,14 @@
                     <label for="vm_name">VM/Worm Password</label>
                     <input type="text" class="form-control" id="worm_password" name="worm_password"
                            value="{{ profile_user.worm_password if profile_user.worm_password else '' }}">
+                </div>
+
+                <div class="form-inline">
+                    <input type="checkbox" class="form-control" id="invisible" name="invisible"
+                            {{ "checked" if profile_user.invisible }}>
+                    <label class="form-check-label ml-1">
+                        Invisible
+                    </label>
                 </div>
 
                 {% if  profile_user.discriminator == "mentor" %}

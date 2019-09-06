@@ -101,11 +101,11 @@ def update(username):
         })
 
     whitelisted_parameters = {
-        "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio"
+        "first_name", "last_name", "email", "location", "skype_id", "bio", "portfolio", "lync_link"
     }
 
     admin_parameters = {
-        "label", "username", "vm_name", "worm_password"
+        "label", "username", "vm_name", "worm_password", "invisible"
     }
 
     for parameter in request.form.keys():
@@ -114,11 +114,15 @@ def update(username):
             if value:
                 if parameter in admin_parameters and current_user.discriminator != "instructor":
                     return json.dumps({"error": "No permission to set " + parameter})
+
+                if parameter == "invisible":
+                    value = value == "on"
+
                 setattr(profile_user, parameter, value)
 
-    if profile_user.discriminator == "mentor":
+    if profile_user.discriminator == "mentor" and current_user.discriminator == "instructor":
+        profile_user.students = []
         if request.form.get("students"):
-            profile_user.students = []
             student_usernames = [username.strip() for username in request.form.get("students").split(",")]
             for student_username in student_usernames:
                 student = model.Student.query.filter_by(username=student_username).first()

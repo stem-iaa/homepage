@@ -50,7 +50,13 @@ x different vm password
 x nicer ui for course info
   x make contact info list like cohort (dont fill whole card)
 x course info button on navbar rather than in menu
-- error messages for login
+x error messages for login
+x dont try to display non-ascii solutions
+x solution description with js editor
+- start vm button in card
+  - restrict mentors by mentee
+  - instructors start all
+x option to make account invisible to all other accounts
 - success message for account info update
 - have to click mentor button each time to actually be mentor register
 - dont show solution description to mentors if there is none
