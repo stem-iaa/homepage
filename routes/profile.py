@@ -118,7 +118,10 @@ def update(username):
                 if parameter == "invisible":
                     value = value == "on"
 
-                setattr(profile_user, parameter, value)
+                if value == " ":
+                    setattr(profile_user, parameter, None)
+                else:
+                    setattr(profile_user, parameter, value)
 
     if profile_user.discriminator == "mentor" and current_user.discriminator == "instructor":
         profile_user.students = []
