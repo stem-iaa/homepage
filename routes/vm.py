@@ -34,8 +34,9 @@ def start(username):
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
 
-    if not is_user(flask_login.current_user, username):
-        return json.dumps({"error": "Permission denied for user."})
+    if flask_login.current_user.discriminator == "student":
+        if not is_user(flask_login.current_user, username):
+            return json.dumps({"error": "Permission denied for user."})
 
     try:
         Azure.start_vm(user.vm_name)

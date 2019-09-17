@@ -65,9 +65,7 @@ class User(UserMixin, db.Model):
 
     @hybrid_property
     def vm_name(self):
-        if self._vm_name:
-            return self._vm_name
-        return self.username
+        return self._vm_name
 
     @vm_name.setter
     def vm_name(self, value):

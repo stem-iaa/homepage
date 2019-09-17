@@ -138,4 +138,7 @@
 {% block scripts %}
     {{ super() }}
     <script src="/static/js/info.js"></script>
+    {% if user.discriminator == "student" %}
+        <script src="/static/js/vm_connect.js"></script>
+    {% endif %}
 {% endblock %}

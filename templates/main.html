@@ -147,15 +147,6 @@
                     <a href="/cohort/{{ cohort.id }}"><span class="badge badge-info">{{ cohort.name }}</span></a>
                 {% endif %}
             {% endfor %}
-
-            {% if profile_user.discriminator == "student" %}
-                {% if user.discriminator == "instructor" or (user.discriminator == "mentor" and profile_user in user.students) %}
-                    <br><br>
-                    <div class="vm-connect" data-username="{{ profile_user.username }}">
-                        <div class="spinner-border"></div>
-                    </div>
-                {% endif %}
-            {% endif %}
         </div>
     </div>
 {%- endmacro %}

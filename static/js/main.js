@@ -33,6 +33,7 @@ $("#profile-search").on("keyup", function () {
 });
 
 
+/*
 $(document).ready(function () {
     $(".vm-connect").each(function () {
         console.log($(this).html());
@@ -78,3 +79,4 @@ $(document).ready(function () {
         });
     });
 });
+*/

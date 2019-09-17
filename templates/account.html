@@ -67,7 +67,7 @@
                 <div class="mb-3">
                     <label for="vm_name">VM Name</label>
                     <input type="text" class="form-control" id="vm_name" name="vm_name"
-                           value="{{ profile_user.vm_name }}">
+                           value="{{ profile_user.vm_name if profile_user.vm_name else '' }}">
                 </div>
 
                 <div class="mb-3">
