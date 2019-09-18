@@ -48,27 +48,30 @@
             <div class="col-auto">
 
                 {% if user.discriminator == "student" %}
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Connect to VM</h4>
-                            <div class="vm-info" id="vm-polling">
-                                <div class="spinner-border">
+                    <div class="vm-connect">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="mb-3">Connect to VM</h4>
+                                <div class="vm-info" id="vm-polling">
+                                    <div class="spinner-border">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="hidden vm-info" id="vm-off">
-                                <p>Your VM is currently <span class="badge badge-danger">stopped</span></p>
-                                <a class="btn btn-outline-primary" id="start-vm-button" href="#" role="button">Start
-                                    VM</a>
-                            </div>
-                            <div class="hidden vm-info" id="vm-on">
-                                <p>Your VM is currently <span class="badge badge-success">running</span></p>
-                                <a class="btn btn-outline-primary mb-2" id="vm-connect-button" href="#" role="button"
-                                   target="_blank">
-                                    Connect to VM
-                                </a>
-                            </div>
-                            <div class="hidden vm-info" id="vm-error">
-                                <div class="alert alert-danger" role="alert" id="vm-alert">
+                                <div class="hidden vm-info" id="vm-off">
+                                    <p>Your VM is currently <span class="badge badge-danger">stopped</span></p>
+                                    <a class="btn btn-outline-primary" id="start-vm-button" href="#" role="button">Start
+                                        VM</a>
+                                </div>
+                                <div class="hidden vm-info" id="vm-on">
+                                    <p>Your VM is currently <span class="badge badge-success">running</span></p>
+                                    <a class="btn btn-outline-primary mb-2" id="vm-connect-button" href="#"
+                                       role="button"
+                                       target="_blank">
+                                        Connect to VM
+                                    </a>
+                                </div>
+                                <div class="hidden vm-info" id="vm-error">
+                                    <div class="alert alert-danger" role="alert" id="vm-alert">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +141,5 @@
 {% block scripts %}
     {{ super() }}
     <script src="/static/js/info.js"></script>
-    {% if user.discriminator == "student" %}
-        <script src="/static/js/vm_connect.js"></script>
-    {% endif %}
+    <script src="/static/js/vm_connect.js"></script>
 {% endblock %}
