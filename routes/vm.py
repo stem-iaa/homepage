@@ -50,10 +50,6 @@ def start(username):
 def ip(username):
     user = model.User.query.filter_by(username=username).first()
 
-    current_user = flask_login.current_user
-    if user != current_user and current_user.discriminator == "student":
-        return json.dumps({"error": "no permission for user"})
-
     if not user:
         return json.dumps({"error": "no user found for username: " + username})
     try:
