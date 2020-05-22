@@ -5,6 +5,5 @@ worm.db
 static/images/profile_pictures
 util/worm_manage_scripts/vm_execute.sh
 static/protected/solutions/*
-util/worm_manage_scripts
 
 
