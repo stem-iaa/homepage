@@ -4,7 +4,7 @@ The Stem-IAA Portal was created to provide a way for students, instructors, and 
 
 The following topics are discussed in this documentation:
 
-- Portal setup
+- [Portal setup](#portal-setup)
 - Portal usage guide
 - Flask/static hosting information
 - Virtual machine information
