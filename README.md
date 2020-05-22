@@ -63,7 +63,7 @@ db.session.commit()
  
  Several technologies were used to setup the hosting service for students. The goal was to provide each student with a custom domain name associated with their username, such as `sam.w3.stem-iaa.org` for static content, and `sam.flask.stem-iaa.org` for flask specific content, which was the web application framework taught in the course. 
  
- To accomplish this, [openresty](https://openresty.org/en/) (from [nginx](https://www.nginx.com/)) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) were used. Both of these libraries should be installed on the server machine.
+ To accomplish this, [openresty](https://openresty.org/en/) (from [nginx](https://www.nginx.com/)) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) were used. Both of these libraries should be installed on the hosting server.
  
  Openresty was chosen over a standard version of nginx due to the added ability to write lua in routing network traffic. This is how the custom URLs were created from the student usernames. The nginx scripts to accomplish this can be found in the [nginx_sites folder of the worm Github repo](https://github.com/stem-iaa/worm/tree/master/nginx_sites). Additionally, custom landing pages were created from each of the routes. The landing pages can be found [here](https://github.com/stem-iaa/worm/tree/master/worm_html).
  
