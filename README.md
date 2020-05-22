@@ -1,6 +1,6 @@
 # Stem-IAA Portal
 
-The Stem-IAA Portal was created to provide a way for students, instructors, and mentors to interact in various ways over the duration of a course. It is meant to supplement an Education Management System, rather than replace it. Importantly, however, mentors of the course do not have access to the EMS, and thus features are provided in the portal to counteract this.
+The Stem-IAA Portal was created to provide a way for students, instructors, and mentors to interact in various ways over the duration of a course. It is meant to supplement an Education Management System, rather than replace it. Importantly, however, mentors of the course do not have access to the EMS, and thus features are provided in the portal to assist with this.
 
 The following topics are discussed in this documentation:
 
