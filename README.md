@@ -8,7 +8,6 @@ The following topics are discussed in this documentation:
 - [Portal usage guide](#portal-usage)
 - [Flask/static hosting information](#hosting-information)
 - [Virtual machine information](#virtual-machines)
-- [Supplementary scripts](#supplementary-scripts)
 
 
 ## Portal Setup
@@ -90,8 +89,12 @@ The `touch-reload` parameter is enabled so that students can have multiple diffe
  
  If hosting the portal with nginx/uwsgi, a very similar script as the previous can be created depending on the system-dependent locations. The .ini used for our hosting is provided [here](https://github.com/stem-iaa/worm/blob/master/portal.ini).
  
+ 
  ## Virtual Machines
  
+ The virtual machines provided to students were slightly modified standard ubuntu machines. The modifications made to these instances are as follows.
  
- ## Supplementary Scripts
+ First, we provided a method for students to log in to their machines via VNC. We used [TightVNC](https://www.tightvnc.com/) as our VNC server, and [noVNC](https://novnc.com/info.html) as the client that was integrated with the portal. Both of these should be installed on the VM and then set to auto run on startup via the service scripts found in the [vm-setup repo](https://github.com/stem-iaa/vm-setup).
+ 
+ Additionally, we wrote a script to automatically shut down the virtual machines when low cpu usage was deducted. This script can be found in the [AutoStopper repo](https://github.com/stem-iaa/AutoStopper). The threshold for cpu usage should be played with since a good value may be different than what we found on our chosen azure instance. The [autostopper.service](https://github.com/stem-iaa/AutoStopper/blob/master/autostopper.service) script is provided to run the AutoStopper on startup.
  
