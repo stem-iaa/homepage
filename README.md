@@ -5,10 +5,10 @@ The Stem-IAA Portal was created to provide a way for students, instructors, and 
 The following topics are discussed in this documentation:
 
 - [Portal setup](#portal-setup)
-- Portal usage guide
-- Flask/static hosting information
-- Virtual machine information
-- Supplementary scripts
+- [Portal usage guide](#portal-usage)
+- [Flask/static hosting information](#hosting-information)
+- [Virtual machine information](#virtual-machines)
+- [Supplementary scripts](#supplementary-scripts)
 
 
 ## Portal Setup
@@ -59,4 +59,39 @@ db.session.commit()
  Lastly, the user can logout of their account via the username dropdown -> Logout feature.
  
  
+ ## Hosting Information
+ 
+ Several technologies were used to setup the hosting service for students. The goal was to provide each student with a custom domain name associated with their username, such as `sam.w3.stem-iaa.org` for static content, and `sam.flask.stem-iaa.org` for flask specific content, which was the web application framework taught in the course. 
+ 
+ To accomplish this, [openresty](https://openresty.org/en/) (from [nginx](https://www.nginx.com/)) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) were used. Both of these libraries should be installed on the server machine.
+ 
+ Openresty was chosen over a standard version of nginx due to the added ability to write lua in routing network traffic. This is how the custom URLs were created from the student usernames. The nginx scripts to accomplish this can be found in the [nginx_sites folder of the worm Github repo](https://github.com/stem-iaa/worm/tree/master/nginx_sites). Additionally, custom landing pages were created from each of the routes. The landing pages can be found [here](https://github.com/stem-iaa/worm/tree/master/worm_html).
+ 
+ The nginx setup assumes a uwsgi ini file is created for each user. This has been automated by creating .ini files when a new user is added to the hosting server. The `/usr/local/sbin/adduser.local` was updated to execute the [create_w3.py](https://github.com/stem-iaa/worm/blob/master/create_w3.py) script, which generates ini files for each user in the `w3` group. This script can also be run manually after adding all the users.
+ 
+ For reference, an example of a auto-generated .ini script for a hosted user looks like the following:
+ 
+ ```
+[uwsgi]
+socket = /tmp/flask_socks/sam.sock
+pythonpath = python3
+callable = app
+vhost = true
+py-autoreload = 3
+plugins = python3
+manage-script-name = true
+chdir = /home/sam/www/flask
+mount = /=app.py
+touch-reload = /home/sam/www/flask_reload
+module = app
+```
+ 
+The `touch-reload` parameter is enabled so that students can have multiple different flask applications in their www directory in their home folder, and switch the `flask` symlink to the one they want to host at any given time. After doing this, they can execute `touch flask_reload` to have the change be updated on the hosting server. `py-autoreload` is enabled so that they do not have to touch reload when making changes to their existing flask app.
+ 
+ If hosting the portal with nginx/uwsgi, a very similar script as the previous can be created depending on the system-dependent locations. The .ini used for our hosting is provided [here](https://github.com/stem-iaa/worm/blob/master/portal.ini).
+ 
+ ## Virtual Machines
+ 
+ 
+ ## Supplementary Scripts
  
